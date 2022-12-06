@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/11 12:06:39 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/06 16:42:12 by ebrodeur         ###   ########lyon.fr   */
+/*   Created: 2021/11/17 11:52:16 by ebrodeur          #+#    #+#             */
+/*   Updated: 2022/12/01 15:05:14 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-unsigned int	ft_strlcpy(char *dest, const char *src, size_t size)
-{
-	size_t	i;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
-	i = 0;
-	if (size == 0)
-	{
-		while (src[i])
-			i++;
-		return (i);
-	}
-	while (src[i] && i < size)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	while (src[i])
-		i++;
-	return (i);
-}
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+
+char	*get_next_line(int fd);
+size_t	ft_strlen(const char *s);
+size_t	ft_strnlen(const char *s);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+void	ft_newline_separator(char	*s);
+
+#endif
