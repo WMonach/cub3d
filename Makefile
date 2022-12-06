@@ -1,75 +1,66 @@
 NAME =		cub3d
 
-CFLAGS =	-Wall -Wextra -Werror -I . #-fsanitize=address -g
+CFLAGS =	-Wall -Wextra -I$(LIBFT_DIR) -I$(INC_DIR) -Imlx/ . #-fsanitize=address -g
 
 CC =		gcc
 
 INC_DIR = includes/
 
+DIR_OBJ =	.object
+
+SUB_DIR_LST =	srcs utils includes
+
 CUB_DIR =	$(INC_DIR)cub3d.h
 
 LIBFT_DIR =	$(INC_DIR)libft/
 
-MLBX_DIR = minilibx/
+MD := mkdir -p
 
-OBJS_DIR = .objs
+DIR_SRC := sources#.
 
-UTILS_DIR = utils/
+FILE_EXT := .c
 
+OBJ			=		$(addprefix $(DIR_OBJ)/, $(addsuffix .o,$(INC_FILES)))
 
-OBJ			=		$(addprefix $(OBJS_DIR)/, $(INC_DIR)$(INC_FILES:.c=.o) , $(SRCS_DIR)$(SRCS_FILES:.c=.o) , $(MLBX_DIR)$(MLBX_FILES:.c=.o) , $(UTILS_DIR)$(UTILS_FILES:.c=.o))
+SUB_DIR=			$(addprefix $(DIR_OBJ)/,$(SUB_DIR_LST))
 
-OBJ_BONUS	=		$(addprefix $(OBJS_DIR)/, $(INC_DIR)$(INC_FILES_BONUS:.c=.o) , $(SRCS_DIR)$(SRCS_FILES_BONUS:.c=.o) , $(MLBX_DIR)$(MLBX_FILES_BONUS:.c=.o) , $(UTILS_DIR)$(UTILS_FILES_BONUS:.c=.o))
+INC_FILES	=		srcs/main\
 
-INC_FILES		=\
-
-SRCS_FILES		=		main.c			\
-
-MLBX_FILES		=\
-
-UTILS_FILES		=\
-
-INC_FILES_BONUS		=\
-
-SRCS_FILES_BONUS		=		main.c			\
-
-MLBX_FILES_BONUS		=\
-
-UTILS_FILES_BONUS		=\
+INC_FILES_BONUS	=	srcs/main\
 
 all: 				libs $(NAME)
 
 libs:
 					$(MAKE) -C $(LIBFT_DIR)
-					$(MAKE) -C $(MLBX_DIR)
+					$(MAKE) -C mlx/
 
 $(NAME):			$(OBJ) $(LIBFT_DIR)libft.a
 					$(CC) $(OBJ) $(LIBFT_DIR)libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	
-$(OBJS_DIR)/%.o:	%.c includes/cub3d.h ${LIBFT_DIR}libft.h ${LIBFT_DIR}libft.a Makefile | $(OBJS_DIR)
-					${CC} ${CFLAGS} -I$(LIBFT_DIR) -c $< -o $@
+$(DIR_OBJ)/%.o:		$(DIR_SRC)/%$(FILE_EXT) includes/cub3d.h ${LIBFT_DIR}libft.h ${LIBFT_DIR}libft.a Makefile | $(SUB_DIR)
+					${CC} ${CFLAGS} -Imlx -c $< -o $@
 
-$(OBJS_DIR):			
-					mkdir -p $(OBJS_DIR)
+$(SUB_DIR) :
+					$(MD) $@
 
 bonus :				libs $(OBJ_BONUS) $(LIBFT_DIR)libft.a
 					$(CC) $(OBJ_BONUS) $(LIBFT_DIR)libft.a -o cub3d_bonus
 
-$(OBJS_DIR)/%.o:	%.c includes/cub3d_bonus.h ${LIBFT_DIR}libft.h ${LIBFT_DIR}libft.a Makefile | $(OBJS_DIR)
-					${CC} ${CFLAGS} -I$(LIBFT_DIR) -c $< -o $@
+# $(DIR_OBJ)/%.o:	%.c includes/cub3d_bonus.h ${LIBFT_DIR}libft.h ${LIBFT_DIR}libft.a Makefile | $(SUB_DIR)
+# 					${CC} ${CFLAGS} -I$(LIBFT_DIR) -c $< -o $@
 
 norme :
-					norminette srcs/*.c *.h
+					norminette srcs/*.c includes/*.c utils/*.c *.h includes/*.h
 
 clean :
 					${MAKE} clean -C ${LIBFT_DIR}
-					${MAKE} clean -C ${MLBX_DIR}
+					${MAKE} clean -C mlx/
 					rm -f ${OBJ} ${OBJ_B} $(OBJS_DIR)/*.o 
 					rm -rf $(OBJS_DIR)
 
 fclean :
 					${MAKE} fclean -C ${LIBFT_DIR}
-					${MAKE} clean -C ${MLBX_DIR}
+					${MAKE} clean -C mlx/
 					rm -f ${OBJ} ${OBJ_B} $(OBJS_DIR)/*.o
 					rm -f ${NAME}
 					rm -f cub3d_bonus
@@ -89,7 +80,7 @@ re :				fclean all
 
 # LIBFT_DIR =	libft/
 
-# MLBX_DIR = minilibx/
+# MLBX_DIR = mlx/
 
 # OBJS_DIR = .objs
 
