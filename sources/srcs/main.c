@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/06 16:42:58 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/06 17:13:44 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 char	**free_tab(char **tab, int i)
 {
+	printf("I ==> %d\n", i);
+	if (i <= 0)
+	{
+		free(tab);
+		return (0);
+	}
 	while (i >= 0)
 	{
 		if (tab[i])
@@ -26,6 +32,8 @@ char	**free_tab(char **tab, int i)
 
 void	main_texture_var_init(t_data *data)
 {
+	data->textures_tab_size = 0;
+	data->rgb_tab_size = 0;
 	data->texture.check_no_texture = 0;
 	data->texture.check_so_texture = 0;
 	data->texture.check_ea_texture = 0;
@@ -137,15 +145,15 @@ int	main(int argc, char *argv[])
 			// 		&(cub->endian));
 			// mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->img, 0, 0);
 			// mlx_loop(cub->vars.mlx);
-			free_tab(data.texture_path, 3);
-			free_tab(data.rgb_values, 1);
+			free_tab(data.texture_path, 0);
+			free_tab(data.rgb_values, 0);
 			free_tab(data.map, (data.map_data.map_size - 1));
 			return (0);
 		}
 		if (data.no_free_tab != 1)
 		{
-			free_tab(data.texture_path, 3);
-			free_tab(data.rgb_values, 1);
+			free_tab(data.texture_path, (data.textures_tab_size - 1));
+			free_tab(data.rgb_values, data.rgb_tab_size);
 			if (data.free_tab_map == 1)
 				free_tab(data.map, (data.map_data.map_size - 1));
 		}

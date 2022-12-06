@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:42:05 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/06 13:04:39 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/06 17:07:24 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	copy_path(t_data *data, int index, int size, char *path)
 		return (1);
 	}
 	ft_strlcpy(data->texture_path[index], path, (size + 1));
+	data->textures_tab_size++;
 	return (0);
 }
 
@@ -74,6 +75,7 @@ int	copy_rgb_value(t_data *data, int index, int size, char *value)
 		return (1);
 	}
 	ft_strlcpy(data->rgb_values[index], value, (size + 1));
+	data->rgb_tab_size++;
 	return (0);
 }
 
