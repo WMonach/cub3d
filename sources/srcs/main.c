@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/07 11:07:46 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 12:24:21 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,18 +149,18 @@ int	main(int argc, char *argv[])
 		if (parsing(argv, &data) == 0)
 		{
 //////////////////////////////////////////////////////////////////////////////////////////////
-			// int a = 0;
-			// while (data.texture_path[a] != NULL)
-			// {
-			// 	printf("PATH COPY ==> %s\n", data.texture_path[a]);
-			// 	a++;
-			// }
-			// a = 0;
-			// while (a < 2)
-			// {
-			// 	printf("COLOR COPY ==> %s\n", data.rgb_values[a]);
-			// 	a++;
-			// }
+			int a = 0;
+			while (data.texture_path[a] != NULL)
+			{
+				printf("PATH COPY ==> %s\n", data.texture_path[a]);
+				a++;
+			}
+			a = 0;
+			while (a < 2)
+			{
+				printf("COLOR COPY ==> %s\n", data.rgb_values[a]);
+				a++;
+			}
 			printf("\n== Map parsing OK ==\n");
 			printf("Map size --> %d\n", data.map_data.map_size);
 //////////////////////////////////////////////////////////////////////////////////////////////
