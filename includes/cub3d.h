@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/06 17:08:04 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 11:05:47 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef struct s_texture {
 	int		check_f_texture;
 	int		check_c_texture;
 	int		check_texture_id;
+	int		north_path_copy;
+	int		south_path_copy;
+	int		west_path_copy;
+	int		east_path_copy;
+	int		rgb_f_copy;
+	int		rgb_c_copy;
 	int		check_rgb_id;
 	int		check_all_id;
 	char	*no_texture;

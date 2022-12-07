@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:42:05 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/06 17:07:24 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 11:08:05 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,25 @@ int	copy_textures_path(t_data *data, char *path, char *id, int i)
 	{
 		if (copy_path(data, 0, size, &path[i]) == 1)
 			return (1);
+		data->texture.north_path_copy = 1;
 	}
 	else if (ft_strncmp(id, "SO", 2) == 0)
 	{
 		if (copy_path(data, 1, size, &path[i]) == 1)
 			return (1);
+		data->texture.south_path_copy = 1;
 	}
 	else if (ft_strncmp(id, "WE", 2) == 0)
 	{
 		if (copy_path(data, 2, size, &path[i]) == 1)
 			return (1);
+		data->texture.west_path_copy = 1;
 	}
 	else
 	{
 		if (copy_path(data, 3, size, &path[i]) == 1)
 			return (1);
+		data->texture.east_path_copy = 1;
 	}
 	return (0);
 }
@@ -93,11 +97,13 @@ int	save_rgb_values(t_data *data, char *id, char *value)
 	{
 		if (copy_rgb_value(data, 0, size, &value[i]) == 1)
 			return (1);
+		data->texture.rgb_f_copy = 1;
 	}
 	if (strncmp(id, "C", 1) == 0)
 	{
 		if (copy_rgb_value(data, 1, size, &value[i]) == 1)
 			return (1);
+		data->texture.rgb_c_copy = 1;
 	}
 	data->rgb_values[2] = NULL;
 	return (0);
