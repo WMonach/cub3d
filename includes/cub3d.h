@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/07 12:25:43 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 14:30:16 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,16 @@ int				line_parsing_call_and_set_all_id_check(t_data *data,
 
 unsigned int	map_strlcpy(char *dest, const char *src, size_t size);
 
+int				copy_rgb_value(t_data *data, int index, int size, char *value);
+int				previous_line_shorter(char **map, size_t i, size_t line_size,
+					int y);
+int				next_line_shorter(char **map, size_t i, size_t line_size,
+					int y);
 int				check_file_loop(t_data *data, char *line, int fd, int i);
 int				last_char_is_not_one(char **map, int line_size, int y);
 int				check_path_to_texture(t_data *data, int i, int size);
 int				save_rgb_values(t_data *data, char *id, char *value);
+int				map_wall_parsing_loop(t_data *data, int y, int x);
 int				save_texture(t_data *data, char *id, char *path);
 int				check_if_line_is_map(t_data *data, char *line);
 int				check_extension(char *str, char *extension);
@@ -149,6 +155,7 @@ int				map_copy(t_data *data, char *file);
 int				check_colors(t_data *data, int i);
 int				exterior_line_check(char *line);
 int				map_wall_parsing(t_data *data);
+int				close_check(char **map, int y);
 int				check_rgb(t_data *data, int i);
 
 #endif

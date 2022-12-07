@@ -37,6 +37,7 @@ INC_FILES	=		srcs/main								\
 					parsing/rgb_parsing						\
 					parsing/save_textures					\
 					parsing/spawn_checking					\
+					parsing/save_textures_utils				\
 					get_next_line/get_next_line				\
 					get_next_line/get_next_line_utils
 
