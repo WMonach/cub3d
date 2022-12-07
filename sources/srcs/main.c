@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/07 12:24:21 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 12:46:54 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,13 @@ int	main(int argc, char *argv[])
 			while (a < 2)
 			{
 				printf("COLOR COPY ==> %s\n", data.rgb_values[a]);
+				a++;
+			}
+			a = 0;
+			printf("\n");
+			while (data.map[a] != NULL)
+			{
+				printf("%s\n", data.map[a]);
 				a++;
 			}
 			printf("\n== Map parsing OK ==\n");
