@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 16:20:11 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 17:17:19 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_wall(t_data *data, t_mlx_data *mlx_data)
 		x = data->x_range;
 		while (x < (data->x_range + 32))
 		{
-			my_mlx_pixel_put(mlx_data, x, y, 0x00FF0000);
+			my_mlx_pixel_put(mlx_data, x, y, 0x00663300);
 			x++;
 		}
 		y++;
@@ -52,7 +52,7 @@ void	print_floor(t_data *data, t_mlx_data *mlx_data)
 		x = data->x_range;
 		while (x < (data->x_range + 32))
 		{
-			my_mlx_pixel_put(mlx_data, x, y, 0x00FFFFFF);
+			my_mlx_pixel_put(mlx_data, x, y, 0x00999999);
 			x++;
 		}
 		y++;
@@ -101,8 +101,10 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 	while (++i < 5)
 	{
 		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xffff00);
+		my_mlx_pixel_put(img, (cub->Posx + (cub->pdx * 5)), (cub->Posy + (cub->pdy * 5)), 0xffff00);
 		cub->Posy += 5;
 		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xffff00);
+		my_mlx_pixel_put(img, (cub->Posx + (cub->pdx * 5)), (cub->Posy + (cub->pdy * 5)), 0xffff00);
 		cub->Posy -= 5;
 		cub->Posx++;
 	}
@@ -111,8 +113,10 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 	while (++i <= 5)
 	{
 		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xffff00);
+		my_mlx_pixel_put(img, (cub->Posx + (cub->pdx * 5)), (cub->Posy + (cub->pdy * 5)), 0xffff00);
 		cub->Posx += 5;
 		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xffff00);
+		my_mlx_pixel_put(img, (cub->Posx + (cub->pdx * 5)), (cub->Posy + (cub->pdy * 5)), 0xffff00);
 		cub->Posx -= 5;
 		cub->Posy++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 16:19:07 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 17:09:04 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,33 @@ void	parsing_debug(t_data *data)
 
 int	ft_keyhook_translation(int keycode, t_cub *cub)
 {
-	if (keycode == 125)
-		cub->Posy += 5;
-	if (keycode == 126)
-		cub->Posy -= 5;
-	if (keycode == 123)
-		cub->Posx -= 5;
-	if (keycode == 124)
-		cub->Posx += 5;
+	if (keycode == S_KEY)
+	{
+		cub->Posx -= cub->pdx;
+		cub->Posy -= cub->pdy;
+
+	}
+	if (keycode == W_KEY)
+	{
+		cub->Posx += cub->pdx;
+		cub->Posy += cub->pdy;
+	}
+	if (keycode == A_KEY)
+	{
+		cub->pa -= 0.1;
+		if (cub->pa < 0)
+			cub->pa += 2 * PI;
+		cub->pdx = cos(cub->pa) * 5;
+		cub->pdy = sin(cub->pa) * 5;
+	}
+	if (keycode == D_KEY)
+	{
+		cub->pa += 0.1;
+		if (cub->pa > 2 * PI)
+			cub->pa -= 2 * PI;
+		cub->pdx = cos(cub->pa) * 5;
+		cub->pdy = sin(cub->pa) * 5;
+	}
 	return (1);
 }
 
@@ -68,12 +87,9 @@ int	key_hook(int keycode, t_cub *cub)
 	ft_keyhook_translation(keycode, cub);
 	cub->data.y_range = 0;
 	cub->data.x_range = 0;
-	printf("addr=%p\n", cub->data.map[0]);
 	map_display(cub, &cub->data, &cub->mlx_data);
 	ft_draw_hero(cub, &cub->mlx_data);
-	// printf("addr=%p\n", cub->data.map[0]);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
-	// printf("addr=%p\n", cub->data.map[0]);
 	return (1);
 }
 
@@ -154,6 +170,8 @@ static void	init_cub_var(t_cub *cub, t_data *data)
 {
 	cub->Posx = 960;
 	cub->Posy = 535;
+	cub->pdx = cos(cub->pa * 5);
+	cub->pdy = sin(cub->pa * 5);
 	(cub->data) = *data;
 }
 
@@ -242,10 +260,10 @@ int	main(int argc, char *argv[])
 	t_data	data;
 	t_cub	*cub;
 
-	cub = NULL;
 	cub = malloc(sizeof(t_cub));
 	if (cub == NULL)
 		return (1);
+	cub->pa = 0;
 	main_data_var_init(&data, cub);
 	main_texture_var_init(&data);
 	if (argc == 2)
