@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 14:23:12 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 14:26:57 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ void	raycaster(t_cub *cub, t_data *data)
 	(void)data;
 	cub->vars.mlx = mlx_init();
 	cub->vars.win = mlx_new_window(cub->vars.mlx,
-			1920, 1080, "cub");
+			1920, 1080, "cub3d");
 	cub->mlx_data.img = mlx_new_image(cub->vars.mlx, 1920, 1080);
 	cub->mlx_data.addr = mlx_get_data_addr((cub->mlx_data.img),
 			&(cub->mlx_data.bits_per_pixel), &(cub->mlx_data.line_length),
@@ -195,6 +195,7 @@ void	raycaster(t_cub *cub, t_data *data)
 	mlx_hook(cub->vars.win, 17, 1L << 0, ft_close, cub);
 	mlx_hook(cub->vars.win, 02, 1L << 0, key_hook, cub);
 	ft_draw_hero(cub, &cub->mlx_data);
+	map_display(cub, data, &cub->mlx_data);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
 	mlx_loop(cub->vars.mlx);
 	return ;

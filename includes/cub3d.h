@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 13:24:12 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 14:27:30 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef struct s_data {
 	int			free_tab_map;
 	int			textures_tab_size;
 	int			rgb_tab_size;
+	int			x_range;
+	int			y_range;
 	char		*line_tmp;
 	char		*rgb_value;
 	char		*texture_id[6];
@@ -130,6 +132,7 @@ typedef struct s_cub
 
 int		ft_draw(t_cub *cub, t_mlx_data *img);
 int		ft_draw_hero(t_cub *cub, t_mlx_data *img);
+int		map_display(t_cub *cub, t_data *data, t_mlx_data *img);
 
 /* PARSING */
 char			**free_tab(char **tab, int i);
