@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 12:38:38 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/07 14:25:04 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 14:26:08 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ int	map_wall_parsing_loop(t_data *data, int y, int x)
 		{
 			if (close_check(data->map, y) == 1)
 				return (1);
-			check_if_spawn_is_set(data, y);
+			if (data->map_data.check_north_spawn == 0 && data->map_data.check_south_spawn == 0
+				&& data->map_data.check_west_spawn == 0 && data->map_data.check_east_spawn == 0)
+				check_if_spawn_is_set(data, y);
 			if (count_number_of_spawn(data, y) == 1)
 				return (1);
 			if (line_check_loop(data, y, x) == 1)

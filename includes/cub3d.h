@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/12/08 13:01:40 by ebrodeur         ###   ########lyon.fr   */
-=======
-/*   Updated: 2022/12/08 11:22:29 by wmonacho         ###   ########lyon.fr   */
->>>>>>> 86a3ad612db1e73e84d0a859334f13aa91477b28
+/*   Updated: 2022/12/08 14:17:57 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +55,8 @@ typedef struct s_texture {
 
 typedef struct s_map {
 	int		map_size;
+	int		player_x;
+	int		player_y;
 	int		check_north_spawn;
 	int		check_south_spawn;
 	int		check_west_spawn;
