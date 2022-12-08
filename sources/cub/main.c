@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/07 12:46:54 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 11:02:08 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	ft_close(t_cub *cub)
+{
+	free(cub); /*FREE all*/
+	exit(0);
+	return (0);
+}
+
+int	key_hook(int keycode, t_cub *cub)
+{
+	// mlx_destroy_image(cub->vars.mlx, cub->img);
+	// cub->img = mlx_new_image(cub->vars.mlx, 1920, 1080);
+	// cub->addr = mlx_get_data_addr(cub->img,
+	// 		&cub->bits_per_pixel, &cub->line_length,
+	// 		&cub->endian);
+	if (keycode == 53)
+	{
+		free(cub); /*FREE all*/
+		exit (0);
+	}
+	// mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->img, 0, 0);
+	return (0);
+}
 
 char	**free_texture_tab(t_data *data)
 {

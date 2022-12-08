@@ -1,5 +1,7 @@
 NAME =		cub3d
 
+CFLAGS =	-Wall -Wextra -I$(LIBFT_DIR) -I$(INC_DIR) -Imlx/ #-fsanitize=address -g
+
 CFLAGS =	-Wall -Wextra -Werror -I$(LIBFT_DIR) -I$(INC_DIR) -Isources/get_next_line/ -Imlx/ #-fsanitize=address -g
 
 CC =		gcc
@@ -8,7 +10,7 @@ INC_DIR = includes/
 
 DIR_OBJ =	.object
 
-SUB_DIR_LST =	srcs utils includes parsing get_next_line
+SUB_DIR_LST =	cub srcs utils includes parsing get_next_line
 
 CUB_DIR =	$(INC_DIR)cub3d.h
 
@@ -24,7 +26,9 @@ OBJ			=		$(addprefix $(DIR_OBJ)/, $(addsuffix .o,$(INC_FILES)))
 
 SUB_DIR=			$(addprefix $(DIR_OBJ)/,$(SUB_DIR_LST))
 
-INC_FILES	=		srcs/main								\
+INC_FILES	=		cub/main								\
+					cub/draw								\
+					utils/round								\
 					parsing/check_id_utils					\
 					parsing/check_id						\
 					parsing/line_parsing_utils				\
@@ -40,8 +44,6 @@ INC_FILES	=		srcs/main								\
 					parsing/save_textures_utils				\
 					get_next_line/get_next_line				\
 					get_next_line/get_next_line_utils
-
-INC_FILES_BONUS	=	srcs/main\
 
 all: 				libs $(NAME)
 
