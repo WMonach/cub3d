@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 14:26:45 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 16:20:11 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	map_display(t_cub *cub, t_data *data, t_mlx_data *img)
 	line_size = 0;
 	(void)cub;
 	data->y_range = 0;
+	printf("TOUR\n");
+	printf("outch\n");
 	while (data->map[i])
 	{
 		j = 0;
@@ -98,9 +100,9 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 	i = -1;
 	while (++i < 5)
 	{
-		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xf0fff0);
+		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xffff00);
 		cub->Posy += 5;
-		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xf0fff0);
+		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xffff00);
 		cub->Posy -= 5;
 		cub->Posx++;
 	}
@@ -108,9 +110,9 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 	i = -1;
 	while (++i <= 5)
 	{
-		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xf0fff0);
+		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xffff00);
 		cub->Posx += 5;
-		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xf0fff0);
+		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xffff00);
 		cub->Posx -= 5;
 		cub->Posy++;
 	}

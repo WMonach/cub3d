@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 14:37:50 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 14:43:02 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct s_cub
 {
 	t_vars		vars;
 	t_mlx_data	mlx_data;
+	t_data		data;
 	float		x;
 	float		y;
 	float		z;

@@ -1,10 +1,10 @@
 NAME =		cub3d
 
-CFLAGS =	-Wall -Wextra -I$(LIBFT_DIR) -I$(INC_DIR) -Imlx/ #-fsanitize=address -g
-
-CFLAGS =	-Wall -Wextra -Werror -I$(LIBFT_DIR) -I$(INC_DIR) -Isources/get_next_line/ -Imlx/ #-fsanitize=address -g
+CFLAGS =	-Wall -Wextra -Werror -I$(LIBFT_DIR) -I$(INC_DIR) -Isources/get_next_line/ -Imlx/
 
 CC =		gcc
+
+CRASH = -fsanitize=address -g3
 
 INC_DIR = includes/
 
@@ -52,7 +52,7 @@ libs:
 					$(MAKE) -C mlx/
 
 $(NAME):			$(OBJ) $(LIBFT_DIR)libft.a
-					$(CC) $(OBJ) $(LIBFT_DIR)libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+					$(CC) $(CRASH) $(OBJ) $(LIBFT_DIR)libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	
 $(DIR_OBJ)/%.o:		$(DIR_SRC)/%$(FILE_EXT) includes/cub3d.h ${LIBFT_DIR}libft.h ${LIBFT_DIR}libft.a Makefile | $(SUB_DIR)
 					${CC} ${CFLAGS} -c $< -o $@
