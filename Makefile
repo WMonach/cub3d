@@ -1,6 +1,6 @@
 NAME =		cub3d
 
-CFLAGS =	-Wall -Wextra -I$(LIBFT_DIR) -I$(INC_DIR) -Imlx/ . #-fsanitize=address -g
+CFLAGS =	-Wall -Wextra -I$(LIBFT_DIR) -I$(INC_DIR) -Imlx/ #-fsanitize=address -g
 
 CC =		gcc
 
@@ -8,7 +8,7 @@ INC_DIR = includes/
 
 DIR_OBJ =	.object
 
-SUB_DIR_LST =	srcs utils includes
+SUB_DIR_LST =	cub utils includes
 
 CUB_DIR =	$(INC_DIR)cub3d.h
 
@@ -24,7 +24,9 @@ OBJ			=		$(addprefix $(DIR_OBJ)/, $(addsuffix .o,$(INC_FILES)))
 
 SUB_DIR=			$(addprefix $(DIR_OBJ)/,$(SUB_DIR_LST))
 
-INC_FILES	=		srcs/main\
+INC_FILES	=		cub/main			\
+					cub/draw			\
+					utils/round			\
 
 INC_FILES_BONUS	=	srcs/main\
 
@@ -38,7 +40,7 @@ $(NAME):			$(OBJ) $(LIBFT_DIR)libft.a
 					$(CC) $(OBJ) $(LIBFT_DIR)libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	
 $(DIR_OBJ)/%.o:		$(DIR_SRC)/%$(FILE_EXT) includes/cub3d.h ${LIBFT_DIR}libft.h ${LIBFT_DIR}libft.a Makefile | $(SUB_DIR)
-					${CC} ${CFLAGS} -Imlx -c $< -o $@
+					${CC} ${CFLAGS} -c $< -o $@
 
 $(SUB_DIR) :
 					$(MD) $@
