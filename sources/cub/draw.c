@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 11:14:21 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 13:46:37 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,73 @@ void	my_mlx_pixel_put(t_mlx_data *mlx_data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	ft_draw(t_cub *cub, t_mlx_data *img)
+void	print_wall(t_data *data, t_mlx_data *mlx_data)
+{
+	int	x;
+	int	y;
+
+	y = data->y_range;
+	(void)data;
+	while (y < (data->y_range + 32))
+	{
+		x = data->x_range;
+		while (x < (data->x_range + 32))
+		{
+			my_mlx_pixel_put(mlx_data, x, y, 0x00FF0000);
+			x++;
+		}
+		y++;
+	}
+	return ;
+}
+
+void	print_floor(t_data *data, t_mlx_data *mlx_data)
+{
+	int	x;
+	int	y;
+
+	y = data->y_range;
+	(void)data;
+	while (y < (data->y_range + 32))
+	{
+		x = data->x_range;
+		while (x < (data->x_range + 32))
+		{
+			my_mlx_pixel_put(mlx_data, x, y, 0x00FFFFFF);
+			x++;
+		}
+		y++;
+	}
+	return ;
+}
+
+int	map_display(t_cub *cub, t_data *data, t_mlx_data *img)
 {
 	int	i;
+	size_t	j;
+	size_t	line_size;
 
-	i = -1;
-	cub->max = 1000;
-	cub->x1 = 0;
-	cub->y1 = 1;
-	while (++i < cub->max)
+	i = 0;
+	j = 0;
+	line_size = 0;
+	(void)cub;
+	data->y_range = 0;
+	while (data->map[i])
 	{
+		j = 0;
+		data->x_range = 0;
+		line_size = ft_strlen(data->map[i]);
+		while (j < line_size)
 		{
-			cub->x1++;
-			cub->y1++;
-			// ft_rounded(fdf->temp.x1, fdf->temp.y1, fdf);
-			my_mlx_pixel_put(img, (int)cub->x1,
-				(int)cub->y1, 0xffefd5);
+			if (data->map[i][j] == '1')
+				print_wall(data, img);
+			if (data->map[i][j] == '0')
+				print_floor(data, img);
+			data->x_range += 32;
+			j++;
 		}
+		data->y_range += 32;
+		i++;
 	}
-	return (1);
+	return (0);
 }
