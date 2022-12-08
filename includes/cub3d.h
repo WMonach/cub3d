@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 16:49:52 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 18:10:12 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define A_KEY 0
 # define S_KEY 1
 # define W_KEY 13
+# define PI 3.1415926535
 
 typedef struct s_texture {
 	int		check_no_texture;
@@ -125,6 +126,9 @@ typedef struct s_cub
 	float		y;
 	float		z;
 	float		x1;
+	float		pa;
+	float		pdx;
+	float		pdy;
 	int			posx;
 	int			posy;
 	float		x2;

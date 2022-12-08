@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 17:00:47 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 18:10:59 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 		my_mlx_pixel_put(img, cub->posx, cub->posy + 3, 0xffff00);
 		my_mlx_pixel_put(img, cub->posx, cub->posy + 4, 0xffff00);
 		my_mlx_pixel_put(img, cub->posx, cub->posy + 5, 0xffff00);
+		my_mlx_pixel_put(img, (cub->Posx + (cub->pdx * 5)), (cub->Posy + (cub->pdy * 5)), 0xffff00);
+		my_mlx_pixel_put(img, (cub->Posx + (cub->pdx * 5)), (cub->Posy + (cub->pdy * 5)), 0xffff00);
 		cub->posx++;
 	}
 	cub->posx -= 5;
@@ -116,6 +118,8 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 		my_mlx_pixel_put(img, cub->posx + 3, cub->posy, 0xffff00);
 		my_mlx_pixel_put(img, cub->posx + 4, cub->posy, 0xffff00);
 		my_mlx_pixel_put(img, cub->posx + 5, cub->posy, 0xffff00);
+		my_mlx_pixel_put(img, (cub->Posx + (cub->pdx * 5)), (cub->Posy + (cub->pdy * 5)), 0xffff00);
+		my_mlx_pixel_put(img, (cub->Posx + (cub->pdx * 5)), (cub->Posy + (cub->pdy * 5)), 0xffff00);
 		cub->posy++;
 	}
 	cub->posy -= 6;

@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 17:01:18 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 18:10:52 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,33 @@ int	ft_keyhook_rotation(int keycode, t_cub *cub)
 
 int	ft_keyhook_translation(int keycode, t_cub *cub)
 {
-	if (keycode == 125)
-		cub->posy += 5;
-	if (keycode == 126)
-		cub->posy -= 5;
-	if (keycode == 123)
-		cub->posx -= 5;
-	if (keycode == 124)
-		cub->posx += 5;
+	if (keycode == S_KEY)
+	{
+		cub->Posx -= cub->pdx;
+		cub->Posy -= cub->pdy;
+
+	}
+	if (keycode == W_KEY)
+	{
+		cub->Posx += cub->pdx;
+		cub->Posy += cub->pdy;
+	}
+	if (keycode == A_KEY)
+	{
+		cub->pa -= 0.1;
+		if (cub->pa < 0)
+			cub->pa += 2 * PI;
+		cub->pdx = cos(cub->pa) * 5;
+		cub->pdy = sin(cub->pa) * 5;
+	}
+	if (keycode == D_KEY)
+	{
+		cub->pa += 0.1;
+		if (cub->pa > 2 * PI)
+			cub->pa -= 2 * PI;
+		cub->pdx = cos(cub->pa) * 5;
+		cub->pdy = sin(cub->pa) * 5;
+	}
 	return (1);
 }
 
@@ -164,8 +183,10 @@ void	main_texture_var_init(t_data *data)
 
 static void	init_cub_var(t_cub *cub, t_data *data)
 {
-	cub->posx = 960;
-	cub->posy = 535;
+	cub->Posx = 960;
+	cub->Posy = 535;
+	cub->pdx = cos(cub->pa * 5);
+	cub->pdy = sin(cub->pa * 5);
 	(cub->data) = *data;
 }
 
@@ -256,10 +277,10 @@ int	main(int argc, char *argv[])
 	t_data	data;
 	t_cub	*cub;
 
-	cub = NULL;
 	cub = malloc(sizeof(t_cub));
 	if (cub == NULL)
 		return (1);
+	cub->pa = 0;
 	main_data_var_init(&data, cub);
 	main_texture_var_init(&data);
 	if (argc == 2)
