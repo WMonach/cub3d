@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 16:19:07 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 17:01:18 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,30 @@ void	parsing_debug(t_data *data)
 	return ;
 }
 
+int	ft_keyhook_rotation(int keycode, t_cub *cub)
+{
+	if (keycode == 125)
+		cub->posy += 5;
+	if (keycode == 126)
+		cub->posy -= 5;
+	if (keycode == 123)
+		cub->posx -= 5;
+	if (keycode == 124)
+		cub->posx += 5;
+	return (1);
+}
+
+
 int	ft_keyhook_translation(int keycode, t_cub *cub)
 {
 	if (keycode == 125)
-		cub->Posy += 5;
+		cub->posy += 5;
 	if (keycode == 126)
-		cub->Posy -= 5;
+		cub->posy -= 5;
 	if (keycode == 123)
-		cub->Posx -= 5;
+		cub->posx -= 5;
 	if (keycode == 124)
-		cub->Posx += 5;
+		cub->posx += 5;
 	return (1);
 }
 
@@ -66,14 +80,12 @@ int	key_hook(int keycode, t_cub *cub)
 		exit (0);
 	}
 	ft_keyhook_translation(keycode, cub);
+	ft_keyhook_rotation(keycode, cub);
 	cub->data.y_range = 0;
 	cub->data.x_range = 0;
-	printf("addr=%p\n", cub->data.map[0]);
 	map_display(cub, &cub->data, &cub->mlx_data);
 	ft_draw_hero(cub, &cub->mlx_data);
-	// printf("addr=%p\n", cub->data.map[0]);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
-	// printf("addr=%p\n", cub->data.map[0]);
 	return (1);
 }
 
@@ -152,8 +164,8 @@ void	main_texture_var_init(t_data *data)
 
 static void	init_cub_var(t_cub *cub, t_data *data)
 {
-	cub->Posx = 960;
-	cub->Posy = 535;
+	cub->posx = 960;
+	cub->posy = 535;
 	(cub->data) = *data;
 }
 
@@ -219,6 +231,8 @@ int	parsing(char **argv, t_data *data)
 void	raycaster(t_cub *cub, t_data *data)
 {
 	(void)data;
+	cub->posx = data->map_data.player_x * 32;
+	cub->posy = data->map_data.player_y * 32;
 	cub->vars.mlx = mlx_init();
 	cub->vars.win = mlx_new_window(cub->vars.mlx,
 			1920, 1080, "cub3d");

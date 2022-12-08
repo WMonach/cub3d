@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 14:43:02 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 16:49:52 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ typedef struct s_cub
 	float		y;
 	float		z;
 	float		x1;
-	int			Posx;
-	int			Posy;
+	int			posx;
+	int			posy;
 	float		x2;
 	float		y1;
 	float		y2;
@@ -136,6 +136,7 @@ typedef struct s_cub
 int		ft_draw(t_cub *cub, t_mlx_data *img);
 int		ft_draw_hero(t_cub *cub, t_mlx_data *img);
 int		map_display(t_cub *cub, t_data *data, t_mlx_data *img);
+int		ft_keyhook_rotation(int keycode, t_cub *cub);
 
 /* PARSING */
 char			**free_tab(char **tab, int i);

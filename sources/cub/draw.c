@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 16:20:11 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 17:00:47 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_wall(t_data *data, t_mlx_data *mlx_data)
 		x = data->x_range;
 		while (x < (data->x_range + 32))
 		{
-			my_mlx_pixel_put(mlx_data, x, y, 0x00FF0000);
+			my_mlx_pixel_put(mlx_data, x, y, 0x00663300);
 			x++;
 		}
 		y++;
@@ -52,7 +52,7 @@ void	print_floor(t_data *data, t_mlx_data *mlx_data)
 		x = data->x_range;
 		while (x < (data->x_range + 32))
 		{
-			my_mlx_pixel_put(mlx_data, x, y, 0x00FFFFFF);
+			my_mlx_pixel_put(mlx_data, x, y, 0x00999999);
 			x++;
 		}
 		y++;
@@ -71,8 +71,6 @@ int	map_display(t_cub *cub, t_data *data, t_mlx_data *img)
 	line_size = 0;
 	(void)cub;
 	data->y_range = 0;
-	printf("TOUR\n");
-	printf("outch\n");
 	while (data->map[i])
 	{
 		j = 0;
@@ -100,22 +98,26 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 	i = -1;
 	while (++i < 5)
 	{
-		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xffff00);
-		cub->Posy += 5;
-		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xffff00);
-		cub->Posy -= 5;
-		cub->Posx++;
+		my_mlx_pixel_put(img, cub->posx, cub->posy, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx, cub->posy + 1, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx, cub->posy + 2, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx, cub->posy + 3, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx, cub->posy + 4, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx, cub->posy + 5, 0xffff00);
+		cub->posx++;
 	}
-	cub->Posx -= 5;
+	cub->posx -= 5;
 	i = -1;
 	while (++i <= 5)
 	{
-		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xffff00);
-		cub->Posx += 5;
-		my_mlx_pixel_put(img, cub->Posx, cub->Posy, 0xffff00);
-		cub->Posx -= 5;
-		cub->Posy++;
+		my_mlx_pixel_put(img, cub->posx, cub->posy, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx + 1, cub->posy, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx + 2, cub->posy, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx + 3, cub->posy, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx + 4, cub->posy, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx + 5, cub->posy, 0xffff00);
+		cub->posy++;
 	}
-	cub->Posy -= 6;
+	cub->posy -= 6;
 	return (1);
 }
