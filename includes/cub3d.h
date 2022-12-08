@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 14:27:30 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 14:34:45 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct s_texture {
 
 typedef struct s_map {
 	int		map_size;
+	int		player_x;
+	int		player_y;
 	int		check_north_spawn;
 	int		check_south_spawn;
 	int		check_west_spawn;
