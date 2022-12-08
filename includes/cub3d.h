@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 14:17:57 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 14:37:50 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,16 @@ typedef struct s_cub
 	float		y;
 	float		z;
 	float		x1;
+	int			Posx;
+	int			Posy;
 	float		x2;
 	float		y1;
 	float		y2;
 	int			max;
 }				t_cub;
 
+int		ft_draw(t_cub *cub, t_mlx_data *img);
+int		ft_draw_hero(t_cub *cub, t_mlx_data *img);
 int		map_display(t_cub *cub, t_data *data, t_mlx_data *img);
 
 /* PARSING */

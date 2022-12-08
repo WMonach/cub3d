@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 14:26:51 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 14:37:58 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
@@ -37,6 +38,37 @@ void	parsing_debug(t_data *data)
 	printf("Map size --> %d\n", data->map_data.map_size);
 	printf("Player starting pos : X-Y [%d] [%d]\n", data->map_data.player_x, data->map_data.player_y);
 	return ;
+}
+
+int	ft_keyhook_translation(int keycode, t_cub *cub)
+{
+	if (keycode == 125)
+		cub->Posy += 5;
+	if (keycode == 126)
+		cub->Posy -= 5;
+	if (keycode == 123)
+		cub->Posx -= 5;
+	if (keycode == 124)
+		cub->Posx += 5;
+	return (1);
+}
+
+int	key_hook(int keycode, t_cub *cub)
+{
+	mlx_destroy_image(cub->vars.mlx, cub->mlx_data.img);
+	cub->mlx_data.img = mlx_new_image(cub->vars.mlx, 1920, 1080);
+	cub->mlx_data.addr = mlx_get_data_addr(cub->mlx_data.img,
+			&cub->mlx_data.bits_per_pixel, &cub->mlx_data.line_length,
+			&cub->mlx_data.endian);
+	if (keycode == 53)
+	{
+		free(cub); /*FREE all*/
+		exit (0);
+	}
+	ft_keyhook_translation(keycode, cub);
+	ft_draw_hero(cub, &cub->mlx_data);
+	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
+	return (1);
 }
 
 int	ft_close(t_cub *cub)
@@ -112,7 +144,13 @@ void	main_texture_var_init(t_data *data)
 	return ;
 }
 
-void	main_data_var_init(t_data *data)
+static void	init_cub_var(t_cub *cub)
+{
+	cub->Posx = 960;
+	cub->Posy = 535;
+}
+
+void	main_data_var_init(t_data *data, t_cub *cub)
 {
 	data->north = 0;
 	data->south = 0;
@@ -129,6 +167,7 @@ void	main_data_var_init(t_data *data)
 	data->map_data.check_south_spawn = 0;
 	data->map_data.check_west_spawn = 0;
 	data->map_data.check_east_spawn = 0;
+	init_cub_var(cub);
 	return ;
 }
 
@@ -173,7 +212,6 @@ int	parsing(char **argv, t_data *data)
 void	raycaster(t_cub *cub, t_data *data)
 {
 	(void)data;
-	cub = malloc(sizeof(t_cub));
 	cub->vars.mlx = mlx_init();
 	cub->vars.win = mlx_new_window(cub->vars.mlx,
 			1920, 1080, "cub3d");
@@ -181,6 +219,10 @@ void	raycaster(t_cub *cub, t_data *data)
 	cub->mlx_data.addr = mlx_get_data_addr((cub->mlx_data.img),
 			&(cub->mlx_data.bits_per_pixel), &(cub->mlx_data.line_length),
 			&(cub->mlx_data.endian));
+	mlx_key_hook(cub->vars.win, key_hook, cub);
+	mlx_hook(cub->vars.win, 17, 1L << 0, ft_close, cub);
+	mlx_hook(cub->vars.win, 02, 1L << 0, key_hook, cub);
+	ft_draw_hero(cub, &cub->mlx_data);
 	map_display(cub, data, &cub->mlx_data);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
 	mlx_loop(cub->vars.mlx);
@@ -193,7 +235,10 @@ int	main(int argc, char *argv[])
 	t_cub	*cub;
 
 	cub = NULL;
-	main_data_var_init(&data);
+	cub = malloc(sizeof(t_cub));
+	if (cub == NULL)
+		return (1);
+	main_data_var_init(&data, cub);
 	main_texture_var_init(&data);
 	if (argc == 2)
 	{
