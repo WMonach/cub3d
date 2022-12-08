@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 18:10:12 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 18:43:00 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,14 @@ typedef struct s_cub
 	float		pa;
 	float		pdx;
 	float		pdy;
-	int			posx;
-	int			posy;
+	float			posx;
+	float			posy;
 	float		x2;
 	float		y1;
 	float		y2;
-	int			max;
+	float			max;
+	float			bresenx;
+	float			breseny;
 }				t_cub;
 
 int		ft_draw(t_cub *cub, t_mlx_data *img);

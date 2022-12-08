@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 18:10:52 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 18:19:58 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,34 +40,21 @@ void	parsing_debug(t_data *data)
 	return ;
 }
 
-int	ft_keyhook_rotation(int keycode, t_cub *cub)
-{
-	if (keycode == 125)
-		cub->posy += 5;
-	if (keycode == 126)
-		cub->posy -= 5;
-	if (keycode == 123)
-		cub->posx -= 5;
-	if (keycode == 124)
-		cub->posx += 5;
-	return (1);
-}
-
 
 int	ft_keyhook_translation(int keycode, t_cub *cub)
 {
-	if (keycode == S_KEY)
+	if (keycode == S_KEY || keycode == 125)
 	{
-		cub->Posx -= cub->pdx;
-		cub->Posy -= cub->pdy;
+		cub->posx -= cub->pdx;
+		cub->posy -= cub->pdy;
 
 	}
-	if (keycode == W_KEY)
+	if (keycode == W_KEY || keycode == 126)
 	{
-		cub->Posx += cub->pdx;
-		cub->Posy += cub->pdy;
+		cub->posx += cub->pdx;
+		cub->posy += cub->pdy;
 	}
-	if (keycode == A_KEY)
+	if (keycode == A_KEY || keycode == 123)
 	{
 		cub->pa -= 0.1;
 		if (cub->pa < 0)
@@ -75,7 +62,7 @@ int	ft_keyhook_translation(int keycode, t_cub *cub)
 		cub->pdx = cos(cub->pa) * 5;
 		cub->pdy = sin(cub->pa) * 5;
 	}
-	if (keycode == D_KEY)
+	if (keycode == D_KEY || keycode == 124)
 	{
 		cub->pa += 0.1;
 		if (cub->pa > 2 * PI)
@@ -99,7 +86,6 @@ int	key_hook(int keycode, t_cub *cub)
 		exit (0);
 	}
 	ft_keyhook_translation(keycode, cub);
-	ft_keyhook_rotation(keycode, cub);
 	cub->data.y_range = 0;
 	cub->data.x_range = 0;
 	map_display(cub, &cub->data, &cub->mlx_data);
@@ -183,8 +169,8 @@ void	main_texture_var_init(t_data *data)
 
 static void	init_cub_var(t_cub *cub, t_data *data)
 {
-	cub->Posx = 960;
-	cub->Posy = 535;
+	cub->posx = 960;
+	cub->posy = 535;
 	cub->pdx = cos(cub->pa * 5);
 	cub->pdy = sin(cub->pa * 5);
 	(cub->data) = *data;
