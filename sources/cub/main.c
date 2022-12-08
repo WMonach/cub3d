@@ -7,16 +7,37 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
 /*   Updated: 2022/12/08 14:26:57 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 14:26:51 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_close(t_cub *cub)
+void	parsing_debug(t_data *data)
 {
-	free(cub); /*FREE all*/
-	exit(0);
-	return (0);
+	int a = 0;
+	while (data->texture_path[a] != NULL)
+	{
+		printf("PATH COPY ==> %s\n", data->texture_path[a]);
+		a++;
+	}
+	a = 0;
+	while (a < 2)
+	{
+		printf("COLOR COPY ==> %s\n", data->rgb_values[a]);
+		a++;
+	}
+	a = 0;
+	printf("\n");
+	while (data->map[a] != NULL)
+	{
+		printf("%s\n", data->map[a]);
+		a++;
+	}
+	printf("\n== Map parsing OK ==\n");
+	printf("Map size --> %d\n", data->map_data.map_size);
+	printf("Player starting pos : X-Y [%d] [%d]\n", data->map_data.player_x, data->map_data.player_y);
+	return ;
 }
 
 int	ft_keyhook_translation(int keycode, t_cub *cub)
@@ -47,6 +68,12 @@ int	key_hook(int keycode, t_cub *cub)
 	ft_keyhook_translation(keycode, cub);
 	ft_draw_hero(cub, &cub->mlx_data);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
+}
+  
+int	ft_close(t_cub *cub)
+{
+	free(cub); /*FREE all*/
+	exit(0);
 	return (0);
 }
 
@@ -216,29 +243,7 @@ int	main(int argc, char *argv[])
 	{
 		if (parsing(argv, &data) == 0)
 		{
-//////////////////////////////////////////////////////////////////////////////////////////////
-			int a = 0;
-			while (data.texture_path[a] != NULL)
-			{
-				printf("PATH COPY ==> %s\n", data.texture_path[a]);
-				a++;
-			}
-			a = 0;
-			while (a < 2)
-			{
-				printf("COLOR COPY ==> %s\n", data.rgb_values[a]);
-				a++;
-			}
-			a = 0;
-			printf("\n");
-			while (data.map[a] != NULL)
-			{
-				printf("%s\n", data.map[a]);
-				a++;
-			}
-			printf("\n== Map parsing OK ==\n");
-			printf("Map size --> %d\n", data.map_data.map_size);
-//////////////////////////////////////////////////////////////////////////////////////////////
+			parsing_debug(&data);
 			raycaster(cub, &data);
 			free_texture_tab(&data);
 			free_rgb_tab(&data);
