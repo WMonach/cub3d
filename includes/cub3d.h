@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 11:19:56 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 11:20:39 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,14 @@ typedef struct s_vars
 	void	*mlx;
 	void	*win;
 }				t_vars;
-
-typedef struct s_mlx_data
+typedef struct data
 {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_mlx_data;
-
+}				data;
 typedef struct s_cub
 {
 	t_vars		vars;
