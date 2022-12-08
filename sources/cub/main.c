@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 11:02:08 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 11:12:57 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,12 +159,28 @@ int	parsing(char **argv, t_data *data)
 	return (0);
 }
 
+void	raycaster(t_cub *cub, t_data *data)
+{
+	(void)data;
+	cub = malloc(sizeof(t_cub));
+	cub->vars.mlx = mlx_init();
+	cub->vars.win = mlx_new_window(cub->vars.mlx,
+			1920, 1080, "cub");
+	cub->mlx_data.img = mlx_new_image(cub->vars.mlx, 1920, 1080);
+	cub->mlx_data.addr = mlx_get_data_addr((cub->mlx_data.img),
+			&(cub->mlx_data.bits_per_pixel), &(cub->mlx_data.line_length),
+			&(cub->mlx_data.endian));
+	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
+	mlx_loop(cub->vars.mlx);
+	return ;
+}
+
 int	main(int argc, char *argv[])
 {
 	t_data	data;
 	t_cub	*cub;
 
-	(void)cub;
+	cub = NULL;
 	main_data_var_init(&data);
 	main_texture_var_init(&data);
 	if (argc == 2)
@@ -194,16 +210,7 @@ int	main(int argc, char *argv[])
 			printf("\n== Map parsing OK ==\n");
 			printf("Map size --> %d\n", data.map_data.map_size);
 //////////////////////////////////////////////////////////////////////////////////////////////
-			// cub = malloc(sizeof(t_cub));
-			// cub->vars.mlx = mlx_init();
-			// cub->vars.win = mlx_new_window(cub->vars.mlx,
-			// 		1920, 1080, "cub");
-			// cub->img = mlx_new_image(cub->vars.mlx, 1920, 1080);
-			// cub->addr = mlx_get_data_addr((cub->img),
-			// 		&(cub->bits_per_pixel), &(cub->line_length),
-			// 		&(cub->endian));
-			// mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->img, 0, 0);
-			// mlx_loop(cub->vars.mlx);
+			raycaster(cub, &data);
 			free_texture_tab(&data);
 			free_rgb_tab(&data);
 			free_tab(data.map, data.map_data.map_size);
