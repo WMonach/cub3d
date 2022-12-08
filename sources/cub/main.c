@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 11:12:57 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 13:16:20 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,11 +165,12 @@ void	raycaster(t_cub *cub, t_data *data)
 	cub = malloc(sizeof(t_cub));
 	cub->vars.mlx = mlx_init();
 	cub->vars.win = mlx_new_window(cub->vars.mlx,
-			1920, 1080, "cub");
+			1920, 1080, "cub3d");
 	cub->mlx_data.img = mlx_new_image(cub->vars.mlx, 1920, 1080);
 	cub->mlx_data.addr = mlx_get_data_addr((cub->mlx_data.img),
 			&(cub->mlx_data.bits_per_pixel), &(cub->mlx_data.line_length),
 			&(cub->mlx_data.endian));
+	map_display(cub, data, &cub->mlx_data);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
 	mlx_loop(cub->vars.mlx);
 	return ;
