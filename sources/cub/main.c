@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 17:09:04 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 18:10:52 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@ void	parsing_debug(t_data *data)
 	printf("Player starting pos : X-Y [%d] [%d]\n", data->map_data.player_x, data->map_data.player_y);
 	return ;
 }
+
+int	ft_keyhook_rotation(int keycode, t_cub *cub)
+{
+	if (keycode == 125)
+		cub->posy += 5;
+	if (keycode == 126)
+		cub->posy -= 5;
+	if (keycode == 123)
+		cub->posx -= 5;
+	if (keycode == 124)
+		cub->posx += 5;
+	return (1);
+}
+
 
 int	ft_keyhook_translation(int keycode, t_cub *cub)
 {
@@ -85,6 +99,7 @@ int	key_hook(int keycode, t_cub *cub)
 		exit (0);
 	}
 	ft_keyhook_translation(keycode, cub);
+	ft_keyhook_rotation(keycode, cub);
 	cub->data.y_range = 0;
 	cub->data.x_range = 0;
 	map_display(cub, &cub->data, &cub->mlx_data);
@@ -237,6 +252,8 @@ int	parsing(char **argv, t_data *data)
 void	raycaster(t_cub *cub, t_data *data)
 {
 	(void)data;
+	cub->posx = data->map_data.player_x * 32;
+	cub->posy = data->map_data.player_y * 32;
 	cub->vars.mlx = mlx_init();
 	cub->vars.win = mlx_new_window(cub->vars.mlx,
 			1920, 1080, "cub3d");
