@@ -6,9 +6,10 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 14:36:16 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 14:37:58 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
