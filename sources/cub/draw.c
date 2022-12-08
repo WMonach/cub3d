@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 18:48:07 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/08 18:57:11 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,10 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 		my_mlx_pixel_put(img, cub->posx + 5, cub->posy, 0xffff00);
 		cub->posy++;
 	}
+	cub->posy -= 6;
 	cub->max = ft_max(fabsf(cub->posx + (cub->pdx * 5)), fabsf(cub->posy + (cub->pdy * 5)));
 	i = 0;
-	while (i < 100000)
+	while (i < 1000000)
 	{
 		cub->bresenx = cub->posx + (cub->pdx * i / cub->max);
 		cub->breseny = cub->posy + (cub->pdy * i / cub->max);
@@ -150,6 +151,5 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 		i++;
 	}
 	my_mlx_pixel_put(img, (cub->posx + (cub->pdx * 5)), (cub->posy + (cub->pdy * 5)), 0xffff00);
-	cub->posy -= 6;
 	return (1);
 }
