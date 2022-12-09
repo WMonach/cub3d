@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 18:57:11 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 20:10:19 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,10 +146,21 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 		{
 			ft_rounded(cub->bresenx, cub->breseny, cub);
 			my_mlx_pixel_put(img, (int)cub->bresenx,
-				(int)cub->breseny, 0xffff00);
+				(int)cub->breseny, 0xff6347);
 		}
+		cub->bresenx = cub->posx + (cub->raylx * i / cub->max);
+		cub->breseny = cub->posy + (cub->rayly * i / cub->max);
+		if (cub->bresenx < 1919 && cub->breseny < 1079
+			&& cub->bresenx >= 0 && cub->breseny >= 0)
+		{
+			ft_rounded(cub->bresenx, cub->breseny, cub);
+			my_mlx_pixel_put(img, (int)cub->bresenx,
+				(int)cub->breseny, 0xff6347);
+		}
+		cub->bresenx = cub->posx + (cub->raylx * i / cub->max);
+		cub->breseny = cub->posy + (cub->rayly * i / cub->max);
 		i++;
 	}
-	my_mlx_pixel_put(img, (cub->posx + (cub->pdx * 5)), (cub->posy + (cub->pdy * 5)), 0xffff00);
+	my_mlx_pixel_put(img, (cub->posx + (cub->pdx * 5)), (cub->posy + (cub->pdy * 5)), 0xff6347);
 	return (1);
 }

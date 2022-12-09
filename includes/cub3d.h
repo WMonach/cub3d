@@ -6,7 +6,7 @@
 /*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/09 17:08:15 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 20:26:23 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,28 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-# define ESC 53
-# define D_KEY 2
-# define A_KEY 0
-# define S_KEY 1
-# define W_KEY 13
+# ifdef __linux__ 
+#  define UP 65362
+#  define DOWN 65364
+#  define LEFT 65361
+#  define RIGHT 65363
+#  define ESC 65307
+#  define D_KEY 100
+#  define A_KEY 97
+#  define S_KEY 115
+#  define W_KEY 119
+# endif
+# ifdef __APPLE__ 
+#  define UP 126
+#  define DOWN 125
+#  define LEFT 123
+#  define RIGHT 124
+#  define ESC 53
+#  define D_KEY 2
+#  define A_KEY 0
+#  define S_KEY 1
+#  define W_KEY 13
+# endif
 # define PI 3.1415926535
 
 typedef struct s_texture {
@@ -128,14 +145,16 @@ typedef struct s_cub
 	float		pa;
 	float		pdx;
 	float		pdy;
-	float			posx;
-	float			posy;
+	float		posx;
+	float		posy;
 	float		x2;
 	float		y1;
 	float		y2;
-	float			max;
-	float			bresenx;
-	float			breseny;
+	float		max;
+	float		bresenx;
+	float		breseny;
+	float		raylx;
+	float		rayly;
 }				t_cub;
 
 int		ft_draw(t_cub *cub, t_mlx_data *img);

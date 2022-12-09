@@ -144,7 +144,7 @@ libs:
 					$(MAKE) -C mlx_linux/
 
 $(NAME):			$(OBJ) $(LIBFT_DIR)libft.a
-					$(CC) $(CRASH) $(OBJ) $(LIBFT_DIR)libft.a -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux  -lXext -lX11 -lm -lz-o $(NAME)
+					$(CC) $(OBJ) -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 	
 $(DIR_OBJ)/%.o:		$(DIR_SRC)/%$(FILE_EXT) includes/cub3d.h ${LIBFT_DIR}libft.h ${LIBFT_DIR}libft.a Makefile | $(SUB_DIR)
 					${CC} ${CFLAGS} -c $< -o $@
@@ -160,7 +160,7 @@ norme :
 
 clean :
 					${MAKE} clean -C ${LIBFT_DIR}
-					${MAKE} clean -C mlx/
+					${MAKE} clean -C mlx_linux/
 					rm -f ${OBJ} ${OBJ_B} $(OBJS_DIR)/*.o 
 					rm -rf $(OBJS_DIR)
 

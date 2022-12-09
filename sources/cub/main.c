@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 18:19:58 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 20:13:18 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,29 @@ void	parsing_debug(t_data *data)
 
 int	ft_keyhook_translation(int keycode, t_cub *cub)
 {
-	if (keycode == S_KEY || keycode == 125)
+	printf("key=%d\n", keycode);
+	if (keycode == S_KEY || keycode == DOWN)
 	{
 		cub->posx -= cub->pdx;
 		cub->posy -= cub->pdy;
 
 	}
-	if (keycode == W_KEY || keycode == 126)
+	if (keycode == W_KEY || keycode == UP)
 	{
 		cub->posx += cub->pdx;
 		cub->posy += cub->pdy;
 	}
-	if (keycode == A_KEY || keycode == 123)
+	if (keycode == A_KEY || keycode == LEFT)
 	{
 		cub->pa -= 0.1;
 		if (cub->pa < 0)
 			cub->pa += 2 * PI;
 		cub->pdx = cos(cub->pa) * 5;
 		cub->pdy = sin(cub->pa) * 5;
+		cub->raylx = cos(cub->pa) * 10;
+		cub->rayly = sin(cub->pa) * 10;
 	}
-	if (keycode == D_KEY || keycode == 124)
+	if (keycode == D_KEY || keycode == RIGHT)
 	{
 		cub->pa += 0.1;
 		if (cub->pa > 2 * PI)
