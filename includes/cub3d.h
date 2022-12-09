@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/08 18:43:00 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 17:08:15 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@
 # include <math.h>
 # include "mlx.h"
 # include <string.h>
-# include "../mlx/mlx.h"
 # include "libft.h"
-# include "../sources/get_next_line/get_next_line.h"
+# include "get_next_line.h"
 
 # define ESC 53
 # define D_KEY 2
