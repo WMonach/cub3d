@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/09 20:13:18 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/12 16:54:14 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,30 @@ void	parsing_debug(t_data *data)
 	return ;
 }
 
+int	ft_rz_rotation(float delta, t_cub *cub)
+{
+	cub->raylx = cub->pdx * cos(delta) + cub->pdy * (-sin(delta));
+	cub->rayly = cub->pdx * sin(delta) + cub->pdy * cos(delta);
+	return (1);
+}
+
+
+int	ft_rx_rotation(float delta, t_cub *cub)
+{
+	cub->raylx = cub->pdx;
+	cub->rayly = cub->pdy * cos(delta);
+	return (1);
+}
+
+int	ft_ry_rotation(float delta, t_cub *cub)
+{
+	cub->raylx = cub->pdx * cos(delta);
+	cub->rayly = cub->pdy;
+	return (1);
+}
 
 int	ft_keyhook_translation(int keycode, t_cub *cub)
 {
-	printf("key=%d\n", keycode);
 	if (keycode == S_KEY || keycode == DOWN)
 	{
 		cub->posx -= cub->pdx;
@@ -62,8 +82,7 @@ int	ft_keyhook_translation(int keycode, t_cub *cub)
 			cub->pa += 2 * PI;
 		cub->pdx = cos(cub->pa) * 5;
 		cub->pdy = sin(cub->pa) * 5;
-		cub->raylx = cos(cub->pa) * 10;
-		cub->rayly = sin(cub->pa) * 10;
+		ft_rz_rotation(DELTA, cub);
 	}
 	if (keycode == D_KEY || keycode == RIGHT)
 	{
@@ -72,6 +91,7 @@ int	ft_keyhook_translation(int keycode, t_cub *cub)
 			cub->pa -= 2 * PI;
 		cub->pdx = cos(cub->pa) * 5;
 		cub->pdy = sin(cub->pa) * 5;
+		ft_rz_rotation(DELTA, cub);
 	}
 	return (1);
 }

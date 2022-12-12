@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/09 20:10:19 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/12 16:54:48 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,14 @@ static float	ft_max(float max1, float max2)
 
 int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 {
-	int	i;
+	int		i;
+	int		ra;
+	float	delta;
+	float	atan;
 
 	i = -1;
+	ra = cub->pa;
+	atan = -1/tan(ra);
 	while (++i <= 5)
 	{
 		my_mlx_pixel_put(img, cub->posx, cub->posy, 0xffff00);
@@ -137,7 +142,7 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 	cub->posy -= 6;
 	cub->max = ft_max(fabsf(cub->posx + (cub->pdx * 5)), fabsf(cub->posy + (cub->pdy * 5)));
 	i = 0;
-	while (i < 1000000)
+	while (i < 100000)
 	{
 		cub->bresenx = cub->posx + (cub->pdx * i / cub->max);
 		cub->breseny = cub->posy + (cub->pdy * i / cub->max);
@@ -148,17 +153,21 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 			my_mlx_pixel_put(img, (int)cub->bresenx,
 				(int)cub->breseny, 0xff6347);
 		}
-		cub->bresenx = cub->posx + (cub->raylx * i / cub->max);
-		cub->breseny = cub->posy + (cub->rayly * i / cub->max);
-		if (cub->bresenx < 1919 && cub->breseny < 1079
-			&& cub->bresenx >= 0 && cub->breseny >= 0)
+		delta = DELTA;
+		while (delta >= -DELTA)
 		{
-			ft_rounded(cub->bresenx, cub->breseny, cub);
-			my_mlx_pixel_put(img, (int)cub->bresenx,
-				(int)cub->breseny, 0xff6347);
+			ft_rz_rotation(delta, cub);
+			cub->bresenx = cub->posx + (cub->raylx * i / cub->max);
+			cub->breseny = cub->posy + (cub->rayly * i / cub->max);
+			if (cub->bresenx < 1919 && cub->breseny < 1079
+				&& cub->bresenx >= 0 && cub->breseny >= 0)
+			{
+				ft_rounded(cub->bresenx, cub->breseny, cub);
+				my_mlx_pixel_put(img, (int)cub->bresenx,
+					(int)cub->breseny, 0xff6347);
+			}
+			delta = delta - (DELTA / 8);
 		}
-		cub->bresenx = cub->posx + (cub->raylx * i / cub->max);
-		cub->breseny = cub->posy + (cub->rayly * i / cub->max);
 		i++;
 	}
 	my_mlx_pixel_put(img, (cub->posx + (cub->pdx * 5)), (cub->posy + (cub->pdy * 5)), 0xff6347);
