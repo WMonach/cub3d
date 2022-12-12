@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/12 16:53:18 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/12 17:34:54 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,13 +158,14 @@ typedef struct s_cub
 	float		rayly;
 }				t_cub;
 
-int		ft_draw(t_cub *cub, t_mlx_data *img);
-int		ft_draw_hero(t_cub *cub, t_mlx_data *img);
-int		map_display(t_cub *cub, t_data *data, t_mlx_data *img);
-int		ft_keyhook_rotation(int keycode, t_cub *cub);
-int		ft_rz_rotation(float delta, t_cub *cub);
-int		ft_rx_rotation(float delta, t_cub *cub);
-int		ft_ry_rotation(float delta, t_cub *cub);
+int				ft_draw(t_cub *cub, t_mlx_data *img);
+int				ft_draw_hero(t_cub *cub, t_mlx_data *img);
+int				map_display(t_cub *cub, t_data *data, t_mlx_data *img);
+int				ft_keyhook_rotation(int keycode, t_cub *cub);
+int				ft_rz_rotation(float delta, t_cub *cub);
+int				ft_rx_rotation(float delta, t_cub *cub);
+int				ft_ry_rotation(float delta, t_cub *cub);
+int				draw_ray(t_cub *cub);
 
 /* PARSING */
 char			**free_tab(char **tab, int i);

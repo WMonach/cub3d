@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/12 16:54:48 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/12 17:36:11 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	print_wall(t_data *data, t_mlx_data *mlx_data)
 
 	y = data->y_range;
 	(void)data;
-	while (y < (data->y_range + 32))
+	while (y < (data->y_range + 31))
 	{
 		x = data->x_range;
-		while (x < (data->x_range + 32))
+		while (x < (data->x_range + 31))
 		{
 			my_mlx_pixel_put(mlx_data, x, y, 0x00663300);
 			x++;
@@ -47,10 +47,10 @@ void	print_floor(t_data *data, t_mlx_data *mlx_data)
 
 	y = data->y_range;
 	(void)data;
-	while (y < (data->y_range + 32))
+	while (y < (data->y_range + 31))
 	{
 		x = data->x_range;
-		while (x < (data->x_range + 32))
+		while (x < (data->x_range + 31))
 		{
 			my_mlx_pixel_put(mlx_data, x, y, 0x00999999);
 			x++;
@@ -91,6 +91,23 @@ int	map_display(t_cub *cub, t_data *data, t_mlx_data *img)
 	return (0);
 }
 
+int	draw_ray(t_cub *cub)
+{
+	float	ra;
+	float	atan;
+	float	ry;
+	float	rx;
+
+	ra = cub->pa;
+	atan = -1 / tan(ra);
+	if (ra > 1)
+	{
+		ry = cub->posy
+		return (1);
+	}
+	return (1);
+}
+
 static void	ft_rounded(float number1, float number2, t_cub	*cub)
 {
 	float	comma;
@@ -122,13 +139,9 @@ static float	ft_max(float max1, float max2)
 int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 {
 	int		i;
-	int		ra;
 	float	delta;
-	float	atan;
 
 	i = -1;
-	ra = cub->pa;
-	atan = -1/tan(ra);
 	while (++i <= 5)
 	{
 		my_mlx_pixel_put(img, cub->posx, cub->posy, 0xffff00);
