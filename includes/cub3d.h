@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/09 20:26:23 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/12 16:53:18 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@
 #  define S_KEY 1
 #  define W_KEY 13
 # endif
-# define PI 3.1415926535
+# define PI 3.1415926535 
+# define DELTA 0.62831853071
 
 typedef struct s_texture {
 	int		check_no_texture;
@@ -161,6 +162,9 @@ int		ft_draw(t_cub *cub, t_mlx_data *img);
 int		ft_draw_hero(t_cub *cub, t_mlx_data *img);
 int		map_display(t_cub *cub, t_data *data, t_mlx_data *img);
 int		ft_keyhook_rotation(int keycode, t_cub *cub);
+int		ft_rz_rotation(float delta, t_cub *cub);
+int		ft_rx_rotation(float delta, t_cub *cub);
+int		ft_ry_rotation(float delta, t_cub *cub);
 
 /* PARSING */
 char			**free_tab(char **tab, int i);
