@@ -28,6 +28,10 @@ SUB_DIR=			$(addprefix $(DIR_OBJ)/,$(SUB_DIR_LST))
 
 INC_FILES	=		cub/main								\
 					cub/draw								\
+					cub/main_utils							\
+					cub/free_functions						\
+					cub/keyhook_and_rotation				\
+					cub/map_display							\
 					utils/round								\
 					parsing/check_id_utils					\
 					parsing/check_id						\

@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/12 16:54:14 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/13 10:38:20 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 
@@ -40,62 +39,6 @@ void	parsing_debug(t_data *data)
 	return ;
 }
 
-int	ft_rz_rotation(float delta, t_cub *cub)
-{
-	cub->raylx = cub->pdx * cos(delta) + cub->pdy * (-sin(delta));
-	cub->rayly = cub->pdx * sin(delta) + cub->pdy * cos(delta);
-	return (1);
-}
-
-
-int	ft_rx_rotation(float delta, t_cub *cub)
-{
-	cub->raylx = cub->pdx;
-	cub->rayly = cub->pdy * cos(delta);
-	return (1);
-}
-
-int	ft_ry_rotation(float delta, t_cub *cub)
-{
-	cub->raylx = cub->pdx * cos(delta);
-	cub->rayly = cub->pdy;
-	return (1);
-}
-
-int	ft_keyhook_translation(int keycode, t_cub *cub)
-{
-	if (keycode == S_KEY || keycode == DOWN)
-	{
-		cub->posx -= cub->pdx;
-		cub->posy -= cub->pdy;
-
-	}
-	if (keycode == W_KEY || keycode == UP)
-	{
-		cub->posx += cub->pdx;
-		cub->posy += cub->pdy;
-	}
-	if (keycode == A_KEY || keycode == LEFT)
-	{
-		cub->pa -= 0.1;
-		if (cub->pa < 0)
-			cub->pa += 2 * PI;
-		cub->pdx = cos(cub->pa) * 5;
-		cub->pdy = sin(cub->pa) * 5;
-		ft_rz_rotation(DELTA, cub);
-	}
-	if (keycode == D_KEY || keycode == RIGHT)
-	{
-		cub->pa += 0.1;
-		if (cub->pa > 2 * PI)
-			cub->pa -= 2 * PI;
-		cub->pdx = cos(cub->pa) * 5;
-		cub->pdy = sin(cub->pa) * 5;
-		ft_rz_rotation(DELTA, cub);
-	}
-	return (1);
-}
-
 int	key_hook(int keycode, t_cub *cub)
 {
 	mlx_destroy_image(cub->vars.mlx, cub->mlx_data.img);
@@ -115,124 +58,6 @@ int	key_hook(int keycode, t_cub *cub)
 	ft_draw_hero(cub, &cub->mlx_data);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
 	return (1);
-}
-
-int	ft_close(t_cub *cub)
-{
-	free(cub); /*FREE all*/
-	exit(0);
-	return (0);
-}
-
-char	**free_texture_tab(t_data *data)
-{
-	if (data->texture.north_path_copy == 1)
-		free(data->texture_path[0]);
-	if (data->texture.south_path_copy == 1)
-		free(data->texture_path[1]);
-	if (data->texture.west_path_copy == 1)
-		free(data->texture_path[2]);
-	if (data->texture.east_path_copy == 1)
-		free(data->texture_path[3]);
-	free(data->texture_path);
-	return (0);
-}
-
-char	**free_rgb_tab(t_data *data)
-{
-	if (data->texture.rgb_f_copy == 1)
-		free(data->rgb_values[0]);
-	if (data->texture.rgb_c_copy == 1)
-		free(data->rgb_values[1]);
-	free(data->rgb_values);
-	return (0);
-}
-
-char	**free_tab(char **tab, int i)
-{
-	if (i == 0)
-	{
-		free(tab);
-		return (0);
-	}
-	while (i >= 0)
-	{
-		if (tab[i])
-			free(tab[i]);
-		i--;
-	}
-	free(tab);
-	return (0);
-}
-
-void	main_texture_var_init(t_data *data)
-{
-	data->texture.rgb_f_copy = 0;
-	data->texture.rgb_f_copy = 0;
-	data->texture.north_path_copy = 0;
-	data->texture.south_path_copy = 0;
-	data->texture.west_path_copy = 0;
-	data->texture.east_path_copy = 0;
-	data->textures_tab_size = 0;
-	data->rgb_tab_size = 0;
-	data->texture.check_no_texture = 0;
-	data->texture.check_so_texture = 0;
-	data->texture.check_ea_texture = 0;
-	data->texture.check_we_texture = 0;
-	data->texture.check_f_texture = 0;
-	data->texture.check_c_texture = 0;
-	data->texture_id[0] = "NO";
-	data->texture_id[1] = "SO";
-	data->texture_id[2] = "WE";
-	data->texture_id[3] = "EA";
-	data->texture_id[4] = "F";
-	data->texture_id[5] = "C";
-	return ;
-}
-
-static void	init_cub_var(t_cub *cub, t_data *data)
-{
-	cub->posx = 960;
-	cub->posy = 535;
-	cub->pdx = cos(cub->pa * 5);
-	cub->pdy = sin(cub->pa * 5);
-	(cub->data) = *data;
-}
-
-void	main_data_var_init(t_data *data, t_cub *cub)
-{
-	data->north = 0;
-	data->south = 0;
-	data->west = 0;
-	data->east = 0;
-	data->length = 0;
-	data->id_number = 6;
-	data->nb_of_lines = 0;
-	data->check_id_parsing = 0;
-	data->map_data.map_size = 0;
-	data->end_line_check = 0;
-	data->check_empty_line = 0;
-	data->map_data.check_north_spawn = 0;
-	data->map_data.check_south_spawn = 0;
-	data->map_data.check_west_spawn = 0;
-	data->map_data.check_east_spawn = 0;
-	init_cub_var(cub, data);
-	return ;
-}
-
-int	map_copy_and_parsing(t_data *data, char **argv)
-{
-	if (map_copy(data, argv[1]) == 1)
-	{
-		data->free_tab_map = 1;
-		return (1);
-	}
-	if (map_wall_parsing(data) == 1)
-	{
-		data->free_tab_map = 1;
-		return (1);
-	}
-	return (0);
 }
 
 int	parsing(char **argv, t_data *data)
