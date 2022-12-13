@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/13 10:41:38 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/13 10:55:44 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	my_mlx_pixel_put(t_mlx_data *mlx_data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-static void	ft_rounded(float number1, float number2, t_cub	*cub)
+void	ft_rounded(float number1, float number2, t_cub	*cub)
 {
 	float	comma;
 	int		temp;
@@ -71,7 +71,7 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 	cub->posy -= 6;
 	cub->max = ft_max(fabsf(cub->posx + (cub->pdx * 5)), fabsf(cub->posy + (cub->pdy * 5)));
 	i = 0;
-	while (i < 100000)
+	while (i < 10000)
 	{
 		cub->bresenx = cub->posx + (cub->pdx * i / cub->max);
 		cub->breseny = cub->posy + (cub->pdy * i / cub->max);
