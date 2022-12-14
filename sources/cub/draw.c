@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/12 17:36:11 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/14 13:06:46 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,12 @@ int	draw_ray(t_cub *cub)
 	float	ra;
 	float	atan;
 	float	ry;
-	float	rx;
 
 	ra = cub->pa;
 	atan = -1 / tan(ra);
 	if (ra > 1)
 	{
-		ry = cub->posy
+		ry = cub->posy;
 		return (1);
 	}
 	return (1);
