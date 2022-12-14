@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/14 13:08:08 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/14 15:37:27 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@
 #  define W_KEY 13
 # endif
 # define PI 3.1415926535 
+# define P2 PI/2
+# define P3 3*PI/2
 # define DELTA 0.62831853071
 
 typedef struct s_texture {

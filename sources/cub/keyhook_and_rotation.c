@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:38:45 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/13 10:49:50 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/14 09:36:39 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_keyhook_translation(int keycode, t_cub *cub)
 			cub->pa += 2 * PI;
 		cub->pdx = cos(cub->pa) * 5;
 		cub->pdy = sin(cub->pa) * 5;
-		ft_rz_rotation(DELTA, cub);
+		//ft_rz_rotation(DELTA, cub);
 	}
 	if (keycode == D_KEY || keycode == RIGHT)
 	{
@@ -62,7 +62,7 @@ int	ft_keyhook_translation(int keycode, t_cub *cub)
 			cub->pa -= 2 * PI;
 		cub->pdx = cos(cub->pa) * 5;
 		cub->pdy = sin(cub->pa) * 5;
-		ft_rz_rotation(DELTA, cub);
+		//ft_rz_rotation(DELTA, cub);
 	}
 	return (1);
 }

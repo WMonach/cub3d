@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/13 10:38:20 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/13 13:40:04 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int	parsing(char **argv, t_data *data)
 void	raycaster(t_cub *cub, t_data *data)
 {
 	(void)data;
-	cub->posx = data->map_data.player_x * 32;
-	cub->posy = data->map_data.player_y * 32;
+	cub->posx = (data->map_data.player_x * 32) + 30;
+	cub->posy = (data->map_data.player_y * 32) + 30;
 	cub->vars.mlx = mlx_init();
 	cub->vars.win = mlx_new_window(cub->vars.mlx,
 			1920, 1080, "cub3d");
