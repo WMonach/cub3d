@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/13 10:55:44 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/14 13:08:01 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,9 @@ static float	ft_max(float max1, float max2)
 int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 {
 	int		i;
-	int		ra;
 	float	delta;
-	float	atan;
 
 	i = -1;
-	ra = cub->pa;
-	atan = -1/tan(ra);
 	while (++i <= 5)
 	{
 		my_mlx_pixel_put(img, cub->posx, cub->posy, 0xffff00);
