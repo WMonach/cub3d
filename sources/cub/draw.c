@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/14 12:38:29 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/14 14:26:23 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,20 @@ float	ft_max(float max1, float max2)
 
 void	print_h_rayon(t_cub *cub, float rx, float ry)
 {
-	int		i;
 	
-	(void)rx;
-	(void)ry;
-	cub->max = ft_max(fabsf(cub->posx + (cub->pdx * 5)), fabsf(cub->posy + (cub->pdy * 5)));
+	float	i;
+	float	c;
+	
 	i = 0;
+	c = 0;
+	c = sqrt((powf(rx, 2) + powf(ry, 2))) * 32;
+	cub->max = ft_max(fabsf(cub->posx + (cub->pdx * 5)), fabsf(cub->posy + (cub->pdy * 5)));
 	while (i < 100000)
 	{
 		cub->bresenx = cub->posx + (cub->pdx * i / cub->max);
 		cub->breseny = cub->posy + (cub->pdy * i / cub->max);
+		if (cub->bresenx > rx)
+			break ;
 		if (cub->bresenx < 1919 && cub->breseny < 1079
 			&& cub->bresenx >= 0 && cub->breseny >= 0)
 		{
@@ -138,6 +142,7 @@ void	vertical_line_check(t_cub *cub, int mx, int my, int mp, int dof, float ra, 
 				dof += 1;
 			}
 		}
+		print_v_rayon(cub, rx, ry);
 }
 
 
@@ -185,6 +190,7 @@ void	horizontal_line_check(t_cub *cub, int mx, int my, int mp, int dof, float ra
 				dof += 1;
 			}
 		}
+		print_h_rayon(cub, rx, ry);
 }
 
 void	draw_rays(t_cub *cub)
@@ -208,9 +214,7 @@ void	draw_rays(t_cub *cub)
 	{
 		dof = 0;
 		horizontal_line_check(cub, mx, my, mp, dof, ra, rx, ry, xo, yo, atan);
-		print_h_rayon(cub, rx, ry);
-		vertical_line_check(cub, mx, my, mp, dof, ra, rx, ry, xo, yo, ntan);
-		print_v_rayon(cub, rx, ry);
+		//vertical_line_check(cub, mx, my, mp, dof, ra, rx, ry, xo, yo, ntan);
 		r++;
 	}
 	printf("\n===========\n");
