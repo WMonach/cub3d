@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/14 15:37:27 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/14 17:04:42 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,11 +136,36 @@ typedef struct s_mlx_data
 	int		endian;
 }				t_mlx_data;
 
+
+typedef struct s_rayh
+{
+	float	rx;
+	float	ry;
+	float	xo;
+	float	yo;
+	int		mx;
+	int		my;
+	int		mp;
+	int		dof;
+}				t_rayh;
+typedef struct s_rayv
+{
+	float	rx;
+	float	ry;
+	float	xo;
+	float	yo;
+	int		mx;
+	int		my;
+	int		mp;
+	int		dof;
+}				t_rayv;
 typedef struct s_cub
 {
 	t_vars		vars;
 	t_mlx_data	mlx_data;
 	t_data		data;
+	t_rayv		ray_v;
+	t_rayh		ray_h;
 	float		x;
 	float		y;
 	float		z;

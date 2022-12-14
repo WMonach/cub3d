@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_display.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:41:52 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/13 10:42:05 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/14 13:11:51 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	print_wall(t_data *data, t_mlx_data *mlx_data)
 
 	y = data->y_range;
 	(void)data;
-	while (y < (data->y_range + 32))
+	while (y < (data->y_range + 31))
 	{
 		x = data->x_range;
-		while (x < (data->x_range + 32))
+		while (x < (data->x_range + 31))
 		{
 			my_mlx_pixel_put(mlx_data, x, y, 0x00663300);
 			x++;
@@ -39,10 +39,10 @@ void	print_floor(t_data *data, t_mlx_data *mlx_data)
 
 	y = data->y_range;
 	(void)data;
-	while (y < (data->y_range + 32))
+	while (y < (data->y_range + 31))
 	{
 		x = data->x_range;
-		while (x < (data->x_range + 32))
+		while (x < (data->x_range + 31))
 		{
 			my_mlx_pixel_put(mlx_data, x, y, 0x00999999);
 			x++;

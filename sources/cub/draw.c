@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/14 15:37:12 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/14 17:39:38 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	print_h_rayon(t_cub *cub, float rx, float ry)
 	float	i;
 	float	c;
 	float	length;
-	
+
 	i = 0;
 	c = 0;
 	length = 0;
@@ -80,7 +80,7 @@ void	print_v_rayon(t_cub *cub, float rx, float ry)
 	float	i;
 	float	c;
 	float	length;
-	
+
 	i = 0;
 	c = 0;
 	length = 0;
@@ -95,122 +95,146 @@ void	print_v_rayon(t_cub *cub, float rx, float ry)
 			&& cub->bresenx >= 0 && cub->breseny >= 0)
 		{
 			ft_rounded(cub->bresenx, cub->breseny, cub);
-			my_mlx_pixel_put(&cub->mlx_data, (int)cub->bresenx + 10,
-				(int)cub->breseny + 10, 0xeeee);
+			my_mlx_pixel_put(&cub->mlx_data, (int)cub->bresenx,
+				(int)cub->breseny, 0xeeee);
 		}
 		i++;
 	}
 }
-
-void	vertical_line_check(t_cub *cub, int mx, int my, int mp, int dof, float ra, float rx, float ry, float xo, float yo, float ntan)
+void	vertical_line_check(t_cub *cub, float ra, float ntan)
 {
-		if ((ra > P2) && (ra < P3))
+	if ((ra > P2) && (ra < P3))
+	{
+		cub->ray_v.rx = (((int)cub->posx>>5) * 32) - 0.0001;
+		cub->ray_v.ry = (cub->posx - cub->ray_v.rx) * ntan + cub->posy;
+		cub->ray_v.xo = -32;
+		cub->ray_v.yo = (-cub->ray_v.xo * ntan);
+	}
+	if ((ra < P2) || (ra > P3))
+	{
+		cub->ray_v.rx = (((int)cub->posx>>5) * 32) + 32;
+		cub->ray_v.ry = (cub->posx - cub->ray_v.rx) * ntan + cub->posy;
+		cub->ray_v.xo = 32;
+		cub->ray_v.yo = (-cub->ray_v.xo * ntan);
+	}
+	if (ra == 0 || ra == PI)
+	{
+		cub->ray_v.rx = cub->posx;
+		cub->ray_v.ry = cub->posy;
+		cub->ray_v.dof = 15;
+	}
+	while (cub->ray_v.dof < 15)
+	{
+		cub->ray_v.mx = abs((int)(cub->ray_v.rx)>>5);
+		cub->ray_v.my = abs((int)(cub->ray_v.ry)>>5);
+		cub->ray_v.mp = cub->ray_v.my * 15 + cub->ray_v.mx;
+		if (cub->ray_h.mp > 0 && (cub->ray_v.mp < (15 * 15)) && cub->data.map[cub->ray_v.my][cub->ray_v.mx] == '1')
 		{
-			rx = (((int)cub->posx>>5) * 32) - 0.0001;
-			ry = (cub->posx - rx) * ntan + cub->posy;
-			xo = -32;
-			yo = (-yo * ntan);
+			printf("\n!!! HIT V WALL !!!\n");
+			printf("\n!!! [%d][%d] !!!\n", cub->ray_v.my, cub->ray_v.mx);
+			cub->ray_v.dof = 15;
 		}
-		if ((ra < P2) || (ra > P3))
+		else
 		{
-			rx = (((int)cub->posx>>5) * 32) + 32;
-			ry = (cub->posx - rx) * ntan + cub->posy;
-			xo = 32;
-			yo = (-yo * ntan);
+			cub->ray_v.rx += cub->ray_v.xo;
+			cub->ray_v.ry += cub->ray_v.yo;
+			cub->ray_v.dof += 1;
 		}
-		if (ra == 0 || ra == PI)
-		{
-			rx = cub->posx;
-			ry = cub->posy;
-			dof = 15;
-		}
-		while (dof < 15)
-		{
-			mx = abs((int)(rx)>>5);
-			my = abs((int)(ry)>>5);
-			mp = my * 15 + mx;
-			if ((mp < (15 * 15)) && cub->data.map[my][mx] == '1')
-			{
-				printf("\n!!! HIT V WALL !!!\n");
-				printf("\n!!! [%d][%d] !!!\n", my, mx);
-				dof = 15;
-			}
-			else
-			{
-				rx += xo;
-				ry += yo;
-				dof += 1;
-			}
-		}
-		print_v_rayon(cub, rx, ry);
+	}
 }
 
 
-void	horizontal_line_check(t_cub *cub, int mx, int my, int mp, int dof, float ra, float rx, float ry, float xo, float yo, float atan)
+void	horizontal_line_check(t_cub *cub, float ra, float atan)
 {
-		if (ra > PI)
+	if (ra > PI)
+	{
+		cub->ray_h.ry = (((int)cub->posy>>5) * 32) - 0.0001;
+		cub->ray_h.rx = (cub->posy - cub->ray_h.ry) * atan + cub->posx;
+		cub->ray_h.yo = -32;
+		cub->ray_h.xo = (-cub->ray_h.yo * atan);
+	}
+	if (ra < PI)
+	{
+		cub->ray_h.ry = (((int)cub->posy>>5) * 32) + 32;
+		cub->ray_h.rx = (cub->posy - cub->ray_h.ry) * atan + cub->posx;
+		cub->ray_h.yo = 32;
+		cub->ray_h.xo = (-cub->ray_h.yo * atan);
+	}
+	if (ra == 0 || ra == PI)
+	{
+		cub->ray_h.rx = cub->posx;
+		cub->ray_h.ry = cub->posy;
+		cub->ray_h.dof = 15;
+	}
+	while (cub->ray_h.dof < 15)
+	{
+		cub->ray_h.mx = abs((int)(cub->ray_h.rx)>>5);
+		cub->ray_h.my = abs((int)(cub->ray_h.ry)>>5);
+		cub->ray_h.mp = cub->ray_h.my * 15 + cub->ray_h.mx;
+		if (cub->ray_h.mp > 0 && (cub->ray_h.mp < (15 * 15)) && cub->data.map[cub->ray_h.my][cub->ray_h.mx] == '1')
 		{
-			ry = (((int)cub->posy>>5) * 32) - 0.0001;
-			rx = (cub->posy - ry) * atan + cub->posx;
-			yo = -32;
-			xo = (-yo * atan);
+			printf("\n!!! HIT H WALL !!!\n");
+			printf("\n!!! [%d][%d] !!!\n", cub->ray_h.my, cub->ray_h.mx);
+			cub->ray_h.dof = 15;
 		}
-		if (ra < PI)
+		else
 		{
-			ry = (((int)cub->posy>>5) * 32) + 32;
-			rx = (cub->posy - ry) * atan + cub->posx;
-			yo = 32;
-			xo = (-yo * atan);
+			cub->ray_h.rx += cub->ray_h.xo;
+			cub->ray_h.ry += cub->ray_h.yo;
+			cub->ray_h.dof += 1;
 		}
-		if (ra == 0 || ra == PI)
-		{
-			rx = cub->posx;
-			ry = cub->posy;
-			dof = 15;
-		}
-		while (dof < 15)
-		{
-			mx = abs((int)(rx)>>5);
-			my = abs((int)(ry)>>5);
-			mp = my * 15 + mx;
-			if ((mp < (15 * 15)) && cub->data.map[my][mx] == '1')
-			{
-				printf("\n!!! HIT H WALL !!!\n");
-				printf("\n!!! [%d][%d] !!!\n", my, mx);
-				dof = 15;
-			}
-			else
-			{
-				rx += xo;
-				ry += yo;
-				dof += 1;
-			}
-		}
-		print_h_rayon(cub, rx, ry);
+	}
+}
+
+void	init_ray_var(t_cub *cub)
+{
+	cub->ray_v.mx = 0;
+	cub->ray_v.my = 0;
+	cub->ray_v.mp = 0;
+	cub->ray_v.rx = 0;
+	cub->ray_v.ry = 0;
+	cub->ray_v.xo = 0;
+	cub->ray_v.yo = 0;
+	cub->ray_v.dof = 0;
+	cub->ray_h.mx = 0;
+	cub->ray_h.my = 0;
+	cub->ray_h.mp = 0;
+	cub->ray_h.rx = 0;
+	cub->ray_h.ry = 0;
+	cub->ray_h.xo = 0;
+	cub->ray_h.yo = 0;
+	cub->ray_h.dof = 0;
+}
+
+int	check_ray(t_cub *cub)
+{
+	printf("verticalray===%f\nhoriray===%f\n", sqrtf((powf(cub->ray_v.rx - cub->posx, 2) + powf(cub->ray_v.ry - cub->posy, 2))), sqrtf((powf(cub->ray_h.rx - cub->posx, 2) + powf(cub->ray_h.ry - cub->posy, 2))));
+	if (sqrtf((powf(cub->ray_h.rx - cub->posx, 2) + powf(cub->ray_h.ry - cub->posy, 2))) >= sqrtf((powf(cub->ray_v.rx - cub->posx, 2) + powf(cub->ray_v.ry - cub->posy, 2))))
+		return (1);
+	else
+		return (0);
+	return (0);
 }
 
 void	draw_rays(t_cub *cub)
 {
-	int		r, mx, my, mp, dof;
-	float	ra, rx, ry, xo, yo, atan, ntan;
+	int		r;
+	float	ra, atan, ntan;
 
+	init_ray_var(cub);
 	r = 0;
-	mx = 0;
-	my = 0;
-	mp = 0;
-	rx = 0;
-	ry = 0;
-	xo = 0;
-	yo = 0;
 	ra = cub->pa;
-	dof = 0;
-	atan = -1/tan(ra);
+	atan = -1 / tan(ra);
 	ntan = -tan(ra);
 	printf("\n===========\n");
 	while (r < 1)
 	{
-		horizontal_line_check(cub, mx, my, mp, dof, ra, rx, ry, xo, yo, atan);
-		//vertical_line_check(cub, mx, my, mp, dof, ra, rx, ry, xo, yo, ntan);
+		horizontal_line_check(cub, ra, atan);
+		vertical_line_check(cub, ra, ntan);
+		if (check_ray(cub) == 0)
+			print_h_rayon(cub, cub->ray_h.rx, cub->ray_h.ry);
+		else
+			print_v_rayon(cub, cub->ray_v.rx, cub->ray_v.ry);
 		r++;
 	}
 	printf("\n===========\n");
@@ -235,10 +259,6 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 	draw_rays(cub);
 	return (1);
 }
-
-
-
-
 
 	//cub->max = ft_max(fabsf(cub->posx + (cub->pdx * 5)), fabsf(cub->posy + (cub->pdy * 5)));
 	// i = 0;
