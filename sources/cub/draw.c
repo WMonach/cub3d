@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/14 13:08:01 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/14 13:11:29 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 	cub->posy -= 6;
 	cub->max = ft_max(fabsf(cub->posx + (cub->pdx * 5)), fabsf(cub->posy + (cub->pdy * 5)));
 	i = 0;
-	while (i < 10000)
+	while (i < 100000)
 	{
 		cub->bresenx = cub->posx + (cub->pdx * i / cub->max);
 		cub->breseny = cub->posy + (cub->pdy * i / cub->max);
