@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/14 14:26:23 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/14 15:34:10 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,20 @@ float	ft_max(float max1, float max2)
 
 void	print_h_rayon(t_cub *cub, float rx, float ry)
 {
-	
 	float	i;
 	float	c;
+	float	length;
 	
 	i = 0;
 	c = 0;
-	c = sqrt((powf(rx, 2) + powf(ry, 2))) * 32;
-	cub->max = ft_max(fabsf(cub->posx + (cub->pdx * 5)), fabsf(cub->posy + (cub->pdy * 5)));
-	while (i < 100000)
+	length = 0;
+	c = sqrtf((powf(rx - cub->posx, 2) + powf(ry - cub->posy, 2)));
+	cub->max = ft_max(fabsf(rx - cub->posx), fabsf(ry - cub->posy));
+	while (length <= c && i < 100000)
 	{
 		cub->bresenx = cub->posx + (cub->pdx * i / cub->max);
 		cub->breseny = cub->posy + (cub->pdy * i / cub->max);
-		if (cub->bresenx > rx)
-			break ;
+		length = sqrtf((powf(cub->bresenx - cub->posx, 2) + powf(cub->breseny - cub->posy, 2)));
 		if (cub->bresenx < 1919 && cub->breseny < 1079
 			&& cub->bresenx >= 0 && cub->breseny >= 0)
 		{
@@ -77,22 +77,26 @@ void	print_h_rayon(t_cub *cub, float rx, float ry)
 
 void	print_v_rayon(t_cub *cub, float rx, float ry)
 {
-	int		i;
+	float	i;
+	float	c;
+	float	length;
 	
-	(void)rx;
-	(void)ry;
-	cub->max = ft_max(fabsf(cub->posx + (cub->pdx * 5)), fabsf(cub->posy + (cub->pdy * 5)));
 	i = 0;
-	while (i < 100000)
+	c = 0;
+	length = 0;
+	c = sqrtf((powf(rx - cub->posx, 2) + powf(ry - cub->posy, 2)));
+	cub->max = ft_max(fabsf(rx - cub->posx), fabsf(ry - cub->posy));
+	while (length <= c && i < 100000)
 	{
 		cub->bresenx = cub->posx + (cub->pdx * i / cub->max);
 		cub->breseny = cub->posy + (cub->pdy * i / cub->max);
+		length = sqrtf((powf(cub->bresenx - cub->posx, 2) + powf(cub->breseny - cub->posy, 2)));
 		if (cub->bresenx < 1919 && cub->breseny < 1079
 			&& cub->bresenx >= 0 && cub->breseny >= 0)
 		{
 			ft_rounded(cub->bresenx, cub->breseny, cub);
-			my_mlx_pixel_put(&cub->mlx_data, (int)cub->bresenx,
-				(int)cub->breseny, 0xfff00);
+			my_mlx_pixel_put(&cub->mlx_data, (int)cub->bresenx + 10,
+				(int)cub->breseny + 10, 0xeeee);
 		}
 		i++;
 	}
@@ -110,9 +114,7 @@ void	vertical_line_check(t_cub *cub, int mx, int my, int mp, int dof, float ra, 
 		if ((ra < P2) || (ra > P3))
 		{
 			rx = (((int)cub->posx>>5) * 32) + 32;
-			printf("RX --> %f\n", rx);
 			ry = (cub->posx - rx) * ntan + cub->posy;
-			printf("RY --> %f\n", ry);
 			xo = 32;
 			yo = (-yo * ntan);
 		}
@@ -122,13 +124,11 @@ void	vertical_line_check(t_cub *cub, int mx, int my, int mp, int dof, float ra, 
 			ry = cub->posy;
 			dof = 15;
 		}
-		//printf("RX --> %f\nRY --> %f\n\n", rx, ry);
 		while (dof < 15)
 		{
 			mx = abs((int)(rx)>>5);
 			my = abs((int)(ry)>>5);
 			mp = my * 15 + mx;
-			printf("\nMX --> %d\nMY --> %d\nMP --> %d\n", mx, my, mp);
 			if ((mp < (15 * 15)) && cub->data.map[my][mx] == '1')
 			{
 				printf("\n!!! HIT V WALL !!!\n");
@@ -158,9 +158,7 @@ void	horizontal_line_check(t_cub *cub, int mx, int my, int mp, int dof, float ra
 		if (ra < PI)
 		{
 			ry = (((int)cub->posy>>5) * 32) + 32;
-			printf("RY --> %f\n", ry);
 			rx = (cub->posy - ry) * atan + cub->posx;
-			printf("RX --> %f\n", rx);
 			yo = 32;
 			xo = (-yo * atan);
 		}
@@ -170,13 +168,11 @@ void	horizontal_line_check(t_cub *cub, int mx, int my, int mp, int dof, float ra
 			ry = cub->posy;
 			dof = 15;
 		}
-		//printf("RX --> %f\nRY --> %f\n\n", rx, ry);
 		while (dof < 15)
 		{
 			mx = abs((int)(rx)>>5);
 			my = abs((int)(ry)>>5);
 			mp = my * 15 + mx;
-			printf("\nMX --> %d\nMY --> %d\nMP --> %d\n", mx, my, mp);
 			if ((mp < (15 * 15)) && cub->data.map[my][mx] == '1')
 			{
 				printf("\n!!! HIT H WALL !!!\n");
@@ -207,12 +203,12 @@ void	draw_rays(t_cub *cub)
 	xo = 0;
 	yo = 0;
 	ra = cub->pa;
+	dof = 0;
 	atan = -1/tan(ra);
 	ntan = -tan(ra);
 	printf("\n===========\n");
 	while (r < 1)
 	{
-		dof = 0;
 		horizontal_line_check(cub, mx, my, mp, dof, ra, rx, ry, xo, yo, atan);
 		//vertical_line_check(cub, mx, my, mp, dof, ra, rx, ry, xo, yo, ntan);
 		r++;
