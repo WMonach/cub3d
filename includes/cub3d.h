@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/12 17:34:54 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/14 13:08:08 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,14 +158,25 @@ typedef struct s_cub
 	float		rayly;
 }				t_cub;
 
-int				ft_draw(t_cub *cub, t_mlx_data *img);
-int				ft_draw_hero(t_cub *cub, t_mlx_data *img);
-int				map_display(t_cub *cub, t_data *data, t_mlx_data *img);
-int				ft_keyhook_rotation(int keycode, t_cub *cub);
-int				ft_rz_rotation(float delta, t_cub *cub);
-int				ft_rx_rotation(float delta, t_cub *cub);
-int				ft_ry_rotation(float delta, t_cub *cub);
-int				draw_ray(t_cub *cub);
+char	**free_texture_tab(t_data *data);
+char	**free_tab(char **tab, int i);
+char	**free_rgb_tab(t_data *data);
+
+void	my_mlx_pixel_put(t_mlx_data *mlx_data, int x, int y, int color);
+void	main_data_var_init(t_data *data, t_cub *cub);
+void	init_cub_var(t_cub *cub, t_data *data);
+void	main_texture_var_init(t_data *data);
+
+int		map_display(t_cub *cub, t_data *data, t_mlx_data *img);
+int		ft_keyhook_translation(int keycode, t_cub *cub);
+int		map_copy_and_parsing(t_data *data, char **argv);
+int		ft_keyhook_rotation(int keycode, t_cub *cub);
+int		ft_draw_hero(t_cub *cub, t_mlx_data *img);
+int		ft_rz_rotation(float delta, t_cub *cub);
+int		ft_rx_rotation(float delta, t_cub *cub);
+int		ft_ry_rotation(float delta, t_cub *cub);
+int		ft_draw(t_cub *cub, t_mlx_data *img);
+int		ft_close(t_cub *cub);
 
 /* PARSING */
 char			**free_tab(char **tab, int i);

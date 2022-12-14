@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/14 13:06:46 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/14 13:08:01 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,94 +20,7 @@ void	my_mlx_pixel_put(t_mlx_data *mlx_data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	print_wall(t_data *data, t_mlx_data *mlx_data)
-{
-	int	x;
-	int	y;
-
-	y = data->y_range;
-	(void)data;
-	while (y < (data->y_range + 31))
-	{
-		x = data->x_range;
-		while (x < (data->x_range + 31))
-		{
-			my_mlx_pixel_put(mlx_data, x, y, 0x00663300);
-			x++;
-		}
-		y++;
-	}
-	return ;
-}
-
-void	print_floor(t_data *data, t_mlx_data *mlx_data)
-{
-	int	x;
-	int	y;
-
-	y = data->y_range;
-	(void)data;
-	while (y < (data->y_range + 31))
-	{
-		x = data->x_range;
-		while (x < (data->x_range + 31))
-		{
-			my_mlx_pixel_put(mlx_data, x, y, 0x00999999);
-			x++;
-		}
-		y++;
-	}
-	return ;
-}
-
-int	map_display(t_cub *cub, t_data *data, t_mlx_data *img)
-{
-	int	i;
-	size_t	j;
-	size_t	line_size;
-
-	i = 0;
-	j = 0;
-	line_size = 0;
-	(void)cub;
-	data->y_range = 0;
-	while (data->map[i])
-	{
-		j = 0;
-		data->x_range = 0;
-		line_size = ft_strlen(data->map[i]);
-		while (j < line_size)
-		{
-			if (data->map[i][j] == '1')
-				print_wall(data, img);
-			if (data->map[i][j] == '0')
-				print_floor(data, img);
-			data->x_range += 32;
-			j++;
-		}
-		data->y_range += 32;
-		i++;
-	}
-	return (0);
-}
-
-int	draw_ray(t_cub *cub)
-{
-	float	ra;
-	float	atan;
-	float	ry;
-
-	ra = cub->pa;
-	atan = -1 / tan(ra);
-	if (ra > 1)
-	{
-		ry = cub->posy;
-		return (1);
-	}
-	return (1);
-}
-
-static void	ft_rounded(float number1, float number2, t_cub	*cub)
+void	ft_rounded(float number1, float number2, t_cub	*cub)
 {
 	float	comma;
 	int		temp;
@@ -154,7 +67,7 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 	cub->posy -= 6;
 	cub->max = ft_max(fabsf(cub->posx + (cub->pdx * 5)), fabsf(cub->posy + (cub->pdy * 5)));
 	i = 0;
-	while (i < 100000)
+	while (i < 10000)
 	{
 		cub->bresenx = cub->posx + (cub->pdx * i / cub->max);
 		cub->breseny = cub->posy + (cub->pdy * i / cub->max);
