@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:45:56 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/15 19:09:00 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/15 19:21:33 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,27 @@ void	print_h_3d_wall(t_cub *cub, float ra, float rx, float ry)
 	}
 }
 
-void	print_v_3d_wall(t_cub *cub, float ra, int j)
+void	print_v_3d_wall(t_cub *cub, float ra, float j)
 {
-	int	i;
+	float	i;
 
 	(void)ra;
 	i = 0;
 	while (i < (540 - cub->lineh / 2))
 		i++;
-	printf("--> %d\n", i);
 	while (i < (540 + cub->lineh / 2))
 	{
-		my_mlx_pixel_put(&cub->mlx_data, j, i, 0xff6347);
+		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
+		{
+			ft_rounded(j, i, cub);
+			my_mlx_pixel_put(&cub->mlx_data, (int)j,
+				(int)i, 0xff6347);
+		}
 		i++;
 	}
 }
 
-void	draw_walls(t_cub *cub, float ra, int r, int j)
+void	draw_walls(t_cub *cub, float ra, int r, float j)
 {
 	float	ca;
 

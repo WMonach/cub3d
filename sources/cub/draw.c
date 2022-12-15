@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/15 18:43:34 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/15 19:21:08 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	horizontal_line_check(t_cub *cub, float ra, float atan)
 void	draw_rays(t_cub *cub)
 {
 	int		r;
-	int		j;
+	float	j;
 	float	ra, atan, ntan;
 
 	r = 0;

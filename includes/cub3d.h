@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/15 18:43:58 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/15 19:21:48 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ void	print_h_rayon(t_cub *cub, float rx, float ry, float ra);
 void	print_v_rayon(t_cub *cub, float rx, float ry, float ra);
 void	ft_rounded(float number1, float number2, t_cub	*cub);
 void	main_data_var_init(t_data *data, t_cub *cub);
-void	draw_walls(t_cub *cub, float ra, int r, int j);
+void	draw_walls(t_cub *cub, float ra, int r, float j);
 void	init_cub_var(t_cub *cub, t_data *data);
 void	main_texture_var_init(t_data *data);
 void	init_ray_var(t_cub *cub);
