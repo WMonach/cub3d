@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/14 17:04:42 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/15 13:15:37 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@
 #  define A_KEY 0
 #  define S_KEY 1
 #  define W_KEY 13
+#  define PI 3.1415926535 
+#  define P2 PI/2
+#  define P3 3*PI/2
+#  define DELTA 0.62831853071
+#  define DR 0.0174533
 # endif
-# define PI 3.1415926535 
-# define P2 PI/2
-# define P3 3*PI/2
-# define DELTA 0.62831853071
 
 typedef struct s_texture {
 	int		check_no_texture;
@@ -148,6 +149,7 @@ typedef struct s_rayh
 	int		mp;
 	int		dof;
 }				t_rayh;
+
 typedef struct s_rayv
 {
 	float	rx;
@@ -199,10 +201,10 @@ int		ft_keyhook_translation(int keycode, t_cub *cub);
 int		map_copy_and_parsing(t_data *data, char **argv);
 int		ft_keyhook_rotation(int keycode, t_cub *cub);
 int		ft_draw_hero(t_cub *cub, t_mlx_data *img);
-int		ft_rz_rotation(float delta, t_cub *cub);
 int		ft_rx_rotation(float delta, t_cub *cub);
 int		ft_ry_rotation(float delta, t_cub *cub);
 int		ft_draw(t_cub *cub, t_mlx_data *img);
+int		ft_rz_rotation(float ra, t_cub *cub);
 int		ft_close(t_cub *cub);
 
 /* PARSING */

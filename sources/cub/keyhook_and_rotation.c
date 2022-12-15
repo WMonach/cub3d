@@ -6,16 +6,16 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:38:45 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/14 09:36:39 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/15 13:25:28 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_rz_rotation(float delta, t_cub *cub)
+int	ft_rz_rotation(float ra, t_cub *cub)
 {
-	cub->raylx = cub->pdx * cos(delta) + cub->pdy * (-sin(delta));
-	cub->rayly = cub->pdx * sin(delta) + cub->pdy * cos(delta);
+	cub->raylx = cub->pdx * cos(ra - cub->pa) + cub->pdy * (-sin(ra - cub->pa));
+	cub->rayly = cub->pdx * sin(ra - cub->pa) + cub->pdy * cos(ra - cub->pa);
 	return (1);
 }
 
@@ -53,7 +53,7 @@ int	ft_keyhook_translation(int keycode, t_cub *cub)
 			cub->pa += 2 * PI;
 		cub->pdx = cos(cub->pa) * 5;
 		cub->pdy = sin(cub->pa) * 5;
-		//ft_rz_rotation(DELTA, cub);
+		ft_rz_rotation(cub->pa, cub);
 	}
 	if (keycode == D_KEY || keycode == RIGHT)
 	{
@@ -62,7 +62,7 @@ int	ft_keyhook_translation(int keycode, t_cub *cub)
 			cub->pa -= 2 * PI;
 		cub->pdx = cos(cub->pa) * 5;
 		cub->pdy = sin(cub->pa) * 5;
-		//ft_rz_rotation(DELTA, cub);
+		ft_rz_rotation(cub->pa, cub);
 	}
 	return (1);
 }

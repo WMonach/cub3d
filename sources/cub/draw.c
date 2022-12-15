@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/14 17:39:38 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/15 13:46:14 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ float	ft_max(float max1, float max2)
 	return (max2);
 }
 
-void	print_h_rayon(t_cub *cub, float rx, float ry)
+void	print_h_rayon(t_cub *cub, float rx, float ry, float ra)
 {
 	float	i;
 	float	c;
@@ -61,8 +61,9 @@ void	print_h_rayon(t_cub *cub, float rx, float ry)
 	cub->max = ft_max(fabsf(rx - cub->posx), fabsf(ry - cub->posy));
 	while (length <= c && i < 100000)
 	{
-		cub->bresenx = cub->posx + (cub->pdx * i / cub->max);
-		cub->breseny = cub->posy + (cub->pdy * i / cub->max);
+		ft_rz_rotation(ra, cub);
+		cub->bresenx = cub->posx + (cub->raylx * i / cub->max);
+		cub->breseny = cub->posy + (cub->rayly * i / cub->max);
 		length = sqrtf((powf(cub->bresenx - cub->posx, 2) + powf(cub->breseny - cub->posy, 2)));
 		if (cub->bresenx < 1919 && cub->breseny < 1079
 			&& cub->bresenx >= 0 && cub->breseny >= 0)
@@ -75,7 +76,7 @@ void	print_h_rayon(t_cub *cub, float rx, float ry)
 	}
 }
 
-void	print_v_rayon(t_cub *cub, float rx, float ry)
+void	print_v_rayon(t_cub *cub, float rx, float ry, float ra)
 {
 	float	i;
 	float	c;
@@ -88,15 +89,16 @@ void	print_v_rayon(t_cub *cub, float rx, float ry)
 	cub->max = ft_max(fabsf(rx - cub->posx), fabsf(ry - cub->posy));
 	while (length <= c && i < 100000)
 	{
-		cub->bresenx = cub->posx + (cub->pdx * i / cub->max);
-		cub->breseny = cub->posy + (cub->pdy * i / cub->max);
+		ft_rz_rotation(ra, cub);
+		cub->bresenx = cub->posx + (cub->raylx * i / cub->max);
+		cub->breseny = cub->posy + (cub->rayly * i / cub->max);
 		length = sqrtf((powf(cub->bresenx - cub->posx, 2) + powf(cub->breseny - cub->posy, 2)));
 		if (cub->bresenx < 1919 && cub->breseny < 1079
 			&& cub->bresenx >= 0 && cub->breseny >= 0)
 		{
 			ft_rounded(cub->bresenx, cub->breseny, cub);
 			my_mlx_pixel_put(&cub->mlx_data, (int)cub->bresenx,
-				(int)cub->breseny, 0xeeee);
+				(int)cub->breseny, 0xff6347);
 		}
 		i++;
 	}
@@ -129,11 +131,7 @@ void	vertical_line_check(t_cub *cub, float ra, float ntan)
 		cub->ray_v.my = abs((int)(cub->ray_v.ry)>>5);
 		cub->ray_v.mp = cub->ray_v.my * 15 + cub->ray_v.mx;
 		if (cub->ray_h.mp > 0 && (cub->ray_v.mp < (15 * 15)) && cub->data.map[cub->ray_v.my][cub->ray_v.mx] == '1')
-		{
-			printf("\n!!! HIT V WALL !!!\n");
-			printf("\n!!! [%d][%d] !!!\n", cub->ray_v.my, cub->ray_v.mx);
 			cub->ray_v.dof = 15;
-		}
 		else
 		{
 			cub->ray_v.rx += cub->ray_v.xo;
@@ -142,7 +140,6 @@ void	vertical_line_check(t_cub *cub, float ra, float ntan)
 		}
 	}
 }
-
 
 void	horizontal_line_check(t_cub *cub, float ra, float atan)
 {
@@ -172,11 +169,7 @@ void	horizontal_line_check(t_cub *cub, float ra, float atan)
 		cub->ray_h.my = abs((int)(cub->ray_h.ry)>>5);
 		cub->ray_h.mp = cub->ray_h.my * 15 + cub->ray_h.mx;
 		if (cub->ray_h.mp > 0 && (cub->ray_h.mp < (15 * 15)) && cub->data.map[cub->ray_h.my][cub->ray_h.mx] == '1')
-		{
-			printf("\n!!! HIT H WALL !!!\n");
-			printf("\n!!! [%d][%d] !!!\n", cub->ray_h.my, cub->ray_h.mx);
 			cub->ray_h.dof = 15;
-		}
 		else
 		{
 			cub->ray_h.rx += cub->ray_h.xo;
@@ -208,7 +201,6 @@ void	init_ray_var(t_cub *cub)
 
 int	check_ray(t_cub *cub)
 {
-	printf("verticalray===%f\nhoriray===%f\n", sqrtf((powf(cub->ray_v.rx - cub->posx, 2) + powf(cub->ray_v.ry - cub->posy, 2))), sqrtf((powf(cub->ray_h.rx - cub->posx, 2) + powf(cub->ray_h.ry - cub->posy, 2))));
 	if (sqrtf((powf(cub->ray_h.rx - cub->posx, 2) + powf(cub->ray_h.ry - cub->posy, 2))) >= sqrtf((powf(cub->ray_v.rx - cub->posx, 2) + powf(cub->ray_v.ry - cub->posy, 2))))
 		return (1);
 	else
@@ -221,23 +213,30 @@ void	draw_rays(t_cub *cub)
 	int		r;
 	float	ra, atan, ntan;
 
-	init_ray_var(cub);
 	r = 0;
-	ra = cub->pa;
-	atan = -1 / tan(ra);
-	ntan = -tan(ra);
-	printf("\n===========\n");
-	while (r < 1)
+	ra = cub->pa - DR * 30;
+	if (ra < 0)
+		ra += 2 *PI;
+	if (ra > 2 * PI)
+		ra -= 2 * PI;
+	while (r < 60)
 	{
+		init_ray_var(cub);
+		atan = -1 / tan(ra);
+		ntan = -tan(ra);
 		horizontal_line_check(cub, ra, atan);
 		vertical_line_check(cub, ra, ntan);
 		if (check_ray(cub) == 0)
-			print_h_rayon(cub, cub->ray_h.rx, cub->ray_h.ry);
+			print_h_rayon(cub, cub->ray_h.rx, cub->ray_h.ry, ra);
 		else
-			print_v_rayon(cub, cub->ray_v.rx, cub->ray_v.ry);
+			print_v_rayon(cub, cub->ray_v.rx, cub->ray_v.ry, ra);
+		ra += DR;
+		if (ra < 0)
+			ra += 2 *PI;
+		if (ra > 2 * PI)
+			ra -= 2 * PI;
 		r++;
 	}
-	printf("\n===========\n");
 }
 
 int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
@@ -259,35 +258,3 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 	draw_rays(cub);
 	return (1);
 }
-
-	//cub->max = ft_max(fabsf(cub->posx + (cub->pdx * 5)), fabsf(cub->posy + (cub->pdy * 5)));
-	// i = 0;
-	// while (i < 100000)
-	// {
-	// 	cub->bresenx = cub->posx + (cub->pdx * i / cub->max);
-	// 	cub->breseny = cub->posy + (cub->pdy * i / cub->max);
-	// 	if (cub->bresenx < 1919 && cub->breseny < 1079
-	// 		&& cub->bresenx >= 0 && cub->breseny >= 0)
-	// 	{
-	// 		ft_rounded(cub->bresenx, cub->breseny, cub);
-	// 		my_mlx_pixel_put(img, (int)cub->bresenx,
-	// 			(int)cub->breseny, 0xff6347);
-	// 	}
-	// 	delta = DELTA;
-	// 	while (delta >= -DELTA)
-	// 	{
-	// 		ft_rz_rotation(delta, cub);
-	// 		cub->bresenx = cub->posx + (cub->raylx * i / cub->max);
-	// 		cub->breseny = cub->posy + (cub->rayly * i / cub->max);
-	// 		if (cub->bresenx < 1919 && cub->breseny < 1079
-	// 			&& cub->bresenx >= 0 && cub->breseny >= 0)
-	// 		{
-	// 			ft_rounded(cub->bresenx, cub->breseny, cub);
-	// 			my_mlx_pixel_put(img, (int)cub->bresenx,
-	// 				(int)cub->breseny, 0xff6347);
-	// 		}
-	// 		delta = delta - (DELTA / 8);
-	// 	}
-	// 	i++;
-	//}
-	//my_mlx_pixel_put(img, (cub->posx + (cub->pdx * 5)), (cub->posy + (cub->pdy * 5)), 0xff6347);
