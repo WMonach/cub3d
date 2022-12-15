@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/15 18:31:24 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/15 18:43:34 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,9 @@ void	draw_rays(t_cub *cub)
 		horizontal_line_check(cub, ra, atan);
 		vertical_line_check(cub, ra, ntan);
 		if (check_ray(cub) == 0)
-			print_h_rayon(cub, cub->ray_h.rx, cub->ray_h.ry, ra);
+		 	print_h_rayon(cub, cub->ray_h.rx, cub->ray_h.ry, ra);
 		else
-			print_v_rayon(cub, cub->ray_v.rx, cub->ray_v.ry, ra);
+		 	print_v_rayon(cub, cub->ray_v.rx, cub->ray_v.ry, ra);
 		draw_walls(cub, ra, r, j);
 		j += 1;
 		ra += DR / (1919 / 60);
@@ -125,20 +125,21 @@ void	draw_rays(t_cub *cub)
 
 int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 {
-	int		i;
+	(void)img;
+	// int		i;
 
-	i = -1;
-	while (++i <= 5)
-	{
-		my_mlx_pixel_put(img, cub->posx, cub->posy, 0xffff00);
-		my_mlx_pixel_put(img, cub->posx + 1, cub->posy, 0xffff00);
-		my_mlx_pixel_put(img, cub->posx + 2, cub->posy, 0xffff00);
-		my_mlx_pixel_put(img, cub->posx + 3, cub->posy, 0xffff00);
-		my_mlx_pixel_put(img, cub->posx + 4, cub->posy, 0xffff00);
-		my_mlx_pixel_put(img, cub->posx + 5, cub->posy, 0xffff00);
-		cub->posy++;
-	}
-	cub->posy -= 6;
+	// i = -1;
+	// while (++i <= 5)
+	// {
+	// 	my_mlx_pixel_put(img, cub->posx, cub->posy, 0xffff00);
+	// 	my_mlx_pixel_put(img, cub->posx + 1, cub->posy, 0xffff00);
+	// 	my_mlx_pixel_put(img, cub->posx + 2, cub->posy, 0xffff00);
+	// 	my_mlx_pixel_put(img, cub->posx + 3, cub->posy, 0xffff00);
+	// 	my_mlx_pixel_put(img, cub->posx + 4, cub->posy, 0xffff00);
+	// 	my_mlx_pixel_put(img, cub->posx + 5, cub->posy, 0xffff00);
+	// 	cub->posy++;
+	// }
+	// cub->posy -= 6;
 	draw_rays(cub);
 	return (1);
 }

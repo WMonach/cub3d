@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/15 17:27:22 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/15 18:43:58 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ void	draw_walls(t_cub *cub, float ra, int r, int j);
 void	init_cub_var(t_cub *cub, t_data *data);
 void	main_texture_var_init(t_data *data);
 void	init_ray_var(t_cub *cub);
+void	draw_rays(t_cub *cub);
 
 float	ft_max(float max1, float max2);
 
