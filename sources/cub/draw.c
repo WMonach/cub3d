@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/15 19:21:08 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/15 20:01:40 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,10 @@ void	draw_rays(t_cub *cub)
 		 	print_h_rayon(cub, cub->ray_h.rx, cub->ray_h.ry, ra);
 		else
 		 	print_v_rayon(cub, cub->ray_v.rx, cub->ray_v.ry, ra);
+		if (cub->dist <= 10)
+			cub->hit_wall = 1;
+		else
+			cub->hit_wall = 0;
 		draw_walls(cub, ra, r, j);
 		j += 1;
 		ra += DR / (1919 / 60);

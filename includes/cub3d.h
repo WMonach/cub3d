@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/15 19:21:48 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/15 19:59:27 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ typedef struct s_cub
 	t_data		data;
 	t_rayv		ray_v;
 	t_rayh		ray_h;
+	int			hit_wall;
 	float		lineo;
 	float		lineh;
 	float		x;

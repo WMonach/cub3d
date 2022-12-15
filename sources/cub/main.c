@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/15 19:19:34 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/15 19:59:16 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int	main(int argc, char *argv[])
 	if (cub == NULL)
 		return (1);
 	cub->pa = 0;
+	cub->hit_wall = 0;
 	main_data_var_init(&data, cub);
 	main_texture_var_init(&data);
 	if (argc == 2)
