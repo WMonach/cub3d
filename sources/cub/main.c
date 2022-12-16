@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/15 19:59:16 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/16 09:50:02 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	parsing_debug(t_data *data)
 		a++;
 	}
 	printf("\n== Map parsing OK ==\n");
-	printf("Map size --> %d\n", data->map_data.map_size);
+	printf("Map height --> %d Width --> %d\n", data->map_data.map_size, data->width);
 	printf("Player starting pos : X-Y [%d] [%d]\n", data->map_data.player_x, data->map_data.player_y);
 	return ;
 }

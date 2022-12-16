@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:38:45 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/15 20:00:28 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/16 09:34:05 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_rz_rotation(float ra, t_cub *cub)
 
 int	ft_keyhook_translation(int keycode, t_cub *cub)
 {
-	if ((keycode == S_KEY || keycode == DOWN) && cub->hit_wall == 0)
+	if ((keycode == S_KEY || keycode == DOWN) && cub->hit_wall == 0)//calculer la distance arriere
 	{
 		cub->posx -= cub->pdx;
 		cub->posy -= cub->pdy;

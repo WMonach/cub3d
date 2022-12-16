@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/15 20:01:40 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/16 09:51:58 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ void	vertical_line_check(t_cub *cub, float ra, float ntan)
 	{
 		cub->ray_v.rx = cub->posx;
 		cub->ray_v.ry = cub->posy;
-		cub->ray_v.dof = 15;
+		cub->ray_v.dof = cub->data.width ;
 	}
-	while (cub->ray_v.dof < 15)
+	while (cub->ray_v.dof < cub->data.width )
 	{
 		cub->ray_v.mx = abs((int)(cub->ray_v.rx)>>5);
 		cub->ray_v.my = abs((int)(cub->ray_v.ry)>>5);
-		cub->ray_v.mp = cub->ray_v.my * 15 + cub->ray_v.mx;
-		if (cub->ray_h.mp > 0 && (cub->ray_v.mp < (15 * 15)) && cub->data.map[cub->ray_v.my][cub->ray_v.mx] == '1')
-			cub->ray_v.dof = 15;
+		cub->ray_v.mp = cub->ray_v.my * cub->data.width + cub->ray_v.mx;
+		if (cub->ray_h.mp > 0 && (cub->ray_v.mp < (cub->data.width * cub->data.map_data.map_size)) && cub->data.map[cub->ray_v.my][cub->ray_v.mx] == '1')
+			cub->ray_v.dof = cub->data.width ;
 		else
 		{
 			cub->ray_v.rx += cub->ray_v.xo;
@@ -70,15 +70,15 @@ void	horizontal_line_check(t_cub *cub, float ra, float atan)
 	{
 		cub->ray_h.rx = cub->posx;
 		cub->ray_h.ry = cub->posy;
-		cub->ray_h.dof = 15;
+		cub->ray_h.dof = cub->data.width ;
 	}
-	while (cub->ray_h.dof < 15)
+	while (cub->ray_h.dof < cub->data.width )
 	{
 		cub->ray_h.mx = abs((int)(cub->ray_h.rx)>>5);
 		cub->ray_h.my = abs((int)(cub->ray_h.ry)>>5);
-		cub->ray_h.mp = cub->ray_h.my * 15 + cub->ray_h.mx;
-		if (cub->ray_h.mp > 0 && (cub->ray_h.mp < (15 * 15)) && cub->data.map[cub->ray_h.my][cub->ray_h.mx] == '1')
-			cub->ray_h.dof = 15;
+		cub->ray_h.mp = cub->ray_h.my * cub->data.width + cub->ray_h.mx;
+		if (cub->ray_h.mp > 0 && (cub->ray_h.mp < (cub->data.width * cub->data.map_data.map_size)) && cub->data.map[cub->ray_h.my][cub->ray_h.mx] == '1')
+			cub->ray_h.dof = cub->data.width ;
 		else
 		{
 			cub->ray_h.rx += cub->ray_h.xo;

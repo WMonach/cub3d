@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/15 19:59:27 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/16 09:42:16 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_data {
 	int			rgb_tab_size;
 	int			x_range;
 	int			y_range;
+	int			width;
 	char		*line_tmp;
 	char		*rgb_value;
 	char		*texture_id[6];

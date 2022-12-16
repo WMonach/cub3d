@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:32:53 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/13 13:38:36 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/16 09:42:56 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_cub_var(t_cub *cub, t_data *data)
 
 void	main_data_var_init(t_data *data, t_cub *cub)
 {
+	data->width = 0;
 	data->north = 0;
 	data->south = 0;
 	data->west = 0;
