@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 12:38:38 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/16 09:42:41 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/16 10:29:26 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	line_check_loop(t_data *data, int y, int x)
 	}
 	if (x > data->width)
 		data->width = x;
-	printf("Line size -> %d\n", x);
 	return (0);
 }
 

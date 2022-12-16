@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:45:56 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/15 19:49:49 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/16 10:41:29 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j)
 		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
 		{
 			ft_rounded(j, i, cub);
-			my_mlx_pixel_put(&cub->mlx_data, (int)j,
-				(int)i,  0xeee685);
+			if (cub->v_check == 1)
+				my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, 0xeee685);
+			else
+				my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i,  0x8b864e);
 		}
 		i++;
 	}
@@ -97,6 +99,7 @@ void	print_h_rayon(t_cub *cub, float rx, float ry, float ra)
 	c = sqrtf((powf(rx - cub->posx, 2) + powf(ry - cub->posy, 2)));
 	cub->dist = c;
 	cub->max = ft_max(fabsf(rx - cub->posx), fabsf(ry - cub->posy));
+	cub->h_check = 1;
 	// while (length <= c && i < 100000)
 	// {
 	// 	ft_rz_rotation(ra, cub);
@@ -127,6 +130,7 @@ void	print_v_rayon(t_cub *cub, float rx, float ry, float ra)
 	c = sqrtf((powf(rx - cub->posx, 2) + powf(ry - cub->posy, 2)));
 	cub->dist = c;
 	cub->max = ft_max(fabsf(rx - cub->posx), fabsf(ry - cub->posy));
+	cub->v_check = 1;
 	// while (length <= c && i < 100000)
 	// {
 	// 	ft_rz_rotation(ra, cub);

@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/16 09:51:58 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/16 10:40:35 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void	draw_rays(t_cub *cub)
 		ra -= 2 * PI;
 	while (r < 1919)
 	{
+		cub->v_check = 0;
+		cub->h_check = 0;
 		init_ray_var(cub);
 		atan = -1 / tan(ra);
 		ntan = -tan(ra);

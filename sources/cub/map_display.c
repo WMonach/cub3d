@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_display.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:41:52 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/14 13:11:51 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/16 10:14:16 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	map_display(t_cub *cub, t_data *data, t_mlx_data *img)
 	j = 0;
 	line_size = 0;
 	(void)cub;
-	data->y_range = 0;
+	data->y_range = 300;
 	while (data->map[i])
 	{
 		j = 0;
