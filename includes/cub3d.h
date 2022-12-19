@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/19 12:49:11 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/19 15:01:09 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,13 @@ typedef struct s_collision
 	int		yo;
 }				t_collision;
 
+typedef struct s_img
+{
+	void	*data;
+	int		*with;
+	int		*length;
+}	t_img;
+
 typedef struct s_cub
 {
 	t_vars		vars;
@@ -186,6 +193,10 @@ typedef struct s_cub
 	t_rayv		ray_v;
 	t_rayh		ray_h;
 	t_collision	collision;
+	t_img		img_n;
+	t_img		img_s;
+	t_img		img_w;
+	t_img		img_e;
 	int			hit_wall;
 	int			v_check;
 	int			h_check;

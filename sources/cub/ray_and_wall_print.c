@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:45:56 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/19 09:45:35 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/19 15:06:47 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ void	print_h_3d_wall(t_cub *cub, float ra, float rx, float ry)
 void	print_v_3d_wall(t_cub *cub, float ra, float j)
 {
 	float	i;
+	float	ty;
+	float	ty_step;
 
+	ty = 0;
+	ty_step = 32.0 / cub->lineh;
 	(void)ra;
 	i = 0;
-	while (i < (540 - cub->lineh / 2))
+	while (i < (540 - cub->lineh / 2))//PLAFOND
 	{
 		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
 		{
@@ -42,7 +46,7 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j)
 		}
 		i++;
 	}
-	while (i < (540 + cub->lineh / 2))
+	while (i < (540 + cub->lineh / 2))//MUR - TEXTURE
 	{
 		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
 		{
@@ -52,9 +56,10 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j)
 			else
 				my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i,  0x8b864e);
 		}
+		ty += ty_step;
 		i++;
 	}
-	while (i < 1080)
+	while (i < 1080)//SOL
 	{
 		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
 		{

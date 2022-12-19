@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/16 10:32:51 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/19 15:32:33 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,19 @@ void	raycaster(t_cub *cub, t_data *data)
 	return ;
 }
 
+float	player_starting_angle(t_data *data)
+{
+	if (data->map_data.check_north_spawn == 1)
+		return (-P2);
+	if (data->map_data.check_south_spawn == 1)
+		return (P2);
+	if (data->map_data.check_west_spawn == 1)
+		return (PI);
+	if (data->map_data.check_east_spawn == 1)
+		return (0);
+	return (0);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_data	data;
@@ -116,7 +129,6 @@ int	main(int argc, char *argv[])
 	cub = malloc(sizeof(t_cub));
 	if (cub == NULL)
 		return (1);
-	cub->pa = 0;
 	cub->hit_wall = 0;
 	main_data_var_init(&data, cub);
 	main_texture_var_init(&data);
@@ -125,6 +137,7 @@ int	main(int argc, char *argv[])
 		if (parsing(argv, &data) == 0)
 		{
 			parsing_debug(&data);
+			cub->pa = player_starting_angle(&data);
 			raycaster(cub, &data);
 			free_texture_tab(&data);
 			free_rgb_tab(&data);
