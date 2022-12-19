@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/16 10:40:13 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/19 12:49:11 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,6 @@ typedef struct s_mlx_data
 	int		endian;
 }				t_mlx_data;
 
-
 typedef struct s_rayh
 {
 	float	rx;
@@ -162,6 +161,23 @@ typedef struct s_rayv
 	int		mp;
 	int		dof;
 }				t_rayv;
+
+typedef struct s_collision
+{
+	int		ym_pos;
+	int		xm_pos;
+	int		yo_add;
+	int		xo_add;
+	int		yo_sub;
+	int		xo_sub;
+	int		xo_right;
+	int		yo_right;
+	int		xo_left;
+	int		yo_left;
+	int		xo;
+	int		yo;
+}				t_collision;
+
 typedef struct s_cub
 {
 	t_vars		vars;
@@ -169,6 +185,7 @@ typedef struct s_cub
 	t_data		data;
 	t_rayv		ray_v;
 	t_rayh		ray_h;
+	t_collision	collision;
 	int			hit_wall;
 	int			v_check;
 	int			h_check;
@@ -194,6 +211,8 @@ typedef struct s_cub
 	float		dist;
 }				t_cub;
 
+/* EXECUTION */
+
 char	**free_texture_tab(t_data *data);
 char	**free_tab(char **tab, int i);
 char	**free_rgb_tab(t_data *data);
@@ -216,14 +235,13 @@ int		ft_keyhook_translation(int keycode, t_cub *cub);
 int		map_copy_and_parsing(t_data *data, char **argv);
 int		ft_keyhook_rotation(int keycode, t_cub *cub);
 int		ft_draw_hero(t_cub *cub, t_mlx_data *img);
-int		ft_rx_rotation(float delta, t_cub *cub);
-int		ft_ry_rotation(float delta, t_cub *cub);
 int		ft_draw(t_cub *cub, t_mlx_data *img);
 int		ft_rz_rotation(float ra, t_cub *cub);
 int		check_ray(t_cub *cub);
 int		ft_close(t_cub *cub);
 
 /* PARSING */
+
 char			**free_tab(char **tab, int i);
 
 int				line_parsing_call_and_set_all_id_check(t_data *data,

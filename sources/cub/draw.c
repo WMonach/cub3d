@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/16 10:40:35 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/19 12:49:48 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	vertical_line_check(t_cub *cub, float ra, float ntan)
 		cub->ray_v.my = abs((int)(cub->ray_v.ry)>>5);
 		cub->ray_v.mp = cub->ray_v.my * cub->data.width + cub->ray_v.mx;
 		if (cub->ray_h.mp > 0 && (cub->ray_v.mp < (cub->data.width * cub->data.map_data.map_size)) && cub->data.map[cub->ray_v.my][cub->ray_v.mx] == '1')
-			cub->ray_v.dof = cub->data.width ;
+			cub->ray_v.dof = cub->data.width;
 		else
 		{
 			cub->ray_v.rx += cub->ray_v.xo;
@@ -78,7 +78,7 @@ void	horizontal_line_check(t_cub *cub, float ra, float atan)
 		cub->ray_h.my = abs((int)(cub->ray_h.ry)>>5);
 		cub->ray_h.mp = cub->ray_h.my * cub->data.width + cub->ray_h.mx;
 		if (cub->ray_h.mp > 0 && (cub->ray_h.mp < (cub->data.width * cub->data.map_data.map_size)) && cub->data.map[cub->ray_h.my][cub->ray_h.mx] == '1')
-			cub->ray_h.dof = cub->data.width ;
+			cub->ray_h.dof = cub->data.width;
 		else
 		{
 			cub->ray_h.rx += cub->ray_h.xo;
@@ -114,10 +114,6 @@ void	draw_rays(t_cub *cub)
 		 	print_h_rayon(cub, cub->ray_h.rx, cub->ray_h.ry, ra);
 		else
 		 	print_v_rayon(cub, cub->ray_v.rx, cub->ray_v.ry, ra);
-		if (cub->dist <= 10)
-			cub->hit_wall = 1;
-		else
-			cub->hit_wall = 0;
 		draw_walls(cub, ra, r, j);
 		j += 1;
 		ra += DR / (1919 / 60);
@@ -147,5 +143,12 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 	// }
 	// cub->posy -= 6;
 	draw_rays(cub);
+	return (1);
+}
+
+int	ft_rz_rotation(float ra, t_cub *cub)
+{
+	cub->raylx = cub->pdx * cos(ra - cub->pa) + cub->pdy * (-sin(ra - cub->pa));
+	cub->rayly = cub->pdx * sin(ra - cub->pa) + cub->pdy * cos(ra - cub->pa);
 	return (1);
 }
