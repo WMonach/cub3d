@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:32:53 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/16 09:42:56 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/20 10:41:33 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_cub_var(t_cub *cub, t_data *data)
 
 void	main_data_var_init(t_data *data, t_cub *cub)
 {
+	(void)cub;
 	data->width = 0;
 	data->north = 0;
 	data->south = 0;
@@ -39,7 +40,7 @@ void	main_data_var_init(t_data *data, t_cub *cub)
 	data->map_data.check_south_spawn = 0;
 	data->map_data.check_west_spawn = 0;
 	data->map_data.check_east_spawn = 0;
-	init_cub_var(cub, data);
+	//init_cub_var(cub, data);
 	return ;
 }
 
