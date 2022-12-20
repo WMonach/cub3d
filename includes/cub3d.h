@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/19 15:01:09 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/20 16:16:10 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,8 +181,12 @@ typedef struct s_collision
 typedef struct s_img
 {
 	void	*data;
-	int		*with;
-	int		*length;
+	int		*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_cub
@@ -200,6 +204,7 @@ typedef struct s_cub
 	int			hit_wall;
 	int			v_check;
 	int			h_check;
+	float		ty_off;
 	float		lineo;
 	float		lineh;
 	float		x;
@@ -240,6 +245,8 @@ void	init_ray_var(t_cub *cub);
 void	draw_rays(t_cub *cub);
 
 float	ft_max(float max1, float max2);
+
+unsigned int	get_value(t_cub *cub, t_img *img, int y, int x);
 
 int		map_display(t_cub *cub, t_data *data, t_mlx_data *img);
 int		ft_keyhook_translation(int keycode, t_cub *cub);

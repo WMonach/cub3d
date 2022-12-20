@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/19 15:32:33 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/20 18:46:00 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	raycaster(t_cub *cub, t_data *data)
 			&(cub->mlx_data.bits_per_pixel), &(cub->mlx_data.line_length),
 			&(cub->mlx_data.endian));
 	(cub->data) = *data;
+	cub->img_n.data = mlx_xpm_file_to_image(cub->vars.mlx, "textures/wall.xpm", &cub->img_n.width, &cub->img_n.height);
 	mlx_key_hook(cub->vars.win, key_hook, cub);
 	mlx_hook(cub->vars.win, 17, 1L << 0, ft_close, cub);
 	mlx_hook(cub->vars.win, 02, 1L << 0, key_hook, cub);
