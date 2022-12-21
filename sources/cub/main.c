@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 16:19:45 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 17:28:13 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ float	player_starting_angle(t_data *data)
 	if (data->map_data.check_north_spawn == 1)
 		return (-P2);
 	if (data->map_data.check_south_spawn == 1)
-		return (P2);
+		return (-P3);
 	if (data->map_data.check_west_spawn == 1)
 		return (PI);
 	if (data->map_data.check_east_spawn == 1)

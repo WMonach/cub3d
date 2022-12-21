@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_and_wall_print.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:45:56 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 16:54:09 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 18:15:49 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,17 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j, float cstep)
 		{
 			if (cub->v_check == 1)
 			{
-				if (cub->pa > P3 && cub->pa < P2)
+				if (cub->ray_v.rx > cub->posx)
 					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_e, j, i));
-				else
+				if (cub->ray_v.rx < cub->posx)
 					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_w, j, i));
 			}
 			else
 			{
-				if (cub->pa > PI)
-					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_n, j, i));
-				else
+				if (cub->ray_h.ry > cub->posy)
 					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_s, j, i));
+				if (cub->ray_h.ry < cub->posy)
+					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_n, j, i));
 			}
 			c += cstep;
 		}
