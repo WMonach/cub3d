@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 14:09:03 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 15:19:52 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@
 #  define A_KEY 0
 #  define S_KEY 1
 #  define W_KEY 13
+# endif
 #  define PI 3.1415926535 
 #  define P2 PI/2
 #  define P3 3*PI/2
 #  define DELTA 0.62831853071
 #  define DR 0.0174533
-# endif
 
 typedef struct s_texture {
 	int		check_no_texture;
@@ -90,6 +90,7 @@ enum {
 };
 
 typedef struct s_data {
+	float		minimap_coeff;
 	int			north;
 	int			south;
 	int			west;
