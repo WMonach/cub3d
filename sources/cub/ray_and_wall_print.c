@@ -6,33 +6,15 @@
 /*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:45:56 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/22 00:01:51 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 00:27:13 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	print_h_3d_wall(t_cub *cub, float ra, float rx, float ry)
+float	print_ceil(t_cub *cub, float j, float i)
 {
-	float	i;
-
-	(void)ra;
-	(void)ry;
-	i = 300;
-	while (i < cub->lineh)
-	{
-		my_mlx_pixel_put(&cub->mlx_data, rx, i, 0xff6347);
-		i++;
-	}
-}
-
-void	print_v_3d_wall(t_cub *cub, float ra, float j)
-{
-	float	i;
-
-	(void)ra;
-	i = 0;
-	while (i < (540 - cub->lineh / 2))//PLAFOND
+	while (i < (540 - cub->lineh / 2))
 	{
 		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
 		{
@@ -42,7 +24,12 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j)
 		}
 		i++;
 	}
-	while (i < (540 + cub->lineh / 2))//MUR - TEXTURE
+	return (i);
+}
+
+float	print_wall(t_cub *cub, float j, float i)
+{
+	while (i < (540 + cub->lineh / 2))
 	{
 		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
 		{
@@ -63,7 +50,12 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j)
 		}
 		i++;
 	}
-	while (i < 1080)//SOL
+	return (i);
+}
+	
+float	print_floor(t_cub *cub, float j, float i)
+{
+	while (i < 1080)
 	{
 		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
 		{
@@ -73,6 +65,18 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j)
 		}
 		i++;
 	}
+	return (i);
+}
+
+void	print_3d_wall(t_cub *cub, float ra, float j)
+{
+	float	i;
+
+	(void)ra;
+	i = 0;
+	i = print_ceil(cub, j, i);
+	i = print_wall(cub, j, i);
+	i = print_floor(cub, j, i);
 }
 
 void	draw_walls(t_cub *cub, float ra, int r, float j)
@@ -90,69 +94,6 @@ void	draw_walls(t_cub *cub, float ra, int r, float j)
 	if (cub->lineh > 1920)
 		cub->lineh = cub->lineh;
 	cub->lineo = (1080 - cub->lineh / 2);
-	print_v_3d_wall(cub, ra, j);
+	print_3d_wall(cub, ra, j);
 	return ;
-}
-
-
-void	print_h_rayon(t_cub *cub, float rx, float ry, float ra)
-{
-	float	i;
-	float	c;
-	float	length;
-
-	(void)ra;
-	i = 0;
-	c = 0;
-	length = 0;
-	c = sqrtf((powf(rx - cub->posx, 2) + powf(ry - cub->posy, 2)));
-	cub->dist = c;
-	cub->max = ft_max(fabsf(rx - cub->posx), fabsf(ry - cub->posy));
-	cub->h_check = 1;
-	// while (length <= c && i < 100000)
-	// {
-	// 	ft_rz_rotation(ra, cub);
-	// 	cub->bresenx = cub->posx + (cub->raylx * i / cub->max);
-	// 	cub->breseny = cub->posy + (cub->rayly * i / cub->max);
-	// 	length = sqrtf((powf(cub->bresenx - cub->posx, 2) + powf(cub->breseny - cub->posy, 2)));
-	// 	if (cub->bresenx < 1919 && cub->breseny < 1079
-	// 		&& cub->bresenx >= 0 && cub->breseny >= 0)
-	// 	{
-	// 		ft_rounded(cub->bresenx, cub->breseny, cub);
-	// 		my_mlx_pixel_put(&cub->mlx_data, (int)cub->bresenx,
-	// 			(int)cub->breseny, 0xff6347);
-	// 	}
-	// 	i++;
-	// }
-}
-
-void	print_v_rayon(t_cub *cub, float rx, float ry, float ra)
-{
-	float	i;
-	float	c;
-	float	length;
-
-	(void)ra;
-	i = 0;
-	c = 0;
-	length = 0;
-	c = sqrtf((powf(rx - cub->posx, 2) + powf(ry - cub->posy, 2)));
-	cub->dist = c;
-	cub->max = ft_max(fabsf(rx - cub->posx), fabsf(ry - cub->posy));
-	cub->v_check = 1;
-	// while (length <= c && i < 100000)
-	// {
-	// 	ft_rz_rotation(ra, cub);
-	// 	cub->bresenx = cub->posx + (cub->raylx * i / cub->max);
-	// 	cub->breseny = cub->posy + (cub->rayly * i / cub->max);
-	// 	length = sqrtf((powf(cub->bresenx - cub->posx, 2) + powf(cub->breseny - cub->posy, 2)));
-	// 	if (cub->bresenx < 1919 && cub->breseny < 1079
-	// 		&& cub->bresenx >= 0 && cub->breseny >= 0)
-	// 	{
-	// 		ft_rounded(cub->bresenx, cub->breseny, cub);
-	// 		my_mlx_pixel_put(&cub->mlx_data, (int)cub->bresenx,
-	// 			(int)cub->breseny, 0xff6347);
-	// 	}
-	// 	i++;
-	// }
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_shooting_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:48:04 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/20 18:47:15 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 00:26:33 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,6 @@ void	ft_rounded(float number1, float number2, t_cub	*cub)
 		cub->breseny = temp;
 	else
 		cub->breseny = rounded_down;
-}
-
-float	ft_max(float max1, float max2)
-{
-	if (max1 > max2)
-		return (max1);
-	return (max2);
 }
 
 void	init_ray_var(t_cub *cub)

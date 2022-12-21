@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 18:59:59 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 00:27:44 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,7 @@ float	set_ra_end_of_loop(float ra);
 
 unsigned int	get_value(t_cub *cub, t_img *img, int y, int x);
 
-int		map_display(t_cub *cub, t_data *data, t_mlx_data *img);
+void	map_display(t_data *data, t_mlx_data *img);
 int		ft_keyhook_translation(int keycode, t_cub *cub);
 int		map_copy_and_parsing(t_data *data, char **argv);
 int		ft_keyhook_rotation(int keycode, t_cub *cub);
@@ -276,6 +276,11 @@ int		ft_draw(t_cub *cub, t_mlx_data *img);
 int		ft_rz_rotation(float ra, t_cub *cub);
 int		check_ray(t_cub *cub);
 int		ft_close(t_cub *cub);
+float	print_ceil(t_cub *cub, float j, float i);
+float	print_wall(t_cub *cub, float j, float i);
+float	print_floor(t_cub *cub, float j, float i);
+void	print_h_rayon(t_cub *cub, float rx, float ry, float ra);
+void	print_v_rayon(t_cub *cub, float rx, float ry, float ra);
 
 /* PARSING */
 
