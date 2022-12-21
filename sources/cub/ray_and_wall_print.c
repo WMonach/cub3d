@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:45:56 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/20 18:48:26 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 09:26:10 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,24 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j, float cstep)
 		}
 		i++;
 	}
-	//printf("==> %u\n", get_value(cub, &cub->img_n, j, i));
-	//get_value(cub, &cub->img_n, j, i);
 	while (i < (540 + cub->lineh / 2))//MUR - TEXTURE
 	{
 		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
 		{
-			// 0xeee685
-			//ft_rounded(j, i, cub);
 			if (cub->v_check == 1)
-				my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, 0xeee685);
+			{
+				if (cub->pa > P3 && cub->pa < P2)
+					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_e, j, i));
+				else
+					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_w, j, i));
+			}
 			else
-				my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i,  get_value(cub, &cub->img_n, j, i));
+			{
+				if (cub->pa > PI)
+					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_n, j, i));
+				else
+					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_s, j, i));
+			}
 			c += cstep;
 		}
 		i++;
