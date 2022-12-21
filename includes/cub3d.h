@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/20 16:16:10 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 13:27:37 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,17 +273,18 @@ int				previous_line_shorter(char **map, size_t i, size_t line_size,
 int				next_line_shorter(char **map, size_t i, size_t line_size,
 					int y);
 int				check_file_loop(t_data *data, char *line, int fd, int i);
+int				copy_map_in_tab(t_data *data, char *line, int fd, int i);
 int				last_char_is_not_one(char **map, int line_size, int y);
 int				check_path_to_texture(t_data *data, int i, int size);
 int				save_rgb_values(t_data *data, char *id, char *value);
 int				map_wall_parsing_loop(t_data *data, int y, int x);
+int				check_if_spawn_is_set(t_data *data, int y, int i);
 int				save_texture(t_data *data, char *id, char *path);
 int				check_if_line_is_map(t_data *data, char *line);
 int				check_extension(char *str, char *extension);
 int				check_id(t_data *data, int i, int j, int k);
 int				check_file_format(char *file, t_data *data);
 int				line_check_loop(t_data *data, int y, int x);
-int				check_if_spawn_is_set(t_data *data, int y);
 int				count_number_of_spawn(t_data *data, int y);
 int				first_or_last_line_ko(t_data *data, int y);
 int				check_duplicates_rgb(t_data *data, int i);

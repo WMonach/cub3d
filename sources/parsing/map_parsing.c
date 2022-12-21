@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:52:18 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 13:04:19 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 13:15:53 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,8 @@ void	map_line_copy(t_data *data, char *line, int i)
 	return ;
 }
 
-int	copy_map_in_tab(t_data *data, char *line, int fd)
+int	copy_map_in_tab(t_data *data, char *line, int fd, int i)
 {
-	int	i;
-
-	i = 0;
 	data->map = malloc(sizeof(char *) * (data->map_data.map_size + 1));
 	if (!data->map)
 		return (1);
@@ -98,7 +95,7 @@ int	map_copy(t_data *data, char *file)
 		j = 0;
 		i++;
 	}
-	if (copy_map_in_tab(data, line, fd) == 1)
+	if (copy_map_in_tab(data, line, fd, 0) == 1)
 		return (1);
 	close(fd);
 	return (0);

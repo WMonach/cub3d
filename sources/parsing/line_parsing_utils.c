@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:31:45 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 12:40:41 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 13:15:11 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	check_file_opening(char *file, int size)
 {
-	int	i;
-	int	fd;
-	int	length;
+	int		i;
+	int		fd;
+	int		length;
 	char	*str;
 
 	i = 0;
