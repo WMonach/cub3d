@@ -6,7 +6,7 @@
 /*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 14:42:44 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 16:52:39 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	draw_rays(t_cub *cub)
 		ra += 2 *PI;
 	if (ra > 2 * PI)
 		ra -= 2 * PI;
+	printf("lineh==%f\n, cubdist==%f\n", cub->lineh, cub->dist);
 	while (r < 1919)
 	{
 		cub->v_check = 0;
@@ -129,19 +130,26 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 {
 	(void)img;
 	int		i;
+	int		player_x;
+	int		player_y;
+	int		j;
 
+	player_x = (cub->posx / 32) * cub->data.minimap_coeff;
+	player_y = ((cub->posy / 32) * cub->data.minimap_coeff);
+	if (player_y > 0)
+		player_y -= 2;
+	j = 0;
 	i = -1;
 	while (++i <= 5)
 	{
-		my_mlx_pixel_put(img, cub->posx / 16, cub->posy / 16, 0xffff00);
-		my_mlx_pixel_put(img, cub->posx + 1 / 16, cub->posy / 16, 0xffff00);
-		my_mlx_pixel_put(img, cub->posx + 2 / 16, cub->posy / 16, 0xffff00);
-		my_mlx_pixel_put(img, cub->posx + 3 / 16, cub->posy / 16, 0xffff00);
-		my_mlx_pixel_put(img, cub->posx + 4 / 16, cub->posy / 16, 0xffff00);
-		my_mlx_pixel_put(img, cub->posx + 5 / 16, cub->posy / 16, 0xffff00);
-		cub->posy++;
+		my_mlx_pixel_put(img, player_x, player_y + j, 0xffff00);
+		my_mlx_pixel_put(img, player_x + 1, player_y + j, 0xffff00);
+		my_mlx_pixel_put(img, player_x + 2, player_y + j, 0xffff00);
+		my_mlx_pixel_put(img, player_x + 3, player_y + j, 0xffff00);
+		my_mlx_pixel_put(img, player_x + 4, player_y + j, 0xffff00);
+		my_mlx_pixel_put(img, player_x + 5, player_y + j, 0xffff00);
+		j++;
 	}
-	cub->posy -= 6;
 	// draw_rays(cub);
 	return (1);
 }
