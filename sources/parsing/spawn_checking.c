@@ -6,17 +6,35 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 10:25:23 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/08 14:28:30 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 13:28:50 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	check_if_spawn_is_set(t_data *data, int y)
+int	check_spawn_is_set_east_and_west(t_data *data, int y, int i)
 {
-	int	i;
+	if (data->map[y][i] == 'W' && data->map_data.check_west_spawn == 0)
+		data->map_data.check_west_spawn = 1;
+	if (data->map_data.check_west_spawn == 1)
+	{
+		data->map_data.player_x = i;
+		data->map_data.player_y = y;
+		return (0);
+	}
+	if (data->map[y][i] == 'E' && data->map_data.check_east_spawn == 0)
+		data->map_data.check_east_spawn = 1;
+	if (data->map_data.check_east_spawn == 1)
+	{
+		data->map_data.player_x = i;
+		data->map_data.player_y = y;
+		return (0);
+	}
+	return (1);
+}
 
-	i = 0;
+int	check_if_spawn_is_set(t_data *data, int y, int i)
+{
 	while (data->map[y][i])
 	{
 		if (data->map[y][i] == 'N' && data->map_data.check_north_spawn == 0)
@@ -35,22 +53,8 @@ int	check_if_spawn_is_set(t_data *data, int y)
 			data->map_data.player_y = y;
 			return (0);
 		}
-		if (data->map[y][i] == 'W' && data->map_data.check_west_spawn == 0)
-			data->map_data.check_west_spawn = 1;
-		if (data->map_data.check_west_spawn == 1)
-		{
-			data->map_data.player_x = i;
-			data->map_data.player_y = y;
+		if (check_spawn_is_set_east_and_west(data, y, i) == 0)
 			return (0);
-		}
-		if (data->map[y][i] == 'E' && data->map_data.check_east_spawn == 0)
-			data->map_data.check_east_spawn = 1;
-		if (data->map_data.check_east_spawn == 1)
-		{
-			data->map_data.player_x = i;
-			data->map_data.player_y = y;
-			return (0);
-		}
 		i++;
 	}
 	return (1);
