@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 13:27:37 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 14:09:03 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ typedef struct s_data {
 	char		*texture_id[6];
 	char		**texture_path;
 	char		**rgb_values;
+	int			c_color;
+	int			f_color;
 	char		**extension;
 	char		**map;
 	t_map		map_data;
@@ -260,6 +262,7 @@ int		ft_close(t_cub *cub);
 
 /* PARSING */
 
+char			*ft_convert_base(char *nbr, char *base_from, char *base_to);
 char			**free_tab(char **tab, int i);
 
 int				line_parsing_call_and_set_all_id_check(t_data *data,

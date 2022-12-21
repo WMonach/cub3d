@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:45:56 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 11:00:09 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 14:36:06 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j, float cstep)
 		{
 			ft_rounded(j, i, cub);
 			my_mlx_pixel_put(&cub->mlx_data, (int)j,
-				(int)i, 0x87cefa);
+				(int)i, cub->data.c_color);
 		}
 		i++;
 	}
@@ -72,7 +72,7 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j, float cstep)
 		{
 			ft_rounded(j, i, cub);
 			my_mlx_pixel_put(&cub->mlx_data, (int)j,
-				(int)i,  0x6c7b8b);
+				(int)i, cub->data.f_color);
 		}
 		i++;
 	}
