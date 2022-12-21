@@ -1,17 +1,17 @@
-EA /path_to_the_east_texture.xpm
-WE /path_to_the_west_texture.xpm
-SO /path_to_the_south_texture.xpm
-NO /path_to_the_north_texture.xpm
+EA textures/exit.xpm
+WE textures/colectible.xpm
+SO textures/player_face.xpm
+NO textures/wall.xpm
 
-F 220,100,0
+F          					220,100,0
 C 255,120,0
 
 
 111111111111111
+10000S000000001
 100000000000001
 100000000000001
-100000000000001
-1000011100000W1
+100001110000001
 100000000000001
 100000000000001
 100000000000001

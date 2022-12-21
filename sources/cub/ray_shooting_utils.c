@@ -6,11 +6,27 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:48:04 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/15 14:48:40 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/20 18:47:15 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+unsigned int	get_value(t_cub *cub, t_img *img, int y, int x)
+{
+	int	texx;
+	int	texy;
+
+	(void)y;
+	texx = 0;
+	if (cub->v_check == 1)
+		texx = ((cub->ray_v.ry / 32) - cub->ray_v.my) * 32;
+	else
+		texx = ((cub->ray_h.rx / 32) - cub->ray_h.mx) * 32;
+	texy = ((x - (540 - cub->lineh / 2)) / cub->lineh) * img->height;
+	img->addr = (int *)mlx_get_data_addr(img->data, &img->bits_per_pixel, &img->line_length, &img->endian);
+	return ( img->addr[texy * img->line_length / 4 + texx]);
+}
 
 int	check_ray(t_cub *cub)
 {

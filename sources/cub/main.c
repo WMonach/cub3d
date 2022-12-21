@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/20 10:41:17 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 11:00:22 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ void	parsing_debug(t_data *data)
 	return ;
 }
 
+void	set_texture_struct(t_cub *cub, t_data *data)
+{
+	cub->img_n.data = mlx_xpm_file_to_image(cub->vars.mlx, data->texture_path[0], &cub->img_n.width, &cub->img_n.height);
+	cub->img_s.data =  mlx_xpm_file_to_image(cub->vars.mlx,  data->texture_path[1], &cub->img_s.width, &cub->img_s.height);
+	cub->img_w.data =  mlx_xpm_file_to_image(cub->vars.mlx,  data->texture_path[2], &cub->img_w.width, &cub->img_w.height);
+	cub->img_e.data =  mlx_xpm_file_to_image(cub->vars.mlx,  data->texture_path[3], &cub->img_e.width, &cub->img_e.height);
+}
+
 int	key_hook(int keycode, t_cub *cub)
 {
 	mlx_destroy_image(cub->vars.mlx, cub->mlx_data.img);
@@ -54,9 +62,9 @@ int	key_hook(int keycode, t_cub *cub)
 	ft_keyhook_translation(keycode, cub);
 	cub->data.y_range = 0;
 	cub->data.x_range = 0;
+	//map_display(cub, &cub->data, &cub->mlx_data);
 	//ft_draw_hero(cub, &cub->mlx_data);
 	draw_rays(cub);
-	//map_display(cub, &cub->data, &cub->mlx_data);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
 	return (1);
 }
@@ -97,12 +105,13 @@ void	raycaster(t_cub *cub, t_data *data)
 			&(cub->mlx_data.bits_per_pixel), &(cub->mlx_data.line_length),
 			&(cub->mlx_data.endian));
 	(cub->data) = *data;
+	set_texture_struct(cub, data);
 	mlx_key_hook(cub->vars.win, key_hook, cub);
 	mlx_hook(cub->vars.win, 17, 1L << 0, ft_close, cub);
 	mlx_hook(cub->vars.win, 02, 1L << 0, key_hook, cub);
+	//map_display(cub, data, &cub->mlx_data);
 	//ft_draw_hero(cub, &cub->mlx_data);
 	draw_rays(cub);
-	//map_display(cub, data, &cub->mlx_data);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
 	mlx_loop(cub->vars.mlx);
 	return ;
