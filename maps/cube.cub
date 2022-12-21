@@ -3,8 +3,8 @@ EA textures/player_right.xpm
 SO textures/player_face.xpm
 NO textures/wall.xpm
 
-F 220,100,0
-C 255,120,0
+F 135,206,250
+C 108,123,139
 
 
 111111111111111

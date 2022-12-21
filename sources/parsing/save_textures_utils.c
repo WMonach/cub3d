@@ -6,11 +6,24 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:28:57 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/07 14:29:29 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 14:38:48 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	convert_rgb_to_hexa(char *str)
+{
+	int		hexa_value;
+	char	**value_tab;
+
+	value_tab = ft_split(str, ',');
+	if (!value_tab)
+		exit (1);
+	hexa_value = (ft_atoi(value_tab[0]) << 16) + (ft_atoi(value_tab[1]) << 8) + ft_atoi(value_tab[2]);
+	free_tab(value_tab, 2);
+	return (hexa_value);
+}
 
 int	copy_rgb_value(t_data *data, int index, int size, char *value)
 {
@@ -37,14 +50,12 @@ int	save_rgb_values(t_data *data, char *id, char *value)
 	size = ft_strlen(&value[i]) - 1;
 	if (strncmp(id, "F", 1) == 0)
 	{
-		if (copy_rgb_value(data, 0, size, &value[i]) == 1)
-			return (1);
+		data->c_color = convert_rgb_to_hexa(&value[i]);
 		data->texture.rgb_f_copy = 1;
 	}
 	if (strncmp(id, "C", 1) == 0)
 	{
-		if (copy_rgb_value(data, 1, size, &value[i]) == 1)
-			return (1);
+		data->f_color = convert_rgb_to_hexa(&value[i]);
 		data->texture.rgb_c_copy = 1;
 	}
 	data->rgb_values[2] = NULL;
