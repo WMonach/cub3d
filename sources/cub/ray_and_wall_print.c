@@ -6,7 +6,7 @@
 /*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:45:56 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 17:11:51 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 00:01:51 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,12 @@ void	print_h_3d_wall(t_cub *cub, float ra, float rx, float ry)
 	}
 }
 
-void	print_v_3d_wall(t_cub *cub, float ra, float j, float cstep)
+void	print_v_3d_wall(t_cub *cub, float ra, float j)
 {
 	float	i;
-	float	c;
 
 	(void)ra;
 	i = 0;
-	c = cub->ty_off * cstep;
 	while (i < (540 - cub->lineh / 2))//PLAFOND
 	{
 		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
@@ -50,19 +48,18 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j, float cstep)
 		{
 			if (cub->v_check == 1)
 			{
-				if (cub->pa >= P3 && cub->pa <= P2)
+				if (cub->ray_v.rx > cub->posx)
 					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_e, j, i));
-				else
+				if (cub->ray_v.rx < cub->posx)
 					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_w, j, i));
 			}
 			else
 			{
-				if (cub->pa > PI)
-					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_n, j, i));
-				else
+				if (cub->ray_h.ry > cub->posy)
 					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_s, j, i));
+				if (cub->ray_h.ry < cub->posy)
+					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_n, j, i));
 			}
-			c += cstep;
 		}
 		i++;
 	}
@@ -81,7 +78,6 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j, float cstep)
 void	draw_walls(t_cub *cub, float ra, int r, float j)
 {
 	float	ca;
-	float	cstep;
 
 	(void)r;
 	ca = cub->pa - ra;
@@ -91,15 +87,10 @@ void	draw_walls(t_cub *cub, float ra, int r, float j)
 		ca -= 2 * PI;
 	cub->dist = cub->dist * cos(ca);
 	cub->lineh = ((25 * 1920) / cub->dist);
-	cstep = 32.0 / cub->lineh;
-	cub->ty_off = 0;
 	if (cub->lineh > 1920)
-	{
-		cub->ty_off = (cub->lineh - 1920) / 2.0;
 		cub->lineh = cub->lineh;
-	}
 	cub->lineo = (1080 - cub->lineh / 2);
-	print_v_3d_wall(cub, ra, j, cstep);
+	print_v_3d_wall(cub, ra, j);
 	return ;
 }
 

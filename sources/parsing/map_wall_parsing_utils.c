@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 12:38:38 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 13:27:25 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 19:29:04 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	line_check_loop(t_data *data, int y, int x)
 		if (data->map[y][x] == '0')
 		{
 			if (space_check(data->map, y, x) == 1)
+			{
+				data->texture.rgb_f_copy = 1;
 				return (1);
+			}
 		}
 		x++;
 	}

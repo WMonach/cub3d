@@ -3,43 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 16:19:45 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 19:00:34 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	parsing_debug(t_data *data)
-{
-	int a = 0;
-	while (data->texture_path[a] != NULL)
-	{
-		printf("PATH COPY ==> %s\n", data->texture_path[a]);
-		a++;
-	}
-	a = 0;
-	printf("\n");
-	while (data->map[a] != NULL)
-	{
-		printf("%s\n", data->map[a]);
-		a++;
-	}
-	printf("\n== Map parsing OK ==\n");
-	printf("Map height --> %d Width --> %d\n", data->map_data.map_size, data->width);
-	printf("Player starting pos : X-Y [%d] [%d]\n", data->map_data.player_x, data->map_data.player_y);
-	return ;
-}
-
-void	set_texture_struct(t_cub *cub, t_data *data)
-{
-	cub->img_n.data = mlx_xpm_file_to_image(cub->vars.mlx, data->texture_path[0], &cub->img_n.width, &cub->img_n.height);
-	cub->img_s.data =  mlx_xpm_file_to_image(cub->vars.mlx,  data->texture_path[1], &cub->img_s.width, &cub->img_s.height);
-	cub->img_w.data =  mlx_xpm_file_to_image(cub->vars.mlx,  data->texture_path[2], &cub->img_w.width, &cub->img_w.height);
-	cub->img_e.data =  mlx_xpm_file_to_image(cub->vars.mlx,  data->texture_path[3], &cub->img_e.width, &cub->img_e.height);
-}
 
 int	key_hook(int keycode, t_cub *cub)
 {
@@ -50,7 +21,7 @@ int	key_hook(int keycode, t_cub *cub)
 			&cub->mlx_data.endian);
 	if (keycode == 53)
 	{
-		free(cub); /*FREE all*/
+		free(cub);
 		exit (0);
 	}
 	ft_keyhook_translation(keycode, cub);
@@ -59,7 +30,8 @@ int	key_hook(int keycode, t_cub *cub)
 	draw_rays(cub);
 	map_display(cub, &cub->data, &cub->mlx_data);
 	ft_draw_hero(cub, &cub->mlx_data);
-	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
+	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win,
+		cub->mlx_data.img, 0, 0);
 	return (1);
 }
 
@@ -82,7 +54,7 @@ int	parsing(char **argv, t_data *data)
 	if (check_file(argv[1], data) == 1)
 		return (1);
 	if (map_copy_and_parsing(data, argv) == 1)
-		return(1);
+		return (1);
 	return (0);
 }
 
@@ -106,7 +78,8 @@ void	raycaster(t_cub *cub, t_data *data)
 	draw_rays(cub);
 	map_display(cub, data, &cub->mlx_data);
 	ft_draw_hero(cub, &cub->mlx_data);
-	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
+	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win,
+		cub->mlx_data.img, 0, 0);
 	mlx_loop(cub->vars.mlx);
 	return ;
 }
@@ -116,7 +89,7 @@ float	player_starting_angle(t_data *data)
 	if (data->map_data.check_north_spawn == 1)
 		return (-P2);
 	if (data->map_data.check_south_spawn == 1)
-		return (P2);
+		return (-P3);
 	if (data->map_data.check_west_spawn == 1)
 		return (PI);
 	if (data->map_data.check_east_spawn == 1)
@@ -132,30 +105,21 @@ int	main(int argc, char *argv[])
 	cub = malloc(sizeof(t_cub));
 	if (cub == NULL)
 		return (1);
-	cub->hit_wall = 0;
 	main_data_var_init(&data, cub);
 	main_texture_var_init(&data);
 	if (argc == 2)
 	{
 		if (parsing(argv, &data) == 0)
 		{
-			//parsing_debug(&data);
 			cub->pa = player_starting_angle(&data);
 			init_cub_var(cub, &data);
 			raycaster(cub, &data);
-			free_texture_tab(&data);
-			free_rgb_tab(&data);
-			free_tab(data.map, data.map_data.map_size);
+			free_parsing_data(&data);
 			return (0);
 		}
 		if (data.no_free_tab != 1)
-		{
-			free_texture_tab(&data);
-			free_rgb_tab(&data);
-			free(cub);
-			if (data.free_tab_map == 1)
-				free_tab(data.map, data.map_data.map_size);
-		}
+			free_if_parsing_failed(&data);
+		free(cub);
 		return (1);
 	}
 	printf("Error : wrong number of arguments\n");

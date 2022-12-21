@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:13:38 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/07 10:54:55 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 19:41:21 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 int	check_textures(t_data *data, int i)
 {
 	if (check_path_to_texture(data, i, 2) == 1)
+	{
+		data->texture.rgb_f_copy = 1;
 		return (1);
+	}
 	if (check_duplicates(data, i) == 1)
 	{
 		printf("Error : duplicate texture detected\n");
+		data->texture.rgb_f_copy = 1;
 		return (1);
 	}
 	return (0);
@@ -28,10 +32,14 @@ int	check_colors(t_data *data, int i)
 {
 	data->length = 0;
 	if (check_rgb(data, i) == 1)
+	{
+		data->texture.rgb_f_copy = 1;
 		return (1);
+	}
 	if (check_duplicates_rgb(data, i) == 1)
 	{
 		printf("Error : duplicate RGB detected\n");
+		data->texture.rgb_f_copy = 1;
 		return (1);
 	}
 	return (0);

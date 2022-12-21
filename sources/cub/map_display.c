@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_display.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:41:52 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 15:16:56 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 17:02:12 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	calculation_of_the_coeff_minimap(t_data *data)
 	{
 		data->minimap_coeff = 15 / (float)(data->map_data.map_size) * 15;
 	}
-	
-
 }
 
 int	map_display(t_cub *cub, t_data *data, t_mlx_data *img)

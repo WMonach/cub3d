@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:36:51 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 13:03:33 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 19:22:37 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ char	**free_texture_tab(t_data *data)
 
 char	**free_rgb_tab(t_data *data)
 {
-	if (data->texture.rgb_f_copy == 1)
+	if (data->texture.rgb_f_copy == 0)
+	{
 		free(data->rgb_values[0]);
-	if (data->texture.rgb_c_copy == 1)
 		free(data->rgb_values[1]);
+	}
 	free(data->rgb_values);
 	return (0);
 }
