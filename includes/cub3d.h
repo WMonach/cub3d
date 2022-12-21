@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 15:19:52 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 18:59:59 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,9 @@ typedef struct s_cub
 	int			hit_wall;
 	int			v_check;
 	int			h_check;
+	float		ra;
+	float		atan;
+	float		ntan;
 	float		ty_off;
 	float		lineo;
 	float		lineh;
@@ -240,14 +243,26 @@ void	my_mlx_pixel_put(t_mlx_data *mlx_data, int x, int y, int color);
 void	print_h_rayon(t_cub *cub, float rx, float ry, float ra);
 void	print_v_rayon(t_cub *cub, float rx, float ry, float ra);
 void	ft_rounded(float number1, float number2, t_cub	*cub);
-void	main_data_var_init(t_data *data, t_cub *cub);
 void	draw_walls(t_cub *cub, float ra, int r, float j);
+void	free_if_parsing_failed(t_data *data);
+void	main_data_var_init(t_data *data, t_cub *cub);
+void	set_texture_struct(t_cub *cub, t_data *data);
+void	set_ray_v_case_1(t_cub *cub, float ntan);
+void	set_ray_v_case_2(t_cub *cub, float ntan);
+void	set_ray_h_case_1(t_cub *cub, float atan);
+void	set_ray_h_case_2(t_cub *cub, float atan);
+void	set_xo_and_yo_for_side_walk(t_cub *cub);
 void	init_cub_var(t_cub *cub, t_data *data);
 void	main_texture_var_init(t_data *data);
+void	free_parsing_data(t_data *data);
+void	set_ray_v_case_3(t_cub *cub);
+void	set_ray_h_case_3(t_cub *cub);
 void	init_ray_var(t_cub *cub);
 void	draw_rays(t_cub *cub);
 
+float	set_ra_before_loop(float ra, float pa);
 float	ft_max(float max1, float max2);
+float	set_ra_end_of_loop(float ra);
 
 unsigned int	get_value(t_cub *cub, t_img *img, int y, int x);
 
@@ -255,6 +270,7 @@ int		map_display(t_cub *cub, t_data *data, t_mlx_data *img);
 int		ft_keyhook_translation(int keycode, t_cub *cub);
 int		map_copy_and_parsing(t_data *data, char **argv);
 int		ft_keyhook_rotation(int keycode, t_cub *cub);
+int		check_collision(char **map, int y, int x);
 int		ft_draw_hero(t_cub *cub, t_mlx_data *img);
 int		ft_draw(t_cub *cub, t_mlx_data *img);
 int		ft_rz_rotation(float ra, t_cub *cub);

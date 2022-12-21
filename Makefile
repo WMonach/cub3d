@@ -27,13 +27,18 @@ OBJ			=		$(addprefix $(DIR_OBJ)/, $(addsuffix .o,$(INC_FILES)))
 SUB_DIR=			$(addprefix $(DIR_OBJ)/,$(SUB_DIR_LST))
 
 INC_FILES	=		cub/main								\
+					cub/main_function						\
 					cub/draw								\
 					cub/main_utils							\
 					cub/free_functions						\
 					cub/keyhook_and_rotation				\
+					cub/key_hook_and_rotation_utils			\
 					cub/map_display							\
 					cub/ray_and_wall_print					\
 					cub/ray_shooting_utils					\
+					cub/vertical_line_check_utils			\
+					cub/horizontal_line_check_utils			\
+					cub/draw_utils							\
 					parsing/check_id_utils					\
 					parsing/check_id						\
 					parsing/line_parsing_utils				\

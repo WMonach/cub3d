@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:32:53 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/20 10:41:33 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 18:57:54 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	init_cub_var(t_cub *cub, t_data *data)
 {
 	cub->posx = 0;
 	cub->posy = 0;
+	cub->hit_wall = 0;
 	cub->pdx = cos(cub->pa * 5);
 	cub->pdy = sin(cub->pa * 5);
 	(cub->data) = *data;
