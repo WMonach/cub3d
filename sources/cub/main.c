@@ -6,7 +6,7 @@
 /*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 15:19:59 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 16:19:45 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	raycaster(t_cub *cub, t_data *data)
 	mlx_hook(cub->vars.win, 02, 1L << 0, key_hook, cub);
 	draw_rays(cub);
 	map_display(cub, data, &cub->mlx_data);
-	// ft_draw_hero(cub, &cub->mlx_data);
+	ft_draw_hero(cub, &cub->mlx_data);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
 	mlx_loop(cub->vars.mlx);
 	return ;
