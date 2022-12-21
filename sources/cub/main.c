@@ -6,7 +6,7 @@
 /*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 15:08:47 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 15:19:59 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ void	parsing_debug(t_data *data)
 	while (data->texture_path[a] != NULL)
 	{
 		printf("PATH COPY ==> %s\n", data->texture_path[a]);
-		a++;
-	}
-	a = 0;
-	while (a < 2)
-	{
-		printf("COLOR COPY ==> %s\n", data->rgb_values[a]);
 		a++;
 	}
 	a = 0;
@@ -95,8 +89,8 @@ int	parsing(char **argv, t_data *data)
 void	raycaster(t_cub *cub, t_data *data)
 {
 	(void)data;
-	cub->posx = (data->map_data.player_x * 32);
-	cub->posy = (data->map_data.player_y * 32);
+	cub->posx = (data->map_data.player_x * 32) + 16;
+	cub->posy = (data->map_data.player_y * 32) + 16;
 	cub->vars.mlx = mlx_init();
 	cub->vars.win = mlx_new_window(cub->vars.mlx,
 			1920, 1080, "cub3d");
@@ -145,7 +139,7 @@ int	main(int argc, char *argv[])
 	{
 		if (parsing(argv, &data) == 0)
 		{
-			parsing_debug(&data);
+			//parsing_debug(&data);
 			cub->pa = player_starting_angle(&data);
 			init_cub_var(cub, &data);
 			raycaster(cub, &data);
