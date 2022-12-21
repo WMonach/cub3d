@@ -6,7 +6,7 @@
 /*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 16:52:39 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 17:07:22 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	draw_rays(t_cub *cub)
 		ra += 2 *PI;
 	if (ra > 2 * PI)
 		ra -= 2 * PI;
-	printf("lineh==%f\n, cubdist==%f\n", cub->lineh, cub->dist);
+	printf("lineh==%f\n, cubdist==%f\n", cub->pa, cub->dist);
 	while (r < 1919)
 	{
 		cub->v_check = 0;

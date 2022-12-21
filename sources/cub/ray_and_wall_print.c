@@ -6,7 +6,7 @@
 /*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:45:56 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 16:54:09 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 17:11:51 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	print_v_3d_wall(t_cub *cub, float ra, float j, float cstep)
 		{
 			if (cub->v_check == 1)
 			{
-				if (cub->pa > P3 && cub->pa < P2)
+				if (cub->pa >= P3 && cub->pa <= P2)
 					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_e, j, i));
 				else
 					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_w, j, i));
