@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 11:01:28 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 14:42:44 by will             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,21 +128,21 @@ void	draw_rays(t_cub *cub)
 int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 {
 	(void)img;
-	// int		i;
+	int		i;
 
-	// i = -1;
-	// while (++i <= 5)
-	// {
-	// 	my_mlx_pixel_put(img, cub->posx, cub->posy, 0xffff00);
-	// 	my_mlx_pixel_put(img, cub->posx + 1, cub->posy, 0xffff00);
-	// 	my_mlx_pixel_put(img, cub->posx + 2, cub->posy, 0xffff00);
-	// 	my_mlx_pixel_put(img, cub->posx + 3, cub->posy, 0xffff00);
-	// 	my_mlx_pixel_put(img, cub->posx + 4, cub->posy, 0xffff00);
-	// 	my_mlx_pixel_put(img, cub->posx + 5, cub->posy, 0xffff00);
-	// 	cub->posy++;
-	// }
-	// cub->posy -= 6;
-	draw_rays(cub);
+	i = -1;
+	while (++i <= 5)
+	{
+		my_mlx_pixel_put(img, cub->posx / 16, cub->posy / 16, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx + 1 / 16, cub->posy / 16, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx + 2 / 16, cub->posy / 16, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx + 3 / 16, cub->posy / 16, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx + 4 / 16, cub->posy / 16, 0xffff00);
+		my_mlx_pixel_put(img, cub->posx + 5 / 16, cub->posy / 16, 0xffff00);
+		cub->posy++;
+	}
+	cub->posy -= 6;
+	// draw_rays(cub);
 	return (1);
 }
 
