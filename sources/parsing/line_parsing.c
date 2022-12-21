@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:25:08 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 12:50:15 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 19:25:44 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	map_line_checking(t_data *data, char *line)
 	if (data->check_id_parsing == 0)
 		data->check_id_parsing = 1;
 	if (check_chars(line, "01NSEW ") == 1)
+	{
+		data->texture.rgb_f_copy = 1;
 		return (1);
+	}
 	data->map_data.map_size++;
 	return (0);
 }
@@ -88,6 +91,7 @@ int	line_parsing(char *line, t_data *data)
 		if (data->check_empty_line == 1)
 		{
 			printf("Error : invalid map : empty line detected\n");
+			data->texture.rgb_f_copy = 1;
 			return (1);
 		}
 		if (map_line_checking(data, line) == 1)
@@ -100,5 +104,6 @@ int	line_parsing(char *line, t_data *data)
 		return (1);
 	if (line_parsing_loop(data, line) == 0)
 		return (0);
+	printf("Error : unknown element found\n");
 	return (1);
 }
