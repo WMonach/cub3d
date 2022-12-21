@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 09:07:23 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 11:00:22 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int	key_hook(int keycode, t_cub *cub)
 	ft_keyhook_translation(keycode, cub);
 	cub->data.y_range = 0;
 	cub->data.x_range = 0;
+	//map_display(cub, &cub->data, &cub->mlx_data);
 	//ft_draw_hero(cub, &cub->mlx_data);
 	draw_rays(cub);
-	//map_display(cub, &cub->data, &cub->mlx_data);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
 	return (1);
 }
@@ -95,8 +95,8 @@ int	parsing(char **argv, t_data *data)
 void	raycaster(t_cub *cub, t_data *data)
 {
 	(void)data;
-	cub->posx = (data->map_data.player_x * 32) + 30;
-	cub->posy = (data->map_data.player_y * 32) + 30;
+	cub->posx = (data->map_data.player_x * 32);
+	cub->posy = (data->map_data.player_y * 32);
 	cub->vars.mlx = mlx_init();
 	cub->vars.win = mlx_new_window(cub->vars.mlx,
 			1920, 1080, "cub3d");
@@ -109,9 +109,9 @@ void	raycaster(t_cub *cub, t_data *data)
 	mlx_key_hook(cub->vars.win, key_hook, cub);
 	mlx_hook(cub->vars.win, 17, 1L << 0, ft_close, cub);
 	mlx_hook(cub->vars.win, 02, 1L << 0, key_hook, cub);
+	//map_display(cub, data, &cub->mlx_data);
 	//ft_draw_hero(cub, &cub->mlx_data);
 	draw_rays(cub);
-	//map_display(cub, data, &cub->mlx_data);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win, cub->mlx_data.img, 0, 0);
 	mlx_loop(cub->vars.mlx);
 	return ;
@@ -147,6 +147,7 @@ int	main(int argc, char *argv[])
 		{
 			parsing_debug(&data);
 			cub->pa = player_starting_angle(&data);
+			init_cub_var(cub, &data);
 			raycaster(cub, &data);
 			free_texture_tab(&data);
 			free_rgb_tab(&data);
