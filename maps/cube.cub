@@ -1,5 +1,5 @@
-EA textures/exit.xpm
 WE textures/colectible.xpm
+EA textures/player_right.xpm
 SO textures/player_face.xpm
 NO textures/wall.xpm
 

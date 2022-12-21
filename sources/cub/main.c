@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/21 11:00:22 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 13:04:33 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int	main(int argc, char *argv[])
 		{
 			free_texture_tab(&data);
 			free_rgb_tab(&data);
+			free(cub);
 			if (data.free_tab_map == 1)
 				free_tab(data.map, data.map_data.map_size);
 		}

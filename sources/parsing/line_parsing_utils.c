@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:31:45 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/06 11:15:38 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 12:40:41 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,22 @@ int	check_file_opening(char *file, int size)
 {
 	int	i;
 	int	fd;
+	int	length;
+	char	*str;
 
 	i = 0;
+	length = 0;
 	i += size;
 	while (file[i] == 9 || file[i] == 32)
 		i++;
-	printf("File to test ==> %s", &file[i]);
-	fd = open(&file[i], O_RDONLY);
+	while (file[length + i] != '\n')
+		length++;
+	str = malloc(sizeof(char) * length + 1);
+	if (!str)
+		return (1);
+	ft_strlcpy(str, &file[i], length);
+	fd = open(str, O_RDONLY);
+	free(str);
 	if (fd < 0)
 		return (1);
 	close(fd);
@@ -48,12 +57,11 @@ int	check_path_to_texture(t_data *data, int i, int size)
 		printf("Error : wrong texture file format : need .xpm\n");
 		return (1);
 	}
-	// if (check_file_opening(str, size) == 1)
-	// {
-	// 	printf("Error : can't open file\n");
-	// 	return (1);
-	// }
-	// printf("== Texture file OK ==\n");
+	if (check_file_opening(str, size) == 1)
+	{
+		printf("Error : can't open file\n");
+		return (1);
+	}
 	return (0);
 }
 

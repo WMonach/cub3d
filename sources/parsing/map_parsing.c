@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:52:18 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/06 16:42:45 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 13:04:19 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	copy_map_in_tab(t_data *data, char *line, int fd)
 	data->map = malloc(sizeof(char *) * (data->map_data.map_size + 1));
 	if (!data->map)
 		return (1);
+	data->free_tab_map = 1;
 	while (i < data->map_data.map_size)
 	{
 		if (i > 0)
