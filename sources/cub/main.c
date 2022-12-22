@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/22 08:53:13 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 09:33:02 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ int	main(int argc, char *argv[])
 		}
 		if (data.no_free_tab != 1)
 			free_if_parsing_failed(&data);
-		free(cub);
-		return (1);
 	}
-	printf("Error : wrong number of arguments\n");
+	free(cub);
+	if (argc != 2)
+		printf("Error : wrong number of arguments\n");
 	return (1);
 }

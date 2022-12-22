@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/22 08:54:22 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 09:34:21 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ enum {
 
 typedef struct s_data {
 	float		minimap_coeff;
+	int			nb_of_color_id;
+	int			no_spawn_set;
 	int			north;
 	int			south;
 	int			west;
@@ -330,5 +332,6 @@ int				exterior_line_check(char *line);
 int				map_wall_parsing(t_data *data);
 int				close_check(char **map, int y);
 int				check_rgb(t_data *data, int i);
+int				error_return(t_data *data);
 
 #endif
