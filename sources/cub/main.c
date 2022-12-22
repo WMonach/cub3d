@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/22 00:23:00 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 08:53:13 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ void	raycaster(t_cub *cub, t_data *data)
 float	player_starting_angle(t_data *data)
 {
 	if (data->map_data.check_north_spawn == 1)
-		return (-P2);
+		return (-PI / 2);
 	if (data->map_data.check_south_spawn == 1)
-		return (-P3);
+		return (-3 * PI / 2);
 	if (data->map_data.check_west_spawn == 1)
 		return (PI);
 	if (data->map_data.check_east_spawn == 1)

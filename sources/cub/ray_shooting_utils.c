@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_shooting_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:48:04 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/22 00:26:33 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 08:37:14 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,17 @@ unsigned int	get_value(t_cub *cub, t_img *img, int y, int x)
 	else
 		texx = ((cub->ray_h.rx / 32) - cub->ray_h.mx) * 32;
 	texy = ((x - (540 - cub->lineh / 2)) / cub->lineh) * img->height;
-	img->addr = (int *)mlx_get_data_addr(img->data, &img->bits_per_pixel, &img->line_length, &img->endian);
-	return ( img->addr[texy * img->line_length / 4 + texx]);
+	img->addr = (int *)mlx_get_data_addr(img->data, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
+	return (img->addr[texy * img->line_length / 4 + texx]);
 }
 
 int	check_ray(t_cub *cub)
 {
-	if (sqrtf((powf(cub->ray_h.rx - cub->posx, 2) + powf(cub->ray_h.ry - cub->posy, 2))) >= sqrtf((powf(cub->ray_v.rx - cub->posx, 2) + powf(cub->ray_v.ry - cub->posy, 2))))
+	if (sqrtf((powf(cub->ray_h.rx - cub->posx, 2)
+				+ powf(cub->ray_h.ry - cub->posy, 2)))
+		>= sqrtf((powf(cub->ray_v.rx - cub->posx, 2)
+				+ powf(cub->ray_v.ry - cub->posy, 2))))
 		return (1);
 	else
 		return (0);
@@ -41,7 +45,8 @@ void	my_mlx_pixel_put(t_mlx_data *mlx_data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = mlx_data->addr + (y * mlx_data->line_length + x * (mlx_data->bits_per_pixel / 8));
+	dst = mlx_data->addr + (y * mlx_data->line_length
+			+ x * (mlx_data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 

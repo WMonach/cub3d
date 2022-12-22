@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/22 00:01:55 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 08:51:00 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	vertical_line_check(t_cub *cub, float ra, float ntan)
 {
-	if ((ra > P2) && (ra < P3))
+	if ((ra > cub->p2) && (ra < cub->p3))
 		set_ray_v_case_1(cub, ntan);
-	if ((ra < P2) || (ra > P3))
+	if ((ra < cub->p2) || (ra > cub->p3))
 		set_ray_v_case_2(cub, ntan);
 	if (ra == 0 || ra == PI)
 		set_ray_v_case_3(cub);

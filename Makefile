@@ -40,6 +40,7 @@ INC_FILES	=		cub/main								\
 					cub/horizontal_line_check_utils			\
 					cub/draw_utils							\
 					cub/print_game_utils					\
+					cub/print_wall							\
 					parsing/check_id_utils					\
 					parsing/check_id						\
 					parsing/line_parsing_utils				\

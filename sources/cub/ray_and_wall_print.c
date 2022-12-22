@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_and_wall_print.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:45:56 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/22 00:27:13 by will             ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 08:41:54 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,22 @@ float	print_wall(t_cub *cub, float j, float i)
 		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
 		{
 			if (cub->v_check == 1)
-			{
-				if (cub->ray_v.rx > cub->posx)
-					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_e, j, i));
-				if (cub->ray_v.rx < cub->posx)
-					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_w, j, i));
-			}
+				print_vertical_wall(cub, j, i);
 			else
 			{
 				if (cub->ray_h.ry > cub->posy)
-					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_s, j, i));
+					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i,
+						get_value(cub, &cub->img_s, j, i));
 				if (cub->ray_h.ry < cub->posy)
-					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i, get_value(cub, &cub->img_n, j, i));
+					my_mlx_pixel_put(&cub->mlx_data, (int)j, (int)i,
+						get_value(cub, &cub->img_n, j, i));
 			}
 		}
 		i++;
 	}
 	return (i);
 }
-	
+
 float	print_floor(t_cub *cub, float j, float i)
 {
 	while (i < 1080)

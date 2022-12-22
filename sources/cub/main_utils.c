@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:32:53 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 18:57:54 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 08:49:56 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	init_cub_var(t_cub *cub, t_data *data)
 	cub->posx = 0;
 	cub->posy = 0;
 	cub->hit_wall = 0;
+	cub->p2 = PI / 2;
+	cub->p3 = 3 * PI / 2;
 	cub->pdx = cos(cub->pa * 5);
 	cub->pdy = sin(cub->pa * 5);
 	(cub->data) = *data;
@@ -41,7 +43,6 @@ void	main_data_var_init(t_data *data, t_cub *cub)
 	data->map_data.check_south_spawn = 0;
 	data->map_data.check_west_spawn = 0;
 	data->map_data.check_east_spawn = 0;
-	//init_cub_var(cub, data);
 	return ;
 }
 
@@ -87,7 +88,7 @@ void	main_texture_var_init(t_data *data)
 
 int	ft_close(t_cub *cub)
 {
-	free(cub); /*FREE all*/
+	free(cub);
 	exit(0);
 	return (0);
 }
