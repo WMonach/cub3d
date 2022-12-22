@@ -6,25 +6,20 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/22 09:33:02 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 11:49:53 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	key_hook(int keycode, t_cub *cub)
+int	key_hook(t_cub *cub)
 {
 	mlx_destroy_image(cub->vars.mlx, cub->mlx_data.img);
 	cub->mlx_data.img = mlx_new_image(cub->vars.mlx, 1920, 1080);
 	cub->mlx_data.addr = mlx_get_data_addr(cub->mlx_data.img,
 			&cub->mlx_data.bits_per_pixel, &cub->mlx_data.line_length,
 			&cub->mlx_data.endian);
-	if (keycode == 53)
-	{
-		free(cub);
-		exit (0);
-	}
-	ft_keyhook_translation(keycode, cub);
+	moves(cub);
 	cub->data.y_range = 0;
 	cub->data.x_range = 0;
 	draw_rays(cub);
@@ -60,7 +55,6 @@ int	parsing(char **argv, t_data *data)
 
 void	raycaster(t_cub *cub, t_data *data)
 {
-	(void)data;
 	cub->posx = (data->map_data.player_x * 32) + 16;
 	cub->posy = (data->map_data.player_y * 32) + 16;
 	cub->vars.mlx = mlx_init();
@@ -72,14 +66,15 @@ void	raycaster(t_cub *cub, t_data *data)
 			&(cub->mlx_data.endian));
 	(cub->data) = *data;
 	set_texture_struct(cub, data);
-	mlx_key_hook(cub->vars.win, key_hook, cub);
 	mlx_hook(cub->vars.win, 17, 1L << 0, ft_close, cub);
-	mlx_hook(cub->vars.win, 02, 1L << 0, key_hook, cub);
+	mlx_hook(cub->vars.win, 02, 1L << 0, key_hook_down, cub);
+	mlx_hook(cub->vars.win, 03, 1L << 1, key_hook_up, cub);
 	draw_rays(cub);
 	map_display(data, &cub->mlx_data);
 	ft_draw_hero(cub, &cub->mlx_data);
 	mlx_put_image_to_window(cub->vars.mlx, cub->vars.win,
 		cub->mlx_data.img, 0, 0);
+	mlx_loop_hook(cub->vars.mlx, key_hook, cub);
 	mlx_loop(cub->vars.mlx);
 	return ;
 }

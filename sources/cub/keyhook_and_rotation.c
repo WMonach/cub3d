@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:38:45 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 18:46:11 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 11:50:03 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,31 +86,24 @@ void	move_left(t_cub *cub)
 		cub->posy += -cub->pdx;
 }
 
-int	ft_keyhook_translation(int keycode, t_cub *cub)
+int	key_hook_down(int keycode, t_cub *cub)
 {
+	if (keycode == 53)
+	{
+		free(cub);
+		exit (0);
+	}
 	if (keycode == S_KEY)
-		move_backward(cub);
+		cub->keys.s_key = 1;
 	if (keycode == W_KEY)
-		move_forward(cub);
+		cub->keys.w_key = 1;
 	if (keycode == A_KEY)
-		move_left(cub);
+		cub->keys.a_key = 1;
 	if (keycode == D_KEY)
-		move_right(cub);
+		cub->keys.d_key = 1;
 	if (keycode == LEFT)
-	{
-		cub->pa -= 0.1;
-		if (cub->pa < 0)
-			cub->pa += 2 * PI;
-		cub->pdx = cos(cub->pa) * 5;
-		cub->pdy = sin(cub->pa) * 5;
-	}
+		cub->keys.left_key = 1;
 	if (keycode == RIGHT)
-	{
-		cub->pa += 0.1;
-		if (cub->pa > 2 * PI)
-			cub->pa -= 2 * PI;
-		cub->pdx = cos(cub->pa) * 5;
-		cub->pdy = sin(cub->pa) * 5;
-	}
-	return (1);
+		cub->keys.right_key = 1;
+	return (0);
 }
