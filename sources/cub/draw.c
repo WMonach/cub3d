@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/22 20:29:33 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 20:51:46 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	draw_rays(t_cub *cub)
 {
 	int		r;
 	float	j;
-	float	delta;
 
 	r = 0;
 	j = 0;
@@ -80,9 +79,8 @@ void	draw_rays(t_cub *cub)
 	{
 		cub->v_check = 0;
 		init_ray_var(cub);
-		delta = cub->ra;
-		cub->atan = -1 / tanf(delta);
-		cub->ntan = -tanf(delta);
+		cub->atan = -1 / tanf(cub->ra);
+		cub->ntan = -tanf(cub->ra);
 		horizontal_line_check(cub, cub->ra, cub->atan);
 		vertical_line_check(cub, cub->ra, cub->ntan);
 		if (check_ray(cub) == 0)
