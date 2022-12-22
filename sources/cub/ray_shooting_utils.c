@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:48:04 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/22 08:37:14 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 18:19:57 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,6 @@ void	init_ray_var(t_cub *cub)
 	cub->ray_h.xo = 0;
 	cub->ray_h.yo = 0;
 	cub->ray_h.dof = 0;
+	cub->atan = 0;
+	cub->ntan = 0;
 }

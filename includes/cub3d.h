@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/22 11:50:33 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 20:29:22 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,7 @@ typedef struct s_cub
 	float		raylx;
 	float		rayly;
 	float		dist;
+	long long	test;
 }				t_cub;
 
 /* EXECUTION */
@@ -270,6 +271,8 @@ void			set_ray_h_case_2(t_cub *cub, float atan);
 void			set_xo_and_yo_for_side_walk(t_cub *cub);
 void			init_cub_var(t_cub *cub, t_data *data);
 void			main_texture_var_init(t_data *data);
+void			horizontal_mx_my_check(t_cub *cub);
+void			vertical_mx_my_check(t_cub *cub);
 void			free_parsing_data(t_data *data);
 void			set_ray_v_case_3(t_cub *cub);
 void			set_ray_h_case_3(t_cub *cub);

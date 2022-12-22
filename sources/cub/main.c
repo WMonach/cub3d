@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:48 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/22 12:41:22 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 20:26:58 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int	parsing(char **argv, t_data *data)
 	if (!data->rgb_values)
 		return (1);
 	if (check_file(argv[1], data) == 1)
+	{
+		data->texture.rgb_f_copy = 1;
 		return (1);
+	}
 	if (map_copy_and_parsing(data, argv) == 1)
 		return (1);
 	return (0);
