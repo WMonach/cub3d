@@ -1,10 +1,10 @@
-EA /path_to_the_east_texture.xpm
-WE /path_to_the_west_texture.xpm
-SO /path_to_the_south_texture.xpm
-NO /textures/wall.xpm
+EA textures/dirt_1.xpm
+WE textures/wood_1.xpm
+SO textures/diamond.xpm
+NO textures/creeper.xpm
 
-F 220,100,0
-C 255,120,0
+F 135,206,250
+C 108,161,51
 
 
                             11111111111111111111111111111111

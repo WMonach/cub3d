@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:50:26 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/22 12:35:58 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 12:43:43 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	moves(t_cub *cub)
 		move_right(cub);
 	if (cub->keys.left_key == 1)
 	{
-		cub->pa -= 0.1;
+		cub->pa -= 0.04;
 		if (cub->pa < 0)
 			cub->pa += 2 * PI;
 		cub->pdx = cos(cub->pa) * 4;
@@ -78,7 +78,7 @@ void	moves(t_cub *cub)
 	}
 	if (cub->keys.right_key == 1)
 	{
-		cub->pa += 0.1;
+		cub->pa += 0.04;
 		if (cub->pa > 2 * PI)
 			cub->pa -= 2 * PI;
 		cub->pdx = cos(cub->pa) * 4;

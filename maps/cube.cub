@@ -1,6 +1,6 @@
-WE textures/colectible.xpm
-EA textures/player_right.xpm
-SO textures/walla.xpm
+WE textures/wall_cpy_4.xpm
+EA textures/wall_cpy_2.xpm
+SO textures/wall_cpy_3.xpm
 NO textures/wall.xpm
 
 C 108,123,139
