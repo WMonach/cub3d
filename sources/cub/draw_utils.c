@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:35:57 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/22 20:51:58 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 07:41:07 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ float	set_ra_before_loop(float ra, float pa)
 void	vertical_mx_my_check(t_cub *cub)
 {
 	if (cub->ray_v.my < 0)
-		cub->ray_v.my = 1;
+		cub->ray_v.my *= -1;
 	if (cub->ray_v.mx < 0)
-		cub->ray_v.mx = 1;
+		cub->ray_v.mx *= -1;
 	if (cub->ray_v.my >= cub->data.map_data.map_size)
 		cub->ray_v.my = cub->data.map_data.map_size - 1;
 }
@@ -45,9 +45,9 @@ void	vertical_mx_my_check(t_cub *cub)
 void	horizontal_mx_my_check(t_cub *cub)
 {
 	if (cub->ray_h.my < 0)
-		cub->ray_h.my = 1;
+		cub->ray_h.my *= -1;
 	if (cub->ray_h.mx < 0)
-		cub->ray_h.mx = 1;
+		cub->ray_h.mx *= -1;
 	if (cub->ray_h.my >= cub->data.map_data.map_size)
 		cub->ray_h.my = cub->data.map_data.map_size - 1;
 }
