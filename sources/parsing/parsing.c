@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:25:01 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 19:09:58 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 09:02:35 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	check_file(char *file, t_data *data)
 		close(fd);
 		return (0);
 	}
+	printf("Error : can't open file\n");
 	return (1);
 }
 

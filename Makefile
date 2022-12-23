@@ -64,7 +64,7 @@ libs:
 					$(MAKE) -C mlx/
 
 $(NAME):			$(OBJ) $(LIBFT_DIR)libft.a
-					$(CC) $(CRASH) $(OBJ) $(LIBFT_DIR)libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+					$(CC) $(OBJ) $(LIBFT_DIR)libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	
 $(DIR_OBJ)/%.o:		$(DIR_SRC)/%$(FILE_EXT) includes/cub3d.h ${LIBFT_DIR}libft.h ${LIBFT_DIR}libft.a Makefile | $(SUB_DIR)
 					${CC} ${CFLAGS} -c $< -o $@
