@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/23 10:53:09 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 11:15:13 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,15 +112,12 @@ int	ft_draw_hero(t_cub *cub, t_mlx_data *img)
 		return (1);
 	while (++i <= 5)
 	{
-		if ( player_x < 1920 && player_x >= 0 && player_y + j < 1080 && player_y + j >= 0)
-		{
-			my_mlx_pixel_put(img, player_x, player_y + j, 0xffff00);
-			my_mlx_pixel_put(img, player_x + 1, player_y + j, 0xffff00);
-			my_mlx_pixel_put(img, player_x + 2, player_y + j, 0xffff00);
-			my_mlx_pixel_put(img, player_x + 3, player_y + j, 0xffff00);
-			my_mlx_pixel_put(img, player_x + 4, player_y + j, 0xffff00);
-			my_mlx_pixel_put(img, player_x + 5, player_y + j, 0xffff00);
-		}
+		my_mlx_pixel_put(img, player_x, player_y + j, 0xffff00);
+		my_mlx_pixel_put(img, player_x + 1, player_y + j, 0xffff00);
+		my_mlx_pixel_put(img, player_x + 2, player_y + j, 0xffff00);
+		my_mlx_pixel_put(img, player_x + 3, player_y + j, 0xffff00);
+		my_mlx_pixel_put(img, player_x + 4, player_y + j, 0xffff00);
+		my_mlx_pixel_put(img, player_x + 5, player_y + j, 0xffff00);
 		j++;
 	}
 	return (1);
