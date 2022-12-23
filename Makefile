@@ -66,7 +66,7 @@ libs:
 $(NAME):			$(OBJ) $(LIBFT_DIR)libft.a
 					$(CC) $(OBJ) $(LIBFT_DIR)libft.a -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	
-$(DIR_OBJ)/%.o:		$(DIR_SRC)/%$(FILE_EXT) includes/cub3d.h ${LIBFT_DIR}libft.h ${LIBFT_DIR}libft.a Makefile | $(SUB_DIR)
+$(DIR_OBJ)/%.o:		$(DIR_SRC)/%$(FILE_EXT) includes/cub3d.h sources/get_next_line/get_next_line.h ${LIBFT_DIR}libft.h ${LIBFT_DIR}libft.a Makefile | $(SUB_DIR)
 					${CC} ${CFLAGS} -c $< -o $@
 
 $(SUB_DIR) :
