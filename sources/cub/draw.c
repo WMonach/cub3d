@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/23 07:45:58 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 09:21:20 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	vertical_line_check(t_cub *cub, float ra, float ntan)
 		set_ray_v_case_2(cub, ntan);
 	if (ra == 0 || ra == PI)
 		set_ray_v_case_3(cub);
-	while (cub->ray_v.dof < cub->data.width)
+	while (cub->ray_v.dof < cub->dof_limit)
 	{
 		cub->ray_v.mx = ((int)(cub->ray_v.rx) >> 5);
 		cub->ray_v.my = ((int)(cub->ray_v.ry) >> 5);
@@ -29,7 +29,7 @@ void	vertical_line_check(t_cub *cub, float ra, float ntan)
 		if (cub->ray_h.mp > 0 && (cub->ray_v.mp
 				< (cub->data.width * cub->data.map_data.map_size))
 			&& cub->data.map[cub->ray_v.my][cub->ray_v.mx] == '1')
-			cub->ray_v.dof = cub->data.width;
+			cub->ray_v.dof = cub->dof_limit;
 		else
 		{
 			cub->ray_v.rx += cub->ray_v.xo;
@@ -47,7 +47,7 @@ void	horizontal_line_check(t_cub *cub, float ra, float atan)
 		set_ray_h_case_2(cub, atan);
 	if (ra == 0 || ra == PI)
 		set_ray_h_case_3(cub);
-	while (cub->ray_h.dof < cub->data.width)
+	while (cub->ray_h.dof < cub->dof_limit)
 	{
 		cub->ray_h.mx = ((int)(cub->ray_h.rx) >> 5);
 		cub->ray_h.my = ((int)(cub->ray_h.ry) >> 5);
@@ -56,7 +56,7 @@ void	horizontal_line_check(t_cub *cub, float ra, float atan)
 		if (cub->ray_h.mp > 0 && (cub->ray_h.mp
 				< (cub->data.width * cub->data.map_data.map_size))
 			&& cub->data.map[cub->ray_h.my][cub->ray_h.mx] == '1')
-			cub->ray_h.dof = cub->data.width;
+			cub->ray_h.dof = cub->dof_limit;
 		else
 		{
 			cub->ray_h.rx += cub->ray_h.xo;

@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:32:53 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/23 08:32:20 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 09:21:00 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	init_cub_var(t_cub *cub, t_data *data)
 {
+	if (data->width > data->map_data.map_size)
+		cub->dof_limit = data->width;
+	else
+		cub->dof_limit = data->map_data.map_size;
 	cub->posx = 0;
 	cub->posy = 0;
 	cub->hit_wall = 0;
