@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:50:52 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/22 08:51:00 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 07:45:58 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	vertical_line_check(t_cub *cub, float ra, float ntan)
 		set_ray_v_case_3(cub);
 	while (cub->ray_v.dof < cub->data.width)
 	{
-		cub->ray_v.mx = abs((int)(cub->ray_v.rx) >> 5);
-		cub->ray_v.my = abs((int)(cub->ray_v.ry) >> 5);
+		cub->ray_v.mx = ((int)(cub->ray_v.rx) >> 5);
+		cub->ray_v.my = ((int)(cub->ray_v.ry) >> 5);
+		vertical_mx_my_check(cub);
 		cub->ray_v.mp = cub->ray_v.my * cub->data.width + cub->ray_v.mx;
 		if (cub->ray_h.mp > 0 && (cub->ray_v.mp
 				< (cub->data.width * cub->data.map_data.map_size))
@@ -48,8 +49,9 @@ void	horizontal_line_check(t_cub *cub, float ra, float atan)
 		set_ray_h_case_3(cub);
 	while (cub->ray_h.dof < cub->data.width)
 	{
-		cub->ray_h.mx = abs((int)(cub->ray_h.rx) >> 5);
-		cub->ray_h.my = abs((int)(cub->ray_h.ry) >> 5);
+		cub->ray_h.mx = ((int)(cub->ray_h.rx) >> 5);
+		cub->ray_h.my = ((int)(cub->ray_h.ry) >> 5);
+		horizontal_mx_my_check(cub);
 		cub->ray_h.mp = cub->ray_h.my * cub->data.width + cub->ray_h.mx;
 		if (cub->ray_h.mp > 0 && (cub->ray_h.mp
 				< (cub->data.width * cub->data.map_data.map_size))
@@ -76,10 +78,9 @@ void	draw_rays(t_cub *cub)
 	while (r < 1919)
 	{
 		cub->v_check = 0;
-		cub->h_check = 0;
 		init_ray_var(cub);
-		cub->atan = -1 / tan(cub->ra);
-		cub->ntan = -tan(cub->ra);
+		cub->atan = -1 / tanf(cub->ra);
+		cub->ntan = -tanf(cub->ra);
 		horizontal_line_check(cub, cub->ra, cub->atan);
 		vertical_line_check(cub, cub->ra, cub->ntan);
 		if (check_ray(cub) == 0)

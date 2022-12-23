@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 17:04:44 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 19:29:00 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 10:18:22 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,22 @@ int	space_check(char **map, int y, int x)
 {
 	if (map[y][x + 1] == 32)
 	{
-		printf("Error : a space char is at the right of a 0\n");
+		printf("Error : a space char is at the right of a 0 or spawn\n");
 		return (1);
 	}
 	if (map[y][x - 1] == 32)
 	{
-		printf("Error : a space char is at the left of a 0\n");
+		printf("Error : a space char is at the left of a 0 or spawn\n");
 		return (1);
 	}
 	if (map[y - 1][x] == 32)
 	{
-		printf("Error : a space char is at the top of a 0\n");
+		printf("Error : a space char is at the top of a 0 or spawn\n");
 		return (1);
 	}
 	if (map[y + 1][x] == 32)
 	{
-		printf("Error : a space char is at the bottom of a 0\n");
+		printf("Error : a space char is at the bottom of a 0 or spawn\n");
 		return (1);
 	}
 	return (0);
@@ -120,7 +120,17 @@ int	map_wall_parsing(t_data *data)
 		data->texture.rgb_f_copy = 1;
 		return (1);
 	}
-	if (looking_for_multi_spawn(data) == 1)
+	if (data->north == 0 && data->south == 0 && data->east == 0
+		&& data->west == 0)
+	{
+		printf("Error : spawn is not set\n");
+		data->texture.rgb_f_copy = 1;
 		return (1);
+	}
+	if (looking_for_multi_spawn(data) == 1)
+	{
+		data->texture.rgb_f_copy = 1;
+		return (1);
+	}
 	return (0);
 }

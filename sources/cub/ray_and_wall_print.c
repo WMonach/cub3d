@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:45:56 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/22 08:41:54 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 20:09:29 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ void	draw_walls(t_cub *cub, float ra, int r, float j)
 		ca -= 2 * PI;
 	cub->dist = cub->dist * cos(ca);
 	cub->lineh = ((25 * 1920) / cub->dist);
-	if (cub->lineh > 1920)
-		cub->lineh = cub->lineh;
-	cub->lineo = (1080 - cub->lineh / 2);
+	cub->lineo = (960 - cub->lineh / 2);
 	print_3d_wall(cub, ra, j);
 	return ;
 }

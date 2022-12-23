@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 12:38:38 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 19:29:04 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 11:51:02 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int	line_check_loop(t_data *data, int y, int x)
 {
 	while ((size_t)(x) < ft_strlen(data->map[y]))
 	{
-		if (data->map[y][x] == '0')
+		if (data->map[y][x] == '0' || data->map[y][x] == 'N' ||
+			data->map[y][x] == 'S' || data->map[y][x] == 'W'
+			|| data->map[y][x] == 'E')
 		{
 			if (space_check(data->map, y, x) == 1)
 			{

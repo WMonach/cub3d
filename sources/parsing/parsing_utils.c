@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 12:56:31 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 19:09:54 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 09:34:10 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@ int	check_file_loop(t_data *data, char *line, int fd, int i)
 		}
 		i++;
 		free(line);
+	}
+	return (0);
+}
+
+int	error_return(t_data *data)
+{
+	if (data->texture.check_rgb_id != 1 && data->texture.check_texture_id == 1)
+	{
+		data->texture.rgb_f_copy = 1;
+		printf("Error : a color for floor or ceiling is missing\n");
+		return (1);
+	}
+	if (data->texture.check_texture_id != 1)
+	{
+		data->texture.rgb_f_copy = 1;
+		printf("Error : a texture is missing\n");
+		return (1);
 	}
 	return (0);
 }

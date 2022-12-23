@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/22 08:54:22 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 20:29:22 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ enum {
 
 typedef struct s_data {
 	float		minimap_coeff;
+	int			nb_of_color_id;
+	int			no_spawn_set;
 	int			north;
 	int			south;
 	int			west;
@@ -191,6 +193,16 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
+typedef struct s_keys
+{
+	int			w_key;
+	int			a_key;
+	int			s_key;
+	int			d_key;
+	int			left_key;
+	int			right_key;
+}	t_keys;
+
 typedef struct s_cub
 {
 	t_vars		vars;
@@ -203,6 +215,7 @@ typedef struct s_cub
 	t_img		img_s;
 	t_img		img_w;
 	t_img		img_e;
+	t_keys		keys;
 	int			hit_wall;
 	int			v_check;
 	int			h_check;
@@ -232,6 +245,7 @@ typedef struct s_cub
 	float		raylx;
 	float		rayly;
 	float		dist;
+	long long	test;
 }				t_cub;
 
 /* EXECUTION */
@@ -249,6 +263,7 @@ void			draw_walls(t_cub *cub, float ra, int r, float j);
 void			free_if_parsing_failed(t_data *data);
 void			main_data_var_init(t_data *data, t_cub *cub);
 void			set_texture_struct(t_cub *cub, t_data *data);
+void			map_display(t_data *data, t_mlx_data *img);
 void			set_ray_v_case_1(t_cub *cub, float ntan);
 void			set_ray_v_case_2(t_cub *cub, float ntan);
 void			set_ray_h_case_1(t_cub *cub, float atan);
@@ -256,11 +271,18 @@ void			set_ray_h_case_2(t_cub *cub, float atan);
 void			set_xo_and_yo_for_side_walk(t_cub *cub);
 void			init_cub_var(t_cub *cub, t_data *data);
 void			main_texture_var_init(t_data *data);
+void			horizontal_mx_my_check(t_cub *cub);
+void			vertical_mx_my_check(t_cub *cub);
 void			free_parsing_data(t_data *data);
 void			set_ray_v_case_3(t_cub *cub);
 void			set_ray_h_case_3(t_cub *cub);
 void			init_ray_var(t_cub *cub);
+void			move_backward(t_cub *cub);
+void			move_forward(t_cub *cub);
+void			move_right(t_cub *cub);
+void			move_left(t_cub *cub);
 void			draw_rays(t_cub *cub);
+void			moves(t_cub *cub);
 
 float			set_ra_before_loop(float ra, float pa);
 float			ft_max(float max1, float max2);
@@ -268,12 +290,13 @@ float			set_ra_end_of_loop(float ra);
 
 unsigned int	get_value(t_cub *cub, t_img *img, int y, int x);
 
-void			map_display(t_data *data, t_mlx_data *img);
 int				ft_keyhook_translation(int keycode, t_cub *cub);
 int				map_copy_and_parsing(t_data *data, char **argv);
 int				ft_keyhook_rotation(int keycode, t_cub *cub);
 int				check_collision(char **map, int y, int x);
 int				ft_draw_hero(t_cub *cub, t_mlx_data *img);
+int				key_hook_down(int keycode, t_cub *cub);
+int				key_hook_up(int keycode, t_cub *cub);
 int				ft_draw(t_cub *cub, t_mlx_data *img);
 int				ft_rz_rotation(float ra, t_cub *cub);
 int				check_ray(t_cub *cub);
@@ -330,5 +353,6 @@ int				exterior_line_check(char *line);
 int				map_wall_parsing(t_data *data);
 int				close_check(char **map, int y);
 int				check_rgb(t_data *data, int i);
+int				error_return(t_data *data);
 
 #endif

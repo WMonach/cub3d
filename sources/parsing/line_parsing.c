@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:25:08 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 19:25:44 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 10:14:25 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	line_open(t_data *data, char *line)
 		i++;
 	if (line[i] == '0')
 	{
+		data->texture.rgb_f_copy = 1;
 		printf("Error : a line of the map begins with a 0\n");
 		return (1);
 	}
@@ -104,6 +105,7 @@ int	line_parsing(char *line, t_data *data)
 		return (1);
 	if (line_parsing_loop(data, line) == 0)
 		return (0);
-	printf("Error : unknown element found\n");
+	if (error_return(data) == 0)
+		printf("Error : unknown element found\n");
 	return (1);
 }
