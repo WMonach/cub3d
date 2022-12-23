@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_display.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:41:52 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/23 09:46:55 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 09:57:41 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	print_spawn_in_minimap(t_data *data, t_mlx_data *mlx_data, int i, int j)
 
 void	print_wall_2d(t_data *data, t_mlx_data *mlx_data)
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 
 	y = data->y_range;
 	while (y < (data->y_range + data->minimap_coeff - 1))
@@ -47,7 +47,8 @@ void	print_wall_2d(t_data *data, t_mlx_data *mlx_data)
 		x = data->x_range;
 		while (x < (data->x_range + data->minimap_coeff - 1))
 		{
-			my_mlx_pixel_put(mlx_data, x, y, 0x00663300);
+			if ( x < 1920 && x >= 0 && y < 1080 && y >= 0)
+				my_mlx_pixel_put(mlx_data, x, y, 0x00663300);
 			x++;
 		}
 		y++;
@@ -66,7 +67,8 @@ void	print_floor_2d(t_data *data, t_mlx_data *mlx_data)
 		x = data->x_range;
 		while (x < (data->x_range + data->minimap_coeff - 1))
 		{
-			my_mlx_pixel_put(mlx_data, x, y, 0x00999999);
+			if ( x < 1920 && x >= 0 && y < 1080 && y >= 0)
+				my_mlx_pixel_put(mlx_data, x, y, 0x00999999);
 			x++;
 		}
 		y++;
@@ -78,11 +80,11 @@ void	calculation_of_the_coeff_minimap(t_data *data)
 {
 	if (data->map_data.map_size >= data->width)
 	{
-		data->minimap_coeff = 15 / (float)(data->width) * 15;
+		data->minimap_coeff = 225 / (float)(data->width);
 	}
 	else
 	{
-		data->minimap_coeff = 15 / (float)(data->map_data.map_size) * 15;
+		data->minimap_coeff = 225 / (float)(data->map_data.map_size);
 	}
 }
 
