@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 18:32:34 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/23 07:50:53 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 09:21:42 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ void	set_ray_h_case_3(t_cub *cub)
 {
 	cub->ray_h.rx = cub->posx;
 	cub->ray_h.ry = cub->posy;
-	cub->ray_h.dof = cub->data.width;
+	cub->ray_h.dof = cub->dof_limit;
 	return ;
 }

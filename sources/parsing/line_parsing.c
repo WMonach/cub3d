@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:25:08 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/22 10:14:25 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 08:28:42 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	line_parsing_loop(t_data *data, char *line)
 	j = 0;
 	k = 0;
 	data->line_tmp = line;
-	while (line && line[i])
+	while (line && line[i] && data->check_rgb_id == 0)
 	{
 		j = 0;
 		while (j < data->id_number)

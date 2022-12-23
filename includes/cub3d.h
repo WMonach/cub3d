@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/22 20:29:22 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 09:23:36 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ enum {
 
 typedef struct s_data {
 	float		minimap_coeff;
+	int			check_rgb_id;
 	int			nb_of_color_id;
 	int			no_spawn_set;
 	int			north;
@@ -219,6 +220,7 @@ typedef struct s_cub
 	int			hit_wall;
 	int			v_check;
 	int			h_check;
+	int			dof_limit;
 	float		p2;
 	float		p3;
 	float		ra;
