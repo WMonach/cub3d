@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_display.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:41:52 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/23 11:23:34 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 11:25:13 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	print_floor_2d(t_data *data, t_mlx_data *mlx_data)
 		x = data->x_range;
 		while (x < (data->x_range + data->minimap_coeff - 1))
 		{
-			if ( x < 1920 && x >= 0 && y < 1080 && y >= 0)
+			if (x < 1920 && x >= 0 && y < 1080 && y >= 0)
 				my_mlx_pixel_put(mlx_data, x, y, 0x00999999);
 			x++;
 		}
@@ -84,7 +84,6 @@ void	print_floor_2d(t_data *data, t_mlx_data *mlx_data)
 
 void	calculation_of_the_coeff_minimap(t_data *data)
 {
-
 	if (data->map_data.map_size >= data->width)
 	{
 		data->minimap_coeff = 225 / (data->width);
