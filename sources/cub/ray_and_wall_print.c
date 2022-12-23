@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_and_wall_print.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:45:56 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/22 20:09:29 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 10:34:30 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ float	print_ceil(t_cub *cub, float j, float i)
 	{
 		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
 		{
-			ft_rounded(j, i, cub);
 			my_mlx_pixel_put(&cub->mlx_data, (int)j,
 				(int)i, cub->data.c_color);
 		}
@@ -56,7 +55,6 @@ float	print_floor(t_cub *cub, float j, float i)
 	{
 		if (j < 1919 && i < 1079 && j >= 0 && i >= 0)
 		{
-			ft_rounded(j, i, cub);
 			my_mlx_pixel_put(&cub->mlx_data, (int)j,
 				(int)i, cub->data.f_color);
 		}

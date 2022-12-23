@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 10:41:52 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/23 09:57:41 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 10:52:35 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	print_spawn_in_minimap(t_data *data, t_mlx_data *mlx_data, int i, int j)
 
 void	print_wall_2d(t_data *data, t_mlx_data *mlx_data)
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 
 	y = data->y_range;
 	while (y < (data->y_range + data->minimap_coeff - 1))
@@ -81,10 +81,14 @@ void	calculation_of_the_coeff_minimap(t_data *data)
 	if (data->map_data.map_size >= data->width)
 	{
 		data->minimap_coeff = 225 / (float)(data->width);
+		if (data->map_data.map_size / data->width > 10)
+			data->mini_map = 1;
 	}
 	else
 	{
 		data->minimap_coeff = 225 / (float)(data->map_data.map_size);
+		if (data->width / data->map_data.map_size > 10)
+			data->mini_map = 1;
 	}
 }
 
@@ -95,9 +99,12 @@ void	map_display(t_data *data, t_mlx_data *img)
 	long	line_size;
 
 	i = -1;
+	data->mini_map = 0;
 	line_size = 0;
 	data->y_range = 0;
 	calculation_of_the_coeff_minimap(data);
+	if (data->mini_map == 1)
+		return ;
 	while (data->map[++i])
 	{
 		j = -1;

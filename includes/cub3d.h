@@ -6,7 +6,7 @@
 /*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 14:26:25 by wmonacho          #+#    #+#             */
-/*   Updated: 2022/12/23 09:57:45 by wmonacho         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 10:48:39 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,10 @@ typedef struct s_data {
 	int			free_tab_map;
 	int			textures_tab_size;
 	int			rgb_tab_size;
-	float		x_range;
-	float		y_range;
+	int			x_range;
+	int			y_range;
 	int			width;
+	int			mini_map;
 	char		*line_tmp;
 	char		*rgb_value;
 	char		*texture_id[6];

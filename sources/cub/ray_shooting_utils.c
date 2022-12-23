@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_shooting_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: wmonacho <wmonacho@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:48:04 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/23 09:20:19 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 10:42:20 by wmonacho         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
