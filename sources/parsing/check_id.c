@@ -6,7 +6,7 @@
 /*   By: ebrodeur <ebrodeur@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 11:13:38 by ebrodeur          #+#    #+#             */
-/*   Updated: 2022/12/21 19:41:21 by ebrodeur         ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 08:35:45 by ebrodeur         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ int	check_textures(t_data *data, int i)
 int	check_colors(t_data *data, int i)
 {
 	data->length = 0;
+	if (data->line_tmp[i + 1] != ' ')
+	{
+		printf("Error : wrong ID for floor or ceiling\n");
+		data->texture.rgb_f_copy = 1;
+		data->check_rgb_id = 1;
+		return (1);
+	}
 	if (check_rgb(data, i) == 1)
 	{
 		data->texture.rgb_f_copy = 1;
